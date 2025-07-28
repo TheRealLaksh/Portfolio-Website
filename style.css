@@ -1,0 +1,106 @@
+/* --- CSS Variables --- */
+:root {
+    --bg-color: #0f172a; /* bg-slate-900 */
+    --spotlight-color: rgba(56, 189, 248, 0.15);
+    --particle-color: #64748b; /* slate-500 */
+}
+
+/* --- Base Body Styles --- */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: #e2e8f0; /* slate-200 */
+}
+
+/* --- Background and Layout --- */
+#constellation-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Keep canvas in the background */
+}
+
+.content-wrapper {
+    position: relative;
+    z-index: 10; /* Ensure content is on top of the canvas */
+}
+
+/* --- Effects and Animations --- */
+.spotlight {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;
+    background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), var(--spotlight-color) 0%, transparent 25%);
+    transition: background 0.1s ease-out;
+}
+
+.hero-glow {
+    background-image: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(56, 189, 248, 0.1), rgba(255, 255, 255, 0));
+}
+
+.text-shimmer {
+    background: linear-gradient(90deg, #93c5fd, #ffffff, #93c5fd);
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 5s linear infinite;
+}
+
+/* --- Keyframe Animations --- */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+    to { background-position: -200% center; }
+}
+
+
+/* --- Animation Utility Classes --- */
+.animate-fade-in {
+    animation: fadeIn 1s ease-in-out;
+}
+.animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+}
+.hero-image-float {
+    animation: float 4s ease-in-out infinite;
+}
+
+/* --- Custom Component Styles --- */
+/* These styles add effects that are not covered by the standard Tailwind classes in the HTML */
+.nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: #38bdf8; /* sky-400 */
+    transition: all 0.3s ease-in-out;
+    transform: translateX(-50%);
+}
+.nav-link:hover::before {
+    width: 80%;
+}

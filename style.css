@@ -1,7 +1,7 @@
 /* --- CSS Variables --- */
 :root {
     --bg-color: #000000; /* bg-slate-900 */
-    --spotlight-color: rgba(135, 150, 238, 0.062);
+    --spotlight-color: rgba(16, 22, 54, 0.034);
     --particle-color: #0058d3; /* slate-500 */
     --grid-color: rgb(0, 0, 0);
 }

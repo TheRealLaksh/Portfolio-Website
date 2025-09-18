@@ -1,9 +1,9 @@
 /* --- CSS Variables --- */
 :root {
-    --bg-color: #0f172a; /* bg-slate-900 */
-    --spotlight-color: rgba(56, 189, 248, 0.15);
-    --particle-color: #64748b; /* slate-500 */
-    --grid-color: rgba(56, 189, 248, 0.05);
+    --bg-color: #000000; /* bg-slate-900 */
+    --spotlight-color: rgba(135, 150, 238, 0.062);
+    --particle-color: #0058d3; /* slate-500 */
+    --grid-color: rgb(0, 0, 0);
 }
 
 /* --- Base Body Styles --- */

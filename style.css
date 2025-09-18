@@ -3,6 +3,7 @@
     --bg-color: #0f172a; /* bg-slate-900 */
     --spotlight-color: rgba(56, 189, 248, 0.15);
     --particle-color: #64748b; /* slate-500 */
+    --grid-color: rgba(56, 189, 248, 0.05);
 }
 
 /* --- Base Body Styles --- */
@@ -10,7 +11,47 @@ body {
     font-family: 'Inter', sans-serif;
     background-color: var(--bg-color);
     color: #e2e8f0; /* slate-200 */
+    background-image:
+        linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+    background-size: 40px 40px;
 }
+
+/* --- Header Styles --- */
+#main-header.header-scrolled {
+    background-color: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Navigation Link Styles --- */
+.nav-link {
+    position: relative;
+    padding: 8px 0;
+    color: #cbd5e1; /* slate-300 */
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: #ffffff;
+}
+
+.nav-link .nav-link-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #38bdf8; /* sky-400 */
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease-in-out;
+}
+
+.nav-link:hover .nav-link-indicator {
+    transform: scaleX(1);
+}
+
 
 /* --- Background and Layout --- */
 #constellation-canvas {
@@ -103,4 +144,80 @@ body {
 }
 .nav-link:hover::before {
     width: 80%;
+}
+
+/* --- Skills Section --- */
+.skill-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.skill-card:hover {
+    transform: translateY(-5px);
+}
+
+.skill-icon-container {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: rgba(30, 41, 59, 0.5); /* slate-800 with opacity */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s;
+    box-shadow: 0 0 0px rgba(56, 189, 248, 0);
+}
+
+.skill-card:hover .skill-icon-container {
+    background-color: rgba(56, 189, 248, 0.1);
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+}
+
+.skill-icon {
+    width: 40px;
+    height: 40px;
+    color: #94a3b8; /* slate-400 */
+    transition: all 0.3s;
+}
+
+.skill-card:hover .skill-icon {
+    color: #38bdf8; /* sky-400 */
+    transform: scale(1.1);
+}
+
+.skill-name {
+    font-weight: 500;
+    color: #cbd5e1; /* slate-300 */
+}
+
+/* --- Contact Section --- */
+.contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid #334155; /* slate-700 */
+    border-radius: 9999px;
+    color: #cbd5e1; /* slate-300 */
+    transition: all 0.3s;
+}
+
+.contact-link:hover {
+    background-color: rgba(56, 189, 248, 0.1);
+    border-color: #38bdf8; /* sky-400 */
+    color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+}
+
+.contact-link svg {
+    transition: transform 0.3s;
+}
+
+.contact-link:hover svg {
+    transform: scale(1.1);
 }

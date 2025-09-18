@@ -92,7 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
             }
         }
-
         function connect() {
             let opacityValue = 1;
             for (let a = 0; a < particlesArray.length; a++) {

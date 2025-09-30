@@ -4,7 +4,7 @@
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laksh Pradhwani | Personal Portfolio</title>
+    <title>About | Laksh Pradhwani</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,62 +18,34 @@
     <div class="content-wrapper max-w-4xl mx-auto p-4 sm:p-6 md:p-8">
         <header id="main-header" class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center py-4 px-8 transition-all duration-300 animate-fade-in" style="animation-duration: 1.5s;">
             <a href="index.html" class="text-2xl font-bold text-white transition-transform duration-300 hover:scale-105">Laksh Pradhwani</a>
+            
             <nav class="hidden md:flex items-center space-x-8">
-                <a href="about.html" class="nav-link">About<span class="nav-link-indicator"></span></a>
-                <a href="skills-and-projects.html" class="nav-link">Skills & Projects<span class="nav-link-indicator"></span></a>
+                <a href="about.html" class="nav-link active-link">About<span class="nav-link-indicator"></span></a>
+                <a href="skills-and-projects.html" class="nav-link">Skills<span class="nav-link-indicator"></span></a>
                 <a href="contact.html" class="nav-link">Contact<span class="nav-link-indicator"></span></a>
             </nav>
+
             <button id="mobile-menu-button" class="md:hidden z-50 text-white">
                 <svg class="hamburger-icon h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
                 <svg class="close-icon h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
         </header>
+
         <div id="mobile-menu" class="hidden fixed top-0 left-0 w-full h-full bg-slate-900/95 backdrop-blur-sm z-40 flex-col items-center justify-center space-y-8 text-2xl">
             <a href="about.html" class="nav-link">About</a>
-            <a href="skills-and-projects.html" class="nav-link">Skills & Projects</a>
+            <a href="skills-and-projects.html" class="nav-link">Skills </a>
             <a href="contact.html" class="nav-link">Contact</a>
         </div>
+        
         <main class="pt-24">
-            <section id="home" class="hero-glow text-center py-16 sm:py-24 rounded-2xl relative overflow-hidden">
-                 <div class="flex flex-col items-center relative z-10">
-                    <img
-                        src="assets/images/image_c270c4.jpg"
-                        alt="A portrait of Laksh Pradhwani"
-                        class="w-40 h-40 rounded-full mb-6 border-4 border-slate-700 shadow-lg object-cover"
-                        data-aos="zoom-in"
-                        data-aos-duration="1000"
-                    >
-                    <h1
-                        class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight animate-fade-in-up"
-                        style="animation-delay: 0.2s;"
-                    >
-                        Hi, I'm <span class="text-shimmer">Laksh Pradhwani</span>
-                    </h1>
-                    <p
-                        class="mt-4 max-w-2xl text-lg text-slate-400 animate-fade-in-up"
-                        style="animation-delay: 0.4s;"
-                    >
-                        I'm a passionate Web Developer and CSS Styling enthusiast dedicated to creating beautiful, functional, and user-centered digital experiences.
+            <section id="about" class="my-16 sm:my-24 scroll-mt-20" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+                <h2 class="section-title text-3xl font-bold text-white text-center mb-8 relative">About Me</h2>
+                <div class="about-card bg-slate-800/50 p-8 rounded-xl shadow-md backdrop-blur-sm hero-image-float">
+                    <p class="text-slate-400 leading-relaxed">
+                        As an aspiring AI/ML Engineer and high school student, my journey from a simple "Hello, World!" to building full-stack applications is driven by a passion for transforming creative ideas into tangible solutions. With a strong foundation in the MERN stack, I've honed my skills through three internships, applying my technical knowledge to real-world projects. I thrive on solving complex problems, a skill sharpened through consistent success in tech competitions, including winning multiple hackathons and being a top performer in the VVM National Science Competition. My experience as House Captain and in competitive sports has instilled in me a disciplined, goal-oriented approach. When I'm not coding, I enjoy contributing to open-source projects and attending insightful and informative workshops. I am actively seeking new internship opportunities to contribute to innovative projects and continue my growth.
                     </p>
-                    <a
-                        href="contact.html"
-                        class="mt-8 px-6 py-3 bg-sky-500 text-white font-bold rounded-lg shadow-lg hover:bg-sky-600 transition-all duration-300 transform hover:scale-105 animate-fade-in-up"
-                        style="animation-delay: 0.6s;"
-                    >
-                        Get In Touch
-                    </a>
                 </div>
             </section>
-            
-            <section class="my-16 sm:my-24" data-aos="fade-up">
-                <h2 class="text-2xl font-bold text-white text-center mb-8">
-                    Know more about me..
-                </h2>
-                <a href="https://www.linkedin.com/in/laksh-pradhwani" target="_blank" rel="noopener noreferrer" class="block">
-                    <img src="assets/images/linkedin-banner.png" alt="Laksh Pradhwani's LinkedIn Banner" class="w-full rounded-lg shadow-lg transition-transform duration-300 hover:scale-[1.02] hover:shadow-sky-400/20">
-                </a>
-            </section>
-
         </main>
         <footer class="text-center mt-16 sm:my-24 py-6 border-t border-slate-800" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
             <p class="text-sm text-slate-500">© 2025 Laksh Pradhwani. All Rights Reserved.</p>

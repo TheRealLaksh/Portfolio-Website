@@ -6,6 +6,45 @@
     --grid-color: rgb(0, 0, 0);
 }
 
+/* --- Style for the active navigation link --- */
+.nav-link.active-link {
+    color: #ffffff;
+}
+
+.nav-link.active-link .nav-link-indicator {
+    transform: scaleX(1);
+}
+
+/* --- Responsive Design Adjustments --- */
+@media (max-width: 768px) {
+    /* Reduce heading sizes on tablets and mobiles */
+    .hero-glow h1 {
+        font-size: 2.75rem; /* 44px */
+        line-height: 1.2;
+    }
+    .section-title {
+        font-size: 1.875rem; /* 30px */
+    }
+
+    /* Adjust padding for the main content wrapper */
+    .content-wrapper {
+        padding-left: 1.5rem; /* 24px */
+        padding-right: 1.5rem; /* 24px */
+    }
+}
+
+@media (max-width: 480px) {
+    /* Further reduce heading size for small mobile screens */
+    .hero-glow h1 {
+        font-size: 2.25rem; /* 36px */
+    }
+
+    /* Make contact links stack nicely */
+    .contact-link {
+        width: 100%;
+        justify-content: center;
+    }
+}
 /* --- Base Body Styles --- */
 body {
     font-family: 'Inter', sans-serif;
@@ -50,6 +89,70 @@ body {
 
 .nav-link:hover .nav-link-indicator {
     transform: scaleX(1);
+}
+/* --- GitHub Project Card Styles --- */
+.project-card {
+    background-color: rgba(30, 41, 59, 0.5); /* slate-800 with opacity */
+    border: 1px solid #334155; /* slate-700 */
+    border-radius: 0.75rem; /* 12px */
+    padding: 1.5rem; /* 24px */
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s;
+    backdrop-filter: blur(5px);
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    border-color: #38bdf8; /* sky-400 */
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+}
+
+.project-title {
+    font-size: 1.25rem; /* 20px */
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+.project-description {
+    color: #cbd5e1; /* slate-300 */
+    font-size: 0.9rem;
+    line-height: 1.6;
+    flex-grow: 1; /* Pushes the footer to the bottom */
+}
+
+.project-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+    font-size: 0.875rem;
+}
+
+.project-language {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #94a3b8; /* slate-400 */
+}
+
+.language-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #38bdf8; /* sky-400 */
+}
+
+.project-link {
+    color: #7dd3fc; /* sky-300 */
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.project-link:hover {
+    color: #ffffff;
 }
 
 
@@ -127,6 +230,31 @@ body {
 }
 .hero-image-float {
     animation: float 4s ease-in-out infinite;
+}
+/* --- View More Button Styles --- */
+.view-more-container {
+    text-align: center;
+    margin-top: 2rem; /* 32px */
+}
+
+.view-more-button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem; /* 12px 24px */
+    background-color: transparent;
+    border: 1px solid #334155; /* slate-700 */
+    border-radius: 9999px;
+    color: #cbd5e1; /* slate-300 */
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.view-more-button:hover {
+    background-color: rgba(56, 189, 248, 0.1);
+    border-color: #38bdf8; /* sky-400 */
+    color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
 }
 
 /* --- Custom Component Styles --- */
@@ -220,4 +348,56 @@ body {
 
 .contact-link:hover svg {
     transform: scale(1.1);
+}
+
+/* --- Contact Form Styles --- */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* 24px */
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-input,
+.form-textarea {
+    width: 100%;
+    padding: 0.75rem 1rem; /* 12px 16px */
+    background-color: rgba(30, 41, 59, 0.5); /* slate-800 with opacity */
+    border: 1px solid #334155; /* slate-700 */
+    border-radius: 0.5rem; /* 8px */
+    color: #cbd5e1; /* slate-300 */
+    transition: all 0.3s;
+    backdrop-filter: blur(5px);
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: #38bdf8; /* sky-400 */
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+}
+
+.form-textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.submit-button {
+    padding: 0.75rem 1.5rem;
+    background-color: #0ea5e9; /* sky-500 */
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 9999px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(14, 165, 233, 0.2);
+}
+
+.submit-button:hover {
+    background-color: #0284c7; /* sky-600 */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(14, 165, 233, 0.3);
 }

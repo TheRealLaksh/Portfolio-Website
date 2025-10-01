@@ -56,9 +56,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Fetch GitHub Projects Script ---
+    // Checks if the project grid exists on the current page before running
     const projectsGrid = document.getElementById('github-projects-grid');
     if (projectsGrid) {
-        fetchGitHubProjects('TheRealLaksh'); // Your GitHub username is here
+        fetchGitHubProjects('TheRealLaksh'); // Your GitHub username
     }
 
     // --- Constellation Background Script ---
@@ -144,24 +145,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+/**
+ * Fetches repositories for a given GitHub user and displays them.
+ * @param {string} username - The GitHub username.
+ */
 async function fetchGitHubProjects(username) {
     const projectsGrid = document.getElementById('github-projects-grid');
+    // API URL fetches public repos, sorted by the last push date, and limits to 6 results.
     const apiUrl = `https://api.github.com/users/${username}/repos?sort=pushed&per_page=6`;
 
     try {
         const response = await fetch(apiUrl);
         if (!response.ok) {
-            throw new Error(`GitHub API returned a ${response.status} error.`);
+            throw new Error(`GitHub API Error: ${response.status}`);
         }
         const repos = await response.json();
 
-        projectsGrid.innerHTML = ''; // Clear the loading message
+        // Clear the "Loading..." message
+        projectsGrid.innerHTML = ''; 
 
         if (repos.length === 0) {
-            projectsGrid.innerHTML = '<p class="text-slate-400 col-span-full text-center">No public projects found.</p>';
+            projectsGrid.innerHTML = '<p class="text-slate-400 col-span-full text-center">No public projects found on GitHub.</p>';
             return;
         }
 
+        // Create and append a card for each repository
         repos.forEach(repo => {
             const projectCard = document.createElement('div');
             projectCard.className = 'project-card';
@@ -169,7 +177,7 @@ async function fetchGitHubProjects(username) {
 
             projectCard.innerHTML = `
                 <h3 class="project-title">${repo.name}</h3>
-                <p class="project-description">${repo.description || 'No description available.'}</p>
+                <p class="project-description">${repo.description || 'No description provided.'}</p>
                 <div class="project-footer">
                     <div class="project-language">
                         <span class="language-dot"></span>
@@ -184,7 +192,7 @@ async function fetchGitHubProjects(username) {
         });
 
     } catch (error) {
-        console.error('Error fetching GitHub projects:', error);
+        console.error('Failed to fetch GitHub projects:', error);
         projectsGrid.innerHTML = '<p class="text-slate-400 col-span-full text-center">Could not load projects. Please try again later.</p>';
     }
 }

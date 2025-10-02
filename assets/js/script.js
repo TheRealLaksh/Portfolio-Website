@@ -1,16 +1,27 @@
-// Wait for the DOM to be fully loaded before running scripts
+// Wait for the DOM to be fully loaded before running any scripts
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Initialize Animate On Scroll (AOS) Library
+    // --- INITIALIZE LIBRARIES ---
     AOS.init({
         duration: 800,
         once: true,
     });
 
-    // --- Mobile Menu Toggle Script ---
+    // --- HERO SECTION TYPING ANIMATION ---
+    const typedTextElement = document.getElementById('typed-text');
+    if (typedTextElement) {
+        new Typed('#typed-text', {
+            strings: ['Laksh Pradhwani', 'a Web Developer', 'an aspiring AI/ML Engineer'],
+            typeSpeed: 40,
+            backSpeed: 20,
+            backDelay: 3000,
+            loop: true
+        });
+    }
+
+    // --- MOBILE MENU TOGGLE ---
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
-
     if (mobileMenuButton && mobileMenu) {
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
@@ -22,10 +33,49 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Sticky Header and Scroll-to-Top Button Script ---
+    // --- SCROLL PROGRESS INDICATOR ---
+    const progressBar = document.getElementById('progressBar');
+    if (progressBar) {
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollProgress = (scrollTop / scrollHeight) * 100;
+            progressBar.style.width = scrollProgress + '%';
+        });
+    }
+    
+    // --- "COPIED TO CLIPBOARD" NOTIFICATION ---
+    const copyButtons = document.querySelectorAll('[data-copy]');
+    const copyNotification = document.getElementById('copy-notification');
+    if (copyButtons.length > 0 && copyNotification) {
+        copyButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const textToCopy = button.getAttribute('data-copy');
+                
+                // Use a temporary textarea to perform the copy action
+                const textArea = document.createElement('textarea');
+                textArea.value = textToCopy;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+
+                // Show notification pop-up
+                copyNotification.textContent = `${button.getAttribute('data-type')} copied to clipboard!`;
+                copyNotification.classList.add('show');
+
+                // Hide notification after 2.5 seconds
+                setTimeout(() => {
+                    copyNotification.classList.remove('show');
+                }, 2500);
+            });
+        });
+    }
+
+    // --- STICKY HEADER & SCROLL-TO-TOP BUTTON ---
     const header = document.getElementById('main-header');
     const scrollToTopBtn = document.getElementById('scroll-to-top');
-
     const handleScroll = () => {
         if (window.scrollY > 50) {
             header.classList.add('header-scrolled');
@@ -35,16 +85,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (scrollToTopBtn) scrollToTopBtn.classList.add('hidden');
         }
     };
-
     window.addEventListener('scroll', handleScroll);
-
     if (scrollToTopBtn) {
         scrollToTopBtn.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     }
 
-    // --- Cursor Spotlight Effect Script ---
+    // --- CURSOR SPOTLIGHT EFFECT ---
     const spotlight = document.querySelector('.spotlight');
     if (spotlight) {
         window.addEventListener('mousemove', e => {
@@ -55,14 +103,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- Fetch GitHub Projects Script ---
-    // Checks if the project grid exists on the current page before running
+    // --- GITHUB PROJECTS FETCH ---
     const projectsGrid = document.getElementById('github-projects-grid');
     if (projectsGrid) {
-        fetchGitHubProjects('TheRealLaksh'); // Your GitHub username
+        fetchGitHubProjects('TheRealLaksh');
     }
 
-    // --- Constellation Background Script ---
+    // --- DYNAMIC CONSTELLATION BACKGROUND ---
     const canvas = document.getElementById('constellation-canvas');
     if (canvas) {
         const ctx = canvas.getContext('2d');
@@ -74,9 +121,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         setCanvasSize();
 
+        // Particle class for creating individual points
         class Particle {
-            constructor(x, y, directionX, directionY, size, color) {
-                this.x = x; this.y = y; this.directionX = directionX; this.directionY = directionY; this.size = size; this.color = color;
+            constructor(x, y, dX, dY, size, color) {
+                this.x = x; this.y = y; this.directionX = dX; this.directionY = dY; this.size = size; this.color = color;
             }
             draw() {
                 ctx.beginPath();
@@ -93,31 +141,30 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        // Initialize particles
         function init() {
             particlesArray = [];
-            const numberOfParticles = (canvas.height * canvas.width) / 9000;
-            for (let i = 0; i < numberOfParticles; i++) {
+            const numParticles = (canvas.height * canvas.width) / 9000;
+            for (let i = 0; i < numParticles; i++) {
                 const size = Math.random() * 2 + 1;
                 const x = Math.random() * (window.innerWidth - size * 2) + size;
                 const y = Math.random() * (window.innerHeight - size * 2) + size;
-                const directionX = (Math.random() * 0.4) - 0.2;
-                const directionY = (Math.random() * 0.4) - 0.2;
+                const dX = (Math.random() * 0.4) - 0.2;
+                const dY = (Math.random() * 0.4) - 0.2;
                 const color = getComputedStyle(document.documentElement).getPropertyValue('--particle-color').trim();
-                particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+                particlesArray.push(new Particle(x, y, dX, dY, size, color));
             }
         }
+
+        // Draw lines between nearby particles
         function connect() {
-            let opacityValue = 1;
+            let opacity = 1;
             for (let a = 0; a < particlesArray.length; a++) {
                 for (let b = a; b < particlesArray.length; b++) {
-                    let distance = Math.sqrt(
-                        (particlesArray[a].x - particlesArray[b].x) ** 2 +
-                        (particlesArray[a].y - particlesArray[b].y) ** 2
-                    );
-                    const connectionRadius = 150;
-                    if (distance < connectionRadius) {
-                        opacityValue = 1 - (distance / connectionRadius);
-                        ctx.strokeStyle = `rgba(100, 116, 139, ${opacityValue})`;
+                    let distance = Math.sqrt((particlesArray[a].x - particlesArray[b].x) ** 2 + (particlesArray[a].y - particlesArray[b].y) ** 2);
+                    if (distance < 150) {
+                        opacity = 1 - (distance / 150);
+                        ctx.strokeStyle = `rgba(100, 116, 139, ${opacity})`;
                         ctx.lineWidth = 1;
                         ctx.beginPath();
                         ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
@@ -128,13 +175,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        // Animation loop
         function animate() {
             requestAnimationFrame(animate);
             ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-            particlesArray.forEach(particle => particle.update());
+            particlesArray.forEach(p => p.update());
             connect();
         }
-
+        
+        // Re-initialize canvas on window resize
         window.addEventListener('resize', () => {
             setCanvasSize();
             init();
@@ -145,73 +194,70 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+
 /**
- * Fetches repositories for a given GitHub user and displays them.
- * @param {string} username - The GitHub username.
- */
-/**
- * Fetches repositories for a given GitHub user and displays them.
+ * Fetches repositories and their languages for a given GitHub user and displays them.
  * @param {string} username - The GitHub username.
  */
 async function fetchGitHubProjects(username) {
     const projectsGrid = document.getElementById('github-projects-grid');
     const apiUrl = `https://api.github.com/users/${username}/repos?sort=pushed&per_page=6`;
 
+    const languageColors = { 'JavaScript': '#f1e05a', 'HTML': '#e34c26', 'CSS': '#563d7c', 'Python': '#3572A5', 'TypeScript': '#3178c6', 'Java': '#b07219', 'C++': '#f34b7d', 'Go': '#00ADD8' };
+    const defaultColor = '#94a3b8';
+
     try {
         const response = await fetch(apiUrl);
-        if (!response.ok) {
-            throw new Error(`GitHub API Error: ${response.status}`);
-        }
+        if (!response.ok) throw new Error(`GitHub API Error: ${response.status}`);
         const repos = await response.json();
-
-        projectsGrid.innerHTML = ''; 
+        
+        projectsGrid.innerHTML = ''; // Clear loading message
 
         if (repos.length === 0) {
-            projectsGrid.innerHTML = '<p class="text-slate-400 col-span-full text-center">No public projects found on GitHub.</p>';
+            projectsGrid.innerHTML = '<p class="text-slate-400 col-span-full text-center">No public projects found.</p>';
             return;
         }
 
-        repos.forEach(repo => {
+        for (const repo of repos) {
             const projectCard = document.createElement('div');
             projectCard.className = 'project-card';
             projectCard.setAttribute('data-aos', 'fade-up');
 
-            // --- NEW CODE START ---
-            // Check if the homepage URL exists and create the link element
-            let liveSiteLink = '';
-            if (repo.homepage && repo.homepage !== "") {
-                liveSiteLink = `
-                    <div class="project-live-link">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"></path></svg>
-                        <a href="${repo.homepage}" target="_blank" rel="noopener noreferrer">
-                            View Live Site
-                        </a>
-                    </div>
-                `;
+            // Fetch all languages for the current repository
+            const langResponse = await fetch(repo.languages_url);
+            const languages = await langResponse.json();
+            const languageKeys = Object.keys(languages);
+            
+            let languagesHtml = '';
+            if (languageKeys.length > 0) {
+                languageKeys.forEach(lang => {
+                    const langColor = languageColors[lang] || defaultColor;
+                    languagesHtml += `<div class="language-item"><span class="language-dot" style="background-color: ${langColor}"></span><span>${lang}</span></div>`;
+                });
+            } else {
+                languagesHtml = `<div class="language-item"><span class="language-dot" style="background-color: ${defaultColor}"></span><span>N/A</span></div>`;
             }
 
+            // Check for a live site link in the repo's homepage field
+            let liveSiteLink = '';
+            if (repo.homepage && repo.homepage !== "") {
+                liveSiteLink = `<div class="project-live-link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"></path></svg><a href="${repo.homepage}" target="_blank" rel="noopener noreferrer">View Live Site</a></div>`;
+            }
+
+            // Construct the project card HTML
             projectCard.innerHTML = `
                 <h3 class="project-title">${repo.name}</h3>
                 <p class="project-description">${repo.description || 'No description provided.'}</p>
-                
-                <!-- The live site link will be inserted here if it exists -->
                 ${liveSiteLink}
-
                 <div class="project-footer">
-                    <div class="project-language">
-                        <span class="language-dot"></span>
-                        <span>${repo.language || 'N/A'}</span>
-                    </div>
-                    <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="project-link">
-                        View on GitHub &rarr;
-                    </a>
+                    <div class="project-languages-container">${languagesHtml}</div>
+                    <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub &rarr;</a>
                 </div>
             `;
             projectsGrid.appendChild(projectCard);
-        });
-
+        }
     } catch (error) {
         console.error('Failed to fetch GitHub projects:', error);
-        projectsGrid.innerHTML = '<p class="text-slate-400 col-span-full text-center">Could not load projects. Please try again later.</p>';
+        projectsGrid.innerHTML = '<p class="text-slate-400 col-span-full text-center">Could not load projects.</p>';
     }
 }

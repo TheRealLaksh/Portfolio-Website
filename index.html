@@ -1,88 +1,101 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
-    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <!-- Meta Tags, Favicon, and Title -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Laksh Pradhwani | Personal Portfolio</title>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+    <!-- External Libraries & Stylesheets -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
 </head>
+
 <body class="text-slate-300 overflow-x-hidden">
+
+    <!-- Scroll Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Background Effects -->
     <canvas id="constellation-canvas"></canvas>
     <div class="spotlight"></div>
+
+    <!-- Main Content Wrapper -->
     <div class="content-wrapper max-w-4xl mx-auto p-4 sm:p-6 md:p-8">
-        <header id="main-header" class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center py-4 px-8 transition-all duration-300 animate-fade-in" style="animation-duration: 1.5s;">
+
+        <!-- Header & Navigation -->
+        <header id="main-header" class="fixed top-0 left-0 right-0 z-50 flex justify-between items-center py-4 px-8 transition-all duration-300">
             <a href="index.html" class="text-2xl font-bold text-white transition-transform duration-300 hover:scale-105">Laksh Pradhwani</a>
+            
+            <!-- Desktop Navigation -->
             <nav class="hidden md:flex items-center space-x-8">
                 <a href="about.html" class="nav-link">About<span class="nav-link-indicator"></span></a>
-                <a href="skills-and-projects.html" class="nav-link">Skills | Projects<span class="nav-link-indicator"></span></a>
+                <a href="skills-and-projects.html" class="nav-link">Skills & Projects<span class="nav-link-indicator"></span></a>
                 <a href="contact.html" class="nav-link">Contact<span class="nav-link-indicator"></span></a>
             </nav>
+
+            <!-- Mobile Menu Button -->
             <button id="mobile-menu-button" class="md:hidden z-50 text-white">
                 <svg class="hamburger-icon h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
                 <svg class="close-icon h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
         </header>
+
+        <!-- Mobile Menu Panel -->
         <div id="mobile-menu" class="hidden fixed top-0 left-0 w-full h-full bg-slate-900/95 backdrop-blur-sm z-40 flex-col items-center justify-center space-y-8 text-2xl">
             <a href="about.html" class="nav-link">About</a>
             <a href="skills-and-projects.html" class="nav-link">Skills & Projects</a>
             <a href="contact.html" class="nav-link">Contact</a>
         </div>
+
+        <!-- Main Content -->
         <main class="pt-24">
+
+            <!-- Hero Section -->
             <section id="home" class="hero-glow text-center py-16 sm:py-24 rounded-2xl relative overflow-hidden">
-                 <div class="flex flex-col items-center relative z-10">
-                    <img
-                        src="assets/images/laksh.pradhwani.jpg"
-                        alt="A portrait of Laksh Pradhwani"
-                        class="w-56 h-56 rounded-full mb-6 border-4 border-slate-700 shadow-lg object-cover"
-                        data-aos="zoom-in"
-                        data-aos-duration="1000"
-                    >
-                    <h1
-                        class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight animate-fade-in-up"
-                        style="animation-delay: 0.2s;"
-                    >
-                        Hi, I'm <span class="text-shimmer">Laksh Pradhwani</span>
+                <div class="flex flex-col items-center relative z-10">
+                    <img src="assets/images/laksh.pradhwani.jpg" alt="A portrait of Laksh Pradhwani" class="w-56 h-56 rounded-full mb-6 border-4 border-slate-700 shadow-lg object-cover" data-aos="zoom-in" data-aos-duration="1000">
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight" data-aos="fade-in">
+                        Hi, I'm <span id="typed-text" class="text-shimmer"></span>
                     </h1>
-                    <p
-                        class="mt-4 max-w-2xl text-lg text-slate-400 animate-fade-in-up"
-                        style="animation-delay: 0.4s;"
-                    >
-                        I'm a passionate Web Developer and CSS Styling enthusiast dedicated to creating beautiful, functional, and user-centered digital experiences.
+                    <p class="mt-4 max-w-2xl text-lg text-slate-400" data-aos="fade-up" data-aos-delay="200">
+                        I'm a passionate Web Developer and an aspiring AI/ML Engineer dedicated to creating beautiful and functional digital experiences.
                     </p>
-                    <a
-                        href="contact.html"
-                        class="mt-8 px-6 py-3 bg-sky-500 text-white font-bold rounded-lg shadow-lg hover:bg-sky-600 transition-all duration-300 transform hover:scale-105 animate-fade-in-up"
-                        style="animation-delay: 0.6s;"
-                    >
+                    <a href="contact.html" class="mt-8 px-6 py-3 bg-sky-500 text-white font-bold rounded-lg shadow-lg hover:bg-sky-600 transition-all duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="400">
                         Get In Touch
                     </a>
                 </div>
             </section>
-            
+
+            <!-- LinkedIn Banner Section -->
             <section class="my-16 sm:my-24" data-aos="fade-up">
-                <h2 class="text-2xl font-bold text-white text-center mb-8">
-                    Know more about me..
-                </h2>
+                <h2 class="text-2xl font-bold text-white text-center mb-8">Know more about me..</h2>
                 <a href="https://www.linkedin.com/in/laksh-pradhwani" target="_blank" rel="noopener noreferrer" class="block">
                     <img src="assets/images/linkedin-banner.png" alt="Laksh Pradhwani's LinkedIn Banner" class="w-full rounded-lg shadow-lg transition-transform duration-300 hover:scale-[1.02] hover:shadow-sky-400/20">
                 </a>
             </section>
 
         </main>
-        <footer class="text-center mt-16 sm:my-24 py-6 border-t border-slate-800" data-aos="fade-up" data-aos-anchor-placement="top-bottom">
+
+        <!-- Footer -->
+        <footer class="text-center mt-16 sm:my-24 py-6 border-t border-slate-800" data-aos="fade-up">
             <p class="text-sm text-slate-500">© 2025 Laksh Pradhwani. All Rights Reserved.</p>
         </footer>
     </div>
+
+    <!-- Utility Buttons & Scripts -->
+    <button id="scroll-to-top" class="fixed bottom-8 right-8 z-50 w-12 h-12 bg-sky-500/80 text-white rounded-full hidden justify-center items-center shadow-lg hover:bg-sky-600 transition-all duration-300 backdrop-blur-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6" /></svg>
+    </button>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="assets/js/script.js"></script>
-    <button id="scroll-to-top" class="fixed bottom-8 right-8 z-50 w-12 h-12 bg-sky-500/80 text-white rounded-full hidden justify-center items-center shadow-lg hover:bg-sky-600 transition-all duration-300 backdrop-blur-sm">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
-</button>
 </body>
+
 </html>

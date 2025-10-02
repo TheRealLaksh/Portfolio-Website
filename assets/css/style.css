@@ -401,3 +401,30 @@ body {
     transform: translateY(-3px);
     box-shadow: 0 6px 20px rgba(14, 165, 233, 0.3);
 }
+
+/* --- Live Site Link Styles --- */
+.project-live-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.project-live-link a {
+    color: #7dd3fc; /* sky-300 */
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.project-live-link a:hover {
+    color: #ffffff;
+}
+
+.project-live-link svg {
+    width: 16px;
+    height: 16px;
+    color: #7dd3fc; /* sky-300 */
+}

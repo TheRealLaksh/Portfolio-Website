@@ -149,9 +149,12 @@ document.addEventListener('DOMContentLoaded', () => {
  * Fetches repositories for a given GitHub user and displays them.
  * @param {string} username - The GitHub username.
  */
+/**
+ * Fetches repositories for a given GitHub user and displays them.
+ * @param {string} username - The GitHub username.
+ */
 async function fetchGitHubProjects(username) {
     const projectsGrid = document.getElementById('github-projects-grid');
-    // API URL fetches public repos, sorted by the last push date, and limits to 6 results.
     const apiUrl = `https://api.github.com/users/${username}/repos?sort=pushed&per_page=6`;
 
     try {
@@ -161,7 +164,6 @@ async function fetchGitHubProjects(username) {
         }
         const repos = await response.json();
 
-        // Clear the "Loading..." message
         projectsGrid.innerHTML = ''; 
 
         if (repos.length === 0) {
@@ -169,15 +171,32 @@ async function fetchGitHubProjects(username) {
             return;
         }
 
-        // Create and append a card for each repository
         repos.forEach(repo => {
             const projectCard = document.createElement('div');
             projectCard.className = 'project-card';
             projectCard.setAttribute('data-aos', 'fade-up');
 
+            // --- NEW CODE START ---
+            // Check if the homepage URL exists and create the link element
+            let liveSiteLink = '';
+            if (repo.homepage && repo.homepage !== "") {
+                liveSiteLink = `
+                    <div class="project-live-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"></path></svg>
+                        <a href="${repo.homepage}" target="_blank" rel="noopener noreferrer">
+                            View Live Site
+                        </a>
+                    </div>
+                `;
+            }
+
             projectCard.innerHTML = `
                 <h3 class="project-title">${repo.name}</h3>
                 <p class="project-description">${repo.description || 'No description provided.'}</p>
+                
+                <!-- The live site link will be inserted here if it exists -->
+                ${liveSiteLink}
+
                 <div class="project-footer">
                     <div class="project-language">
                         <span class="language-dot"></span>

@@ -11,10 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const typedTextElement = document.getElementById('typed-text');
     if (typedTextElement) {
         new Typed('#typed-text', {
-            strings: ['Laksh Pradhwani', 'Laksh Pradhwani','Laksh Pradhwani','Laksh Pradhwani'],
+            strings: ['Laksh Pradhwani', 'a Web Developer', 'an aspiring AI/ML Engineer'],
             typeSpeed: 40,
             backSpeed: 20,
-            backDelay: 1500,
+            backDelay: 3000,
             loop: true
         });
     }
@@ -194,7 +194,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-
 /**
  * Fetches repositories and their languages for a given GitHub user and displays them.
  * @param {string} username - The GitHub username.
@@ -203,6 +202,7 @@ async function fetchGitHubProjects(username) {
     const projectsGrid = document.getElementById('github-projects-grid');
     const apiUrl = `https://api.github.com/users/${username}/repos?sort=pushed&per_page=6`;
 
+    // Map of languages to their corresponding colors for styling
     const languageColors = { 'JavaScript': '#f1e05a', 'HTML': '#e34c26', 'CSS': '#563d7c', 'Python': '#3572A5', 'TypeScript': '#3178c6', 'Java': '#b07219', 'C++': '#f34b7d', 'Go': '#00ADD8' };
     const defaultColor = '#94a3b8';
 
@@ -218,6 +218,7 @@ async function fetchGitHubProjects(username) {
             return;
         }
 
+        // Loop through each repository to create its card
         for (const repo of repos) {
             const projectCard = document.createElement('div');
             projectCard.className = 'project-card';
@@ -244,7 +245,7 @@ async function fetchGitHubProjects(username) {
                 liveSiteLink = `<div class="project-live-link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"></path></svg><a href="${repo.homepage}" target="_blank" rel="noopener noreferrer">View Live Site</a></div>`;
             }
 
-            // Construct the project card HTML
+            // Construct the final project card HTML
             projectCard.innerHTML = `
                 <h3 class="project-title">${repo.name}</h3>
                 <p class="project-description">${repo.description || 'No description provided.'}</p>

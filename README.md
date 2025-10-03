@@ -20,7 +20,7 @@ A modern, multi-page personal portfolio built to showcase skills, projects, and 
 * **📬 Functional Contact Form:** A working contact form that allows visitors to send messages directly to your inbox via Formspree.
 
 ## 🛠️ Tech Stack
-
+ 
 This project was built using a combination of modern web technologies:
 
 * **HTML5:** For the core structure and content.

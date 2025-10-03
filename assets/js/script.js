@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
             strings: ['Laksh Pradhwani', 'Laksh Pradhwani','Laksh Pradhwani','Laksh Pradhwani'],
             typeSpeed: 40,
             backSpeed: 20,
-            backDelay: 3000,
+            backDelay: 1500,
             loop: true
         });
     }

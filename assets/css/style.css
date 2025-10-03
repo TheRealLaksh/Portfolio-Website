@@ -91,8 +91,8 @@ body {
 .site-footer {
     border-top: 1px solid #334155;
     padding: 3rem 0;
-    position: relative;
-    z-index: 100;
+    position: relative; /* Required for z-index to work */
+    z-index: 10;     /* THE FIX: Ensures footer is on the same layer as content */
 }
 
 .footer-content {
@@ -100,8 +100,6 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 2rem;
-    position: relative;
-    z-index: 200;
 }
 
 .footer-nav {
@@ -115,38 +113,19 @@ body {
 }
 
 .social-icon-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: #94a3b8; 
+    color: #94a3b8;
     transition: all 0.3s ease;
 }
 
-.social-icon-link svg {
-    width: 28px;
-    height: 28px;
-    fill: currentColor !important;   
-    stroke: currentColor !important; 
-    transition: transform 0.3s ease, color 0.3s ease, fill 0.3s ease, stroke 0.3s ease;
-}
-
 .social-icon-link:hover {
-    color: #38bdf8;
+    color: #ffffff;
     transform: translateY(-3px);
-}
-
-.social-icon-link:hover svg {
-    fill: #38bdf8 !important;
-    stroke: #38bdf8 !important;
-    transform: scale(1.1) translateY(-3px);
-    filter: drop-shadow(0 0 8px #38bdf8); 
 }
 
 .footer-copyright {
     color: #64748b;
     font-size: 0.875rem;
 }
-
 
 /* ==========================================================================
    5. UI EFFECTS & ANIMATIONS
@@ -158,7 +137,7 @@ body {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 5; 
+    z-index: 5; /* THE FIX: Lowered z-index to sit below content */
     background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), var(--spotlight-color) 0%, transparent 25%);
     transition: background 0.1s ease-out;
 }

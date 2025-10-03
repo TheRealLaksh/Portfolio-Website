@@ -113,30 +113,31 @@ body {
 }
 
 .social-icon-link {
-    color: #94a3b8;
-    transition: all 0.3s ease;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    color: #94a3b8; 
+    transition: all 0.3s ease;
 }
 
 .social-icon-link svg {
-    width: 24px;
-    height: 24px;
-    fill: currentColor;   /* ensures icons take parent color */
-    stroke: currentColor; /* supports stroke-based icons */
+    width: 28px;
+    height: 28px;
+    fill: currentColor !important;   
+    stroke: currentColor !important; 
     transition: transform 0.3s ease, color 0.3s ease, fill 0.3s ease, stroke 0.3s ease;
 }
 
 .social-icon-link:hover {
-    color: #ffffff;
+    color: #38bdf8;
     transform: translateY(-3px);
 }
 
 .social-icon-link:hover svg {
-    fill: #ffffff;
-    stroke: #ffffff;
-    transform: translateY(-3px);
+    fill: #38bdf8 !important;
+    stroke: #38bdf8 !important;
+    transform: scale(1.1) translateY(-3px);
+    filter: drop-shadow(0 0 8px #38bdf8); 
 }
 
 .footer-copyright {

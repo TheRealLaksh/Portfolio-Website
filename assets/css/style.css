@@ -177,15 +177,7 @@ body {
    ========================================================================== */
 
 /* --- Skill Cards & Tooltips --- */
-.skill-card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    text-align: center;
-    transition: transform 0.3s;
-}
+.skill-card { position: relative; display: flex; flex-direction: column; align-items: center; gap: 1rem; text-align: center; transition: transform 0.3s; }
 .skill-card:hover { transform: translateY(-5px); }
 .skill-icon-container { width: 80px; height: 80px; border-radius: 50%; background-color: rgba(30, 41, 59, 0.5); display: flex; justify-content: center; align-items: center; transition: all 0.3s; }
 .skill-card:hover .skill-icon-container { background-color: rgba(56, 189, 248, 0.1); box-shadow: 0 0 20px rgba(56, 189, 248, 0.5); }

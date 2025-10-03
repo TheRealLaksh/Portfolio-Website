@@ -28,12 +28,12 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1; /* Sits behind everything except the body */
+    z-index: 1; /* Sits just above the body background */
 }
 
 .content-wrapper {
     position: relative;
-    z-index: 10; /* All main content sits on top */
+    z-index: 10; /* All main content sits on top of background effects */
 }
 
 .progress-bar {
@@ -137,7 +137,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none;
+    pointer-events: none; /* Allows clicks to pass through */
     z-index: 5; /* THE FIX: Sits below content (z-index 10) */
     background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), var(--spotlight-color) 0%, transparent 25%);
     transition: background 0.1s ease-out;
@@ -175,7 +175,6 @@ body {
 /* ==========================================================================
    6. COMPONENT STYLES
    ========================================================================== */
-
 /* --- Skill Cards & Tooltips --- */
 .skill-card { position: relative; display: flex; flex-direction: column; align-items: center; gap: 1rem; text-align: center; transition: transform 0.3s; }
 .skill-card:hover { transform: translateY(-5px); }

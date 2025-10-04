@@ -1,6 +1,0 @@
-Ignore SEO and crawler instruction files
-sitemap.xml
-robots.txt
-
-Ignore system files (optional but good practice)
-.DS_Store

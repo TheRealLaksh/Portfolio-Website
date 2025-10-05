@@ -196,13 +196,18 @@ async function fetchGitHubProjects(username) {
                 ${liveSiteLink}
                 <div class="project-footer">
                     <div class="project-languages-container">${languagesHtml}</div>
-                    <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub &rarr;</a>
+                    <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub →</a>
                 </div>
             `;
             projectsGrid.appendChild(projectCard);
         }
     } catch (error) {
         console.error('Failed to fetch GitHub projects:', error);
-        projectsGrid.innerHTML = '<p class="text-slate-400 col-span-full text-center">Could not load projects.</p>';
+        projectsGrid.innerHTML = `<p class="text-slate-400 col-span-full text-center">
+            Could not load projects from GitHub. This might be due to API rate limiting. 
+            <br>
+            Please check the console for errors or view my projects directly on 
+            <a href="https://github.com/${username}" target="_blank" rel="noopener noreferrer" class="font-bold text-sky-400 hover:underline">my GitHub profile</a>.
+        </p>`;
     }
 }

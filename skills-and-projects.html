@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skills & Projects | Laksh Pradhwani</title>
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
 
-    <meta name="description" content="Explore the skills and projects of Laksh Pradhwani. View my work in Python, JavaScript, HTML, CSS, and more, with live demos and GitHub repositories.">
-    <meta name="keywords" content="Laksh Pradhwani projects, skills, GitHub portfolio, Python projects, JavaScript projects, web development skills">
+    <meta name="description"
+        content="Explore the skills and projects of Laksh Pradhwani. View my work in Python, JavaScript, HTML, CSS, and more, with live demos and GitHub repositories.">
+    <meta name="keywords"
+        content="Laksh Pradhwani projects, skills, GitHub portfolio, Python projects, JavaScript projects, web development skills">
     <meta name="author" content="Laksh Pradhwani">
     <link rel="canonical" href="https://www.lakshp.live/skills-and-projects.html">
 
@@ -15,7 +18,8 @@
 
 
     <meta property="og:title" content="Skills & Projects | Laksh Pradhwani">
-    <meta property="og:description" content="A showcase of my technical skills and a gallery of my latest projects, fetched directly from GitHub.">
+    <meta property="og:description"
+        content="A showcase of my technical skills and a gallery of my latest projects, fetched directly from GitHub.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.lakshp.live/skills-and-projects.html">
     <meta property="og:image" content="https://www.lakshp.live/assets/images/linkedin-banner.png">
@@ -25,7 +29,8 @@
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Skills & Projects | Laksh Pradhwani">
-    <meta name="twitter:description" content="A showcase of my technical skills and a gallery of my latest projects, fetched directly from GitHub.">
+    <meta name="twitter:description"
+        content="A showcase of my technical skills and a gallery of my latest projects, fetched directly from GitHub.">
     <meta name="twitter:image" content="https://www.lakshp.live/assets/images/linkedin-banner.png">
     <meta name="twitter:url" content="https://www.lakshp.live/skills-and-projects.html">
 
@@ -38,34 +43,44 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
 </head>
+
 <body class="text-slate-300 overflow-x-hidden">
 
     <!-- Scroll Progress Bar -->
     <div class="progress-bar" id="progressBar"></div>
 
     <!-- Background Effects -->
-    <canvas id="constellation-canvas"></canvas>
+
+    <body class="text-slate-300 overflow-x-hidden" id="vanta-bg"></body>
     <div class="spotlight"></div>
 
     <!-- Main Content Wrapper -->
     <div class="content-wrapper max-w-4xl mx-auto p-4 sm:p-6 md:p-8">
 
         <!-- Header & Navigation -->
-        <header id="main-header" class="site-header fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-4 sm:px-8">
-            <a href="index.html" class="text-2xl font-bold text-white transition-transform duration-300 hover:scale-105">Laksh Pradhwani</a>
+        <header id="main-header"
+            class="site-header fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-4 sm:px-8">
+            <a href="index.html"
+                class="text-2xl font-bold text-white transition-transform duration-300 hover:scale-105">Laksh
+                Pradhwani</a>
             <nav class="hidden md:flex items-center space-x-2">
                 <a href="about.html" class="nav-link">About</a>
                 <a href="skills-and-projects.html" class="nav-link active-link">Skills & Projects</a>
                 <a href="contact.html" class="nav-link">Contact</a>
             </nav>
             <button id="mobile-menu-button" class="md:hidden z-50 text-white">
-                <svg class="hamburger-icon h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
-                <svg class="close-icon h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                <svg class="hamburger-icon h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+                <svg class="close-icon h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
             </button>
         </header>
 
         <!-- Mobile Menu Panel -->
-        <div id="mobile-menu" class="hidden fixed top-0 left-0 w-full h-full bg-slate-900/95 backdrop-blur-sm z-40 flex-col items-center justify-center space-y-8 text-2xl">
+        <div id="mobile-menu"
+            class="hidden fixed top-0 left-0 w-full h-full bg-slate-900/95 backdrop-blur-sm z-40 flex-col items-center justify-center space-y-8 text-2xl">
             <a href="about.html" class="nav-link">About</a>
             <a href="skills-and-projects.html" class="nav-link">Skills & Projects</a>
             <a href="contact.html" class="nav-link">Contact</a>
@@ -78,23 +93,72 @@
             <section id="skills" class="my-16 sm:my-24 scroll-mt-20" data-aos="fade-up">
                 <h2 class="section-title text-3xl font-bold text-white text-center mb-12 relative">My Skillset</h2>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="0" data-tooltip="Used for backend logic and data analysis."><div class="skill-icon-container"><svg class="skill-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M15.7,2.8H8.3L2.8,8.3v7.4l5.5,5.5h7.4l5.5-5.5V8.3L15.7,2.8z M19.2,15.7L15.7,19.2h-7.4L4.8,15.7V8.3L8.3,4.8h7.4 l3.5,3.5V15.7z M12,7.5c-1.4,0-2.5,1.1-2.5,2.5s1.1,2.5,2.5,2.5s2.5-1.1,2.5-2.5S13.4,7.5,12,7.5z M12,12.5c-1.4,0-2.5,1.1-2.5,2.5 s1.1,2.5,2.5,2.5s2.5-1.1,2.5-2.5S13.4,12.5,12,12.5z"/></svg></div><h3 class="skill-name">Python</h3></div>
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="100" data-tooltip="Structuring all my web projects."><div class="skill-icon-container"><svg class="skill-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M2.3,1.1l1.8,20.8L12,24l7.9-2.1L21.7,1.1H2.3z M17.6,8.3l-0.3,3.3H12V8.3h5.6z M11,15.7h-4 l0.2,2.3l4.8,1.3v-3.6H11z"/></svg></div><h3 class="skill-name">HTML</h3></div>
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="200" data-tooltip="Building interactive and dynamic features."><div class="skill-icon-container"><svg class="skill-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M2,2h20v20H2V2z M13,18h2V9h-2V18z M9,18h2V9H9V18z"/></svg></div><h3 class="skill-name">JavaScript</h3></div>
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="300" data-tooltip="Creating responsive and animated designs."><div class="skill-icon-container"><svg class="skill-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M2.3,1.1l1.8,20.8L12,24l7.9-2.1L21.7,1.1H2.3z M17.6,8.3l-0.3,3.3H12V8.3h5.6z M11,15.7h-4 l0.2,2.3l4.8,1.3v-3.6H11z"/></svg></div><h3 class="skill-name">CSS Styling</h3></div>
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="400" data-tooltip="Version control for all my projects."><div class="skill-icon-container"><svg class="skill-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M23.955 10.533c-.03-.245-.223-.424-.468-.424h-3.073c-.245 0-.438.179-.468.424l-1.396 9.875c-.03.245.163.49.407.49h2.327c.245 0 .438-.245.408-.49l.962-9.875zm-6.02-6.55c.245 0 .438-.18.468-.424l.962-9.11C19.425.18 19.232 0 18.988 0h-2.327c-.244 0-.437.245-.407.49l1.396 9.05c.03.244.223.424.468.424h.94v.019zm-5.998 19.952c-6.626 0-11.996-5.37-11.996-11.996S5.311.004 11.937.004s11.996 5.37 11.996 11.996-5.37 11.985-11.996 11.985zM9.542 8.528h2.094c.306 0 .407.245.407.489v2.296l2.094-2.122c.183-.153.316-.184.499-.184.366 0 .468.275.468.489v5.18c0 .245-.102.49-.468.49-.183 0-.316-.03-.499-.184l-2.094-2.122v2.296c0 .244-.102.489-.407.489H9.542c-.306 0-.407-.245-.407-.49V9.017c0-.244.101-.489.407-.489z"/></svg></div><h3 class="skill-name">Git</h3></div>
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="500" data-tooltip="Hosting and managing all my code."><div class="skill-icon-container"><svg class="skill-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2.1c-3.2.7-3.9-1.5-3.9-1.5-.5-1.2-1.1-1.6-1.1-1.6-.9-.6.1-.6.1-.6 1 .1 1.6 1 1.6 1 .9 1.6 2.5 1.1 3.1.8.1-.7.4-1.1.7-1.4-2.6-.3-5.4-1.3-5.4-5.9 0-1.3.5-2.4 1.1-3.3-.1-.3-.5-1.5.1-3.1 0 0 .9-.3 3.4 1.2a11.5 11.5 0 0 1 6.2 0c2.5-1.5 3.4-1.2 3.4-1.2.6 1.6.2 2.8.1 3.1.7.9 1.1 2 1.1 3.3 0 4.6-2.8 5.6-5.5 5.9.4.3.8 1 .8 2v3c0 .4.2.7.8.6 4.6-1.5 7.9-5.9 7.9-10.9C23.5 5.65 18.35.5 12 .5z"/></svg></div><h3 class="skill-name">GitHub</h3></div>
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="0"
+                        data-tooltip="Used for backend logic and data analysis.">
+                        <div class="skill-icon-container"><svg class="skill-icon" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M15.7,2.8H8.3L2.8,8.3v7.4l5.5,5.5h7.4l5.5-5.5V8.3L15.7,2.8z M19.2,15.7L15.7,19.2h-7.4L4.8,15.7V8.3L8.3,4.8h7.4 l3.5,3.5V15.7z M12,7.5c-1.4,0-2.5,1.1-2.5,2.5s1.1,2.5,2.5,2.5s2.5-1.1,2.5-2.5S13.4,7.5,12,7.5z M12,12.5c-1.4,0-2.5,1.1-2.5,2.5 s1.1,2.5,2.5,2.5s2.5-1.1,2.5-2.5S13.4,12.5,12,12.5z" />
+                            </svg></div>
+                        <h3 class="skill-name">Python</h3>
+                    </div>
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="100"
+                        data-tooltip="Structuring all my web projects.">
+                        <div class="skill-icon-container"><svg class="skill-icon" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M2.3,1.1l1.8,20.8L12,24l7.9-2.1L21.7,1.1H2.3z M17.6,8.3l-0.3,3.3H12V8.3h5.6z M11,15.7h-4 l0.2,2.3l4.8,1.3v-3.6H11z" />
+                            </svg></div>
+                        <h3 class="skill-name">HTML</h3>
+                    </div>
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="200"
+                        data-tooltip="Building interactive and dynamic features.">
+                        <div class="skill-icon-container"><svg class="skill-icon" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M2,2h20v20H2V2z M13,18h2V9h-2V18z M9,18h2V9H9V18z" />
+                            </svg></div>
+                        <h3 class="skill-name">JavaScript</h3>
+                    </div>
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="300"
+                        data-tooltip="Creating responsive and animated designs.">
+                        <div class="skill-icon-container"><svg class="skill-icon" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M2.3,1.1l1.8,20.8L12,24l7.9-2.1L21.7,1.1H2.3z M17.6,8.3l-0.3,3.3H12V8.3h5.6z M11,15.7h-4 l0.2,2.3l4.8,1.3v-3.6H11z" />
+                            </svg></div>
+                        <h3 class="skill-name">CSS Styling</h3>
+                    </div>
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="400"
+                        data-tooltip="Version control for all my projects.">
+                        <div class="skill-icon-container"><svg class="skill-icon" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M23.955 10.533c-.03-.245-.223-.424-.468-.424h-3.073c-.245 0-.438.179-.468.424l-1.396 9.875c-.03.245.163.49.407.49h2.327c.245 0 .438-.245.408-.49l.962-9.875zm-6.02-6.55c.245 0 .438-.18.468-.424l.962-9.11C19.425.18 19.232 0 18.988 0h-2.327c-.244 0-.437.245-.407.49l1.396 9.05c.03.244.223.424.468.424h.94v.019zm-5.998 19.952c-6.626 0-11.996-5.37-11.996-11.996S5.311.004 11.937.004s11.996 5.37 11.996 11.996-5.37 11.985-11.996 11.985zM9.542 8.528h2.094c.306 0 .407.245.407.489v2.296l2.094-2.122c.183-.153.316-.184.499-.184.366 0 .468.275.468.489v5.18c0 .245-.102.49-.468.49-.183 0-.316-.03-.499-.184l-2.094-2.122v2.296c0 .244-.102.489-.407.489H9.542c-.306 0-.407-.245-.407-.49V9.017c0-.244.101-.489.407-.489z" />
+                            </svg></div>
+                        <h3 class="skill-name">Git</h3>
+                    </div>
+                    <div class="skill-card" data-aos="fade-up" data-aos-delay="500"
+                        data-tooltip="Hosting and managing all my code.">
+                        <div class="skill-icon-container"><svg class="skill-icon" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2.1c-3.2.7-3.9-1.5-3.9-1.5-.5-1.2-1.1-1.6-1.1-1.6-.9-.6.1-.6.1-.6 1 .1 1.6 1 1.6 1 .9 1.6 2.5 1.1 3.1.8.1-.7.4-1.1.7-1.4-2.6-.3-5.4-1.3-5.4-5.9 0-1.3.5-2.4 1.1-3.3-.1-.3-.5-1.5.1-3.1 0 0 .9-.3 3.4 1.2a11.5 11.5 0 0 1 6.2 0c2.5-1.5 3.4-1.2 3.4-1.2.6 1.6.2 2.8.1 3.1.7.9 1.1 2 1.1 3.3 0 4.6-2.8 5.6-5.5 5.9.4.3.8 1 .8 2v3c0 .4.2.7.8.6 4.6-1.5 7.9-5.9 7.9-10.9C23.5 5.65 18.35.5 12 .5z" />
+                            </svg></div>
+                        <h3 class="skill-name">GitHub</h3>
+                    </div>
                 </div>
             </section>
 
             <!-- Projects Section -->
             <section id="projects" class="my-16 sm:my-24 scroll-mt-20" data-aos="fade-up">
-                <h2 class="section-title text-3xl font-bold text-white text-center mb-12 relative">My GitHub Projects</h2>
+                <h2 class="section-title text-3xl font-bold text-white text-center mb-12 relative">My GitHub Projects
+                </h2>
                 <div id="github-projects-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-8">
                     <p class="text-slate-400 col-span-full text-center">Loading projects from GitHub...</p>
                 </div>
                 <div class="view-more-container" data-aos="fade-up">
-                    <a href="https://github.com/TheRealLaksh?tab=repositories" target="_blank" rel="noopener noreferrer" class="view-more-button">
+                    <a href="https://github.com/TheRealLaksh?tab=repositories" target="_blank" rel="noopener noreferrer"
+                        class="view-more-button">
                         View More on GitHub
                     </a>
                 </div>
@@ -111,10 +175,35 @@
                     <a href="contact.html" class="nav-link">Contact</a>
                 </nav>
                 <div class="footer-socials">
-                    <a href="https://www.linkedin.com/in/laksh-pradhwani" target="_blank" rel="noopener noreferrer" class="social-icon-link"><svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
-                    <a href="https://github.com/TheRealLaksh" target="_blank" rel="noopener noreferrer" class="social-icon-link"><svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2.1c-3.2.7-3.9-1.5-3.9-1.5-.5-1.2-1.1-1.6-1.1-1.6-.9-.6.1-.6.1-.6 1 .1 1.6 1 1.6 1 .9 1.6 2.5 1.1 3.1.8.1-.7.4-1.1.7-1.4-2.6-.3-5.4-1.3-5.4-5.9 0-1.3.5-2.4 1.1-3.3-.1-.3-.5-1.5.1-3.1 0 0 .9-.3 3.4 1.2a11.5 11.5 0 0 1 6.2 0c2.5-1.5 3.4-1.2 3.4-1.2.6 1.6.2 2.8.1 3.1.7.9 1.1 2 1.1 3.3 0 4.6-2.8 5.6-5.5 5.9.4.3.8 1 .8 2v3c0 .4.2.7.8.6 4.6-1.5 7.9-5.9 7.9-10.9C23.5 5.65 18.35.5 12 .5z"/></svg></a>
-                    <a href="https://www.instagram.com/_.lakshp/" target="_blank" rel="noopener noreferrer" class="social-icon-link"><svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
-                    <a href="https://open.spotify.com/user/31m5vveagfpvf3to6nxjqytiawpy?si=851a9fa5d535485e" target="_blank" rel="noopener noreferrer" class="social-icon-link"><svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 6.62 5.37 12 12 12s12-5.38 12-12c0-6.63-5.37-12-12-12zm5.49 17.36a.74.74 0 0 1-1.02.25c-2.81-1.72-6.35-2.11-10.52-1.13a.75.75 0 1 1-.33-1.47c4.61-1.06 8.55-.61 11.66 1.3.35.22.46.68.21 1.05zm1.44-3.2a.93.93 0 0 1-1.29.31c-3.22-1.98-8.13-2.55-11.92-1.36a.93.93 0 1 1-.55-1.78c4.29-1.33 9.7-.7 13.43 1.54.45.28.6.88.33 1.29zm.13-3.38c-3.78-2.25-10.04-2.46-13.65-1.31a1.11 1.11 0 0 1-.65-2.12c4.19-1.29 11.07-1.04 15.39 1.54a1.1 1.1 0 1 1-1.09 1.89z"/></svg></a>
+                    <a href="https://www.linkedin.com/in/laksh-pradhwani" target="_blank" rel="noopener noreferrer"
+                        class="social-icon-link"><svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                            </path>
+                            <rect x="2" y="9" width="4" height="12"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg></a>
+                    <a href="https://github.com/TheRealLaksh" target="_blank" rel="noopener noreferrer"
+                        class="social-icon-link"><svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2.1c-3.2.7-3.9-1.5-3.9-1.5-.5-1.2-1.1-1.6-1.1-1.6-.9-.6.1-.6.1-.6 1 .1 1.6 1 1.6 1 .9 1.6 2.5 1.1 3.1.8.1-.7.4-1.1.7-1.4-2.6-.3-5.4-1.3-5.4-5.9 0-1.3.5-2.4 1.1-3.3-.1-.3-.5-1.5.1-3.1 0 0 .9-.3 3.4 1.2a11.5 11.5 0 0 1 6.2 0c2.5-1.5 3.4-1.2 3.4-1.2.6 1.6.2 2.8.1 3.1.7.9 1.1 2 1.1 3.3 0 4.6-2.8 5.6-5.5 5.9.4.3.8 1 .8 2v3c0 .4.2.7.8.6 4.6-1.5 7.9-5.9 7.9-10.9C23.5 5.65 18.35.5 12 .5z" />
+                        </svg></a>
+                    <a href="https://www.instagram.com/_.lakshp/" target="_blank" rel="noopener noreferrer"
+                        class="social-icon-link"><svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg></a>
+                    <a href="https://open.spotify.com/user/31m5vveagfpvf3to6nxjqytiawpy?si=851a9fa5d535485e"
+                        target="_blank" rel="noopener noreferrer" class="social-icon-link"><svg class="w-6 h-6"
+                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M12 0C5.37 0 0 5.37 0 12c0 6.62 5.37 12 12 12s12-5.38 12-12c0-6.63-5.37-12-12-12zm5.49 17.36a.74.74 0 0 1-1.02.25c-2.81-1.72-6.35-2.11-10.52-1.13a.75.75 0 1 1-.33-1.47c4.61-1.06 8.55-.61 11.66 1.3.35.22.46.68.21 1.05zm1.44-3.2a.93.93 0 0 1-1.29.31c-3.22-1.98-8.13-2.55-11.92-1.36a.93.93 0 1 1-.55-1.78c4.29-1.33 9.7-.7 13.43 1.54.45.28.6.88.33 1.29zm.13-3.38c-3.78-2.25-10.04-2.46-13.65-1.31a1.11 1.11 0 0 1-.65-2.12c4.19-1.29 11.07-1.04 15.39 1.54a1.1 1.1 0 1 1-1.09 1.89z" />
+                        </svg></a>
                 </div>
                 <p class="footer-copyright">© 2025 Laksh Pradhwani. All Rights Reserved.</p>
             </div>
@@ -122,18 +211,42 @@
     </div>
 
     <!-- Utility Buttons & Scripts -->
-    <button id="scroll-to-top" class="fixed bottom-8 right-8 z-50 w-12 h-12 bg-sky-500/80 text-white rounded-full hidden justify-center items-center shadow-lg hover:bg-sky-600 transition-all duration-300 backdrop-blur-sm">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+    <button id="scroll-to-top"
+        class="fixed bottom-8 right-8 z-50 w-12 h-12 bg-sky-500/80 text-white rounded-full hidden justify-center items-center shadow-lg hover:bg-sky-600 transition-all duration-300 backdrop-blur-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m18 15-6-6-6 6" />
+        </svg>
     </button>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="assets/js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.topology.min.js"></script>
+    <script>
+        VANTA.TOPOLOGY({
+            el: "#vanta-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x38bdf8, // Original Accent Color
+            backgroundColor: 0x000000, // Original Background Color
+            waveSpeed: 8, // You can change this value (e.g., 0.5 for slower, 2.0 for faster)
+            waveHeight: 15.00,
+            shininess: 30.00
+        })
+    </script>
 </body>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ETE24Q0PR1"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-  gtag('config', 'G-ETE24Q0PR1');
+    gtag('config', 'G-ETE24Q0PR1');
 </script>
+
 </html>

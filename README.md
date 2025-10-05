@@ -6,7 +6,7 @@ A modern, multi-page personal portfolio built to showcase skills, projects, and 
 
 ### ✨ [View the Live Demo](www.lakshp.live) ✨
 
-*(Replace the link above with your actual live URL)*
+
 
 ## 🚀 Key Features
 

@@ -18,6 +18,10 @@ body {
     background-size: 40px 40px;
 }
 
+section {
+    scroll-margin-top: 80px; /* Offset for fixed header */
+}
+
 
 /* ==========================================================================
    2. LAYOUT & GENERAL COMPONENTS

@@ -22,16 +22,32 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- MOBILE MENU TOGGLE ---
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
+    const navLinks = document.querySelectorAll('#mobile-menu .nav-link');
     if (mobileMenuButton && mobileMenu) {
-        mobileMenuButton.addEventListener('click', () => {
+        const toggleMenu = () => {
             mobileMenu.classList.toggle('hidden');
             mobileMenu.classList.toggle('flex');
             const hamburgerIcon = mobileMenuButton.querySelector('.hamburger-icon');
             const closeIcon = mobileMenuButton.querySelector('.close-icon');
             hamburgerIcon.classList.toggle('hidden');
             closeIcon.classList.toggle('hidden');
+        };
+
+        mobileMenuButton.addEventListener('click', toggleMenu);
+        navLinks.forEach(link => {
+            link.addEventListener('click', toggleMenu);
         });
     }
+
+    // --- SMOOTH SCROLLING FOR NAV LINKS ---
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
 
     // --- SCROLL PROGRESS INDICATOR ---
     const progressBar = document.getElementById('progressBar');
@@ -43,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
             progressBar.style.width = scrollProgress + '%';
         });
     }
-    
+
     // --- "COPIED TO CLIPBOARD" NOTIFICATION ---
     const copyButtons = document.querySelectorAll('[data-copy]');
     const copyNotification = document.getElementById('copy-notification');
@@ -52,31 +68,28 @@ document.addEventListener('DOMContentLoaded', () => {
             button.addEventListener('click', (e) => {
                 e.preventDefault();
                 const textToCopy = button.getAttribute('data-copy');
-                
-                // Use a temporary textarea to perform the copy action
-                const textArea = document.createElement('textarea');
-                textArea.value = textToCopy;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    // Show notification pop-up
+                    copyNotification.textContent = `${button.getAttribute('data-type')} copied to clipboard!`;
+                    copyNotification.classList.add('show');
 
-                // Show notification pop-up
-                copyNotification.textContent = `${button.getAttribute('data-type')} copied to clipboard!`;
-                copyNotification.classList.add('show');
-
-                // Hide notification after 2.5 seconds
-                setTimeout(() => {
-                    copyNotification.classList.remove('show');
-                }, 2500);
+                    // Hide notification after 2.5 seconds
+                    setTimeout(() => {
+                        copyNotification.classList.remove('show');
+                    }, 2500);
+                });
             });
         });
     }
 
-    // --- STICKY HEADER & SCROLL-TO-TOP BUTTON ---
+    // --- STICKY HEADER & SCROLL-TO-TOP BUTTON & ACTIVE NAV LINK ON SCROLL ---
     const header = document.getElementById('main-header');
     const scrollToTopBtn = document.getElementById('scroll-to-top');
+    const sections = document.querySelectorAll('section[id]');
+    const desktopNavLinks = document.querySelectorAll('#main-header .nav-link');
+
     const handleScroll = () => {
+        // Sticky Header & Scroll-to-Top
         if (window.scrollY > 50) {
             header.classList.add('header-scrolled');
             if (scrollToTopBtn) scrollToTopBtn.classList.remove('hidden');
@@ -84,6 +97,22 @@ document.addEventListener('DOMContentLoaded', () => {
             header.classList.remove('header-scrolled');
             if (scrollToTopBtn) scrollToTopBtn.classList.add('hidden');
         }
+
+        // Active Nav Link on Scroll
+        let currentSection = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (scrollY >= sectionTop - 150) {
+                currentSection = section.getAttribute('id');
+            }
+        });
+
+        desktopNavLinks.forEach(link => {
+            link.classList.remove('active-link');
+            if (link.getAttribute('href') === `#${currentSection}`) {
+                link.classList.add('active-link');
+            }
+        });
     };
     window.addEventListener('scroll', handleScroll);
     if (scrollToTopBtn) {
@@ -125,7 +154,7 @@ async function fetchGitHubProjects(username) {
         const response = await fetch(apiUrl);
         if (!response.ok) throw new Error(`GitHub API Error: ${response.status}`);
         const repos = await response.json();
-        
+
         projectsGrid.innerHTML = ''; // Clear loading message
 
         if (repos.length === 0) {
@@ -143,7 +172,7 @@ async function fetchGitHubProjects(username) {
             const langResponse = await fetch(repo.languages_url);
             const languages = await langResponse.json();
             const languageKeys = Object.keys(languages);
-            
+
             let languagesHtml = '';
             if (languageKeys.length > 0) {
                 languageKeys.forEach(lang => {

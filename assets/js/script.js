@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const typedTextElement = document.getElementById('typed-text');
     if (typedTextElement) {
         new Typed('#typed-text', {
-            strings: [ 'a Web Developer','an Aspiring AI/ML Engineer','a Passionate Learner' ],
+            strings: ['a Web Developer', 'an Aspiring AI/ML Engineer', 'a Passionate Learner'],
             typeSpeed: 20,
             backSpeed: 20,
             backDelay: 3000,
@@ -138,6 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fetchGitHubProjects('TheRealLaksh');
     }
 });
+
 /**
  * Fetches repositories and their languages for a given GitHub user and displays them.
  * @param {string} username - The GitHub username.
@@ -145,10 +146,6 @@ document.addEventListener('DOMContentLoaded', () => {
 async function fetchGitHubProjects(username) {
     const projectsGrid = document.getElementById('github-projects-grid');
     const apiUrl = `https://api.github.com/users/${username}/repos?sort=pushed&per_page=6`;
-
-    // Map of languages to their corresponding colors for styling
-    const languageColors = { 'JavaScript': '#f1e05a', 'HTML': '#e34c26', 'CSS': '#563d7c', 'Python': '#3572A5', 'TypeScript': '#3178c6', 'Java': '#b07219', 'C++': '#f34b7d', 'Go': '#00ADD8' };
-    const defaultColor = '#94a3b8';
 
     try {
         const response = await fetch(apiUrl);
@@ -162,45 +159,43 @@ async function fetchGitHubProjects(username) {
             return;
         }
 
-        // Loop through each repository to create its card
+        // Loop through each repository to create its card using the new "Terminal Style"
         for (const repo of repos) {
-            const projectCard = document.createElement('div');
-            projectCard.className = 'project-card';
-            projectCard.setAttribute('data-aos', 'fade-up');
+            const projectCardHTML = `
+                <div class="spotlight-card rounded-2xl border border-slate-800 bg-slate-900/50 p-6 flex flex-col h-full relative group transition-all duration-300 hover:-translate-y-1" data-aos="fade-up">
+                    <div class="flex items-center gap-2 mb-4 opacity-50">
+                        <div class="w-3 h-3 rounded-full bg-red-500/50"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+                    </div>
 
-            // Fetch all languages for the current repository
-            const langResponse = await fetch(repo.languages_url);
-            const languages = await langResponse.json();
-            const languageKeys = Object.keys(languages);
+                    <div class="flex justify-between items-start mb-4 relative z-10">
+                        <h3 class="text-xl font-bold text-white group-hover:text-sky-400 transition-colors truncate pr-4">
+                            ${repo.name}
+                        </h3>
+                        <div class="text-slate-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        </div>
+                    </div>
+                    
+                    <p class="text-slate-400 text-sm flex-grow mb-6 font-mono bg-black/20 p-3 rounded border border-white/5">
+                        > ${repo.description || "No description available."}
+                    </p>
 
-            let languagesHtml = '';
-            if (languageKeys.length > 0) {
-                languageKeys.forEach(lang => {
-                    const langColor = languageColors[lang] || defaultColor;
-                    languagesHtml += `<div class="language-item"><span class="language-dot" style="background-color: ${langColor}"></span><span>${lang}</span></div>`;
-                });
-            } else {
-                languagesHtml = `<div class="language-item"><span class="language-dot" style="background-color: ${defaultColor}"></span><span>N/A</span></div>`;
-            }
-
-            // Check for a live site link in the repo's homepage field
-            let liveSiteLink = '';
-            if (repo.homepage && repo.homepage !== "") {
-                liveSiteLink = `<div class="project-live-link"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"></path></svg><a href="${repo.homepage}" target="_blank" rel="noopener noreferrer">View Live Site</a></div>`;
-            }
-
-            // Construct the final project card HTML
-            projectCard.innerHTML = `
-                <h3 class="project-title">${repo.name}</h3>
-                <p class="project-description">${repo.description || 'No description provided.'}</p>
-                ${liveSiteLink}
-                <div class="project-footer">
-                    <div class="project-languages-container">${languagesHtml}</div>
-                    <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub →</a>
+                    <div class="flex items-center justify-between mt-auto relative z-10">
+                        <span class="text-xs font-medium px-3 py-1 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/20">
+                            ${repo.language || "Code"}
+                        </span>
+                        <a href="${repo.html_url}" target="_blank" class="text-sm font-medium text-white hover:text-sky-400 transition-colors flex items-center gap-1">
+                            View Source <span class="text-xs">↗</span>
+                        </a>
+                    </div>
                 </div>
             `;
-            projectsGrid.appendChild(projectCard);
+            
+            projectsGrid.insertAdjacentHTML('beforeend', projectCardHTML);
         }
+
     } catch (error) {
         console.error('Failed to fetch GitHub projects:', error);
         projectsGrid.innerHTML = `<p class="text-slate-400 col-span-full text-center">

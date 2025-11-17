@@ -44,15 +44,15 @@
     <div class="progress-bar" id="progressBar"></div>
     <div class="spotlight"></div>
 
-    <div class="content-wrapper max-w-7xl mx-auto p-4 sm:p-6 md:p-8">
+    <div class="content-wrapper w-full overflow-hidden">
 
         <header id="main-header"
-            class="site-header fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-4 sm:px-8">
+            class="site-header fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 md:px-12 py-4 transition-all duration-300">
             <a href="#home"
                 class="text-2xl font-bold text-white transition-transform duration-300 hover:scale-105">Laksh
                 Pradhwani</a>
 
-            <nav class="hidden md:flex items-center space-x-2">
+            <nav class="hidden md:flex items-center space-x-6">
                 <a href="#home" class="nav-link active-link">Home</a>
                 <a href="#about" class="nav-link">About</a>
                 <a href="#experience" class="nav-link">Work Experience</a>
@@ -61,10 +61,10 @@
             </nav>
 
             <button id="mobile-menu-button" class="md:hidden z-50 text-white" aria-label="Toggle menu">
-                <svg class="hamburger-icon h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="hamburger-icon h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                 </svg>
-                <svg class="close-icon h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg class="close-icon h-8 w-8 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
@@ -79,13 +79,13 @@
             <a href="#contact" class="nav-link">Contact</a>
         </div>
 
-        <main class="pt-24">
+        <main>
 
             <section id="home" class="min-h-screen flex flex-col justify-center relative z-10 px-4 sm:px-0">
-                <div class="max-w-4xl mx-auto w-full text-center">
+                <div class="w-full max-w-4xl mx-auto text-center">
 
                     <h2 class="text-3xl sm:text-5xl font-bold text-slate-400 mb-8 h-[20px] sm:h-[20px]">Hello, I'm</h2>
-                    <h1 class="text-5xl sm:text-7xl font-extrabold text-white tracking-tight mb-6" data-aos="fade-up"
+                    <h1 class="text-6xl sm:text-8xl font-extrabold text-white tracking-tight mb-6" data-aos="fade-up"
                         data-aos-delay="100">
                         Laksh Pradhwani.
                     </h1>
@@ -166,21 +166,17 @@
             </section>
 
             <section id="about" class="my-16 sm:my-24 scroll-mt-20" data-aos="fade-up">
-                <div class="max-w-7xl mx-auto px-6 sm:px-8 relative z-10">
+                <div class="w-full px-6 md:px-12 relative z-10">
 
                     <h2 class="section-title text-3xl font-bold text-white text-center mb-16 relative">
                         About Me
                     </h2>
 
-                    <div class="flex flex-col lg:flex-row items-start justify-center gap-12">
+                    <div class="flex flex-col lg:flex-row items-stretch justify-center gap-12 max-w-[1600px] mx-auto">
 
-                        <div class="relative" style="width: 600px; height: 520px; max-width: 100%;">
-
-                            <div class="absolute inset-0 rounded-2xl overflow-hidden shadow-2xl">
-                                <img src="assets/images/laksh.pradhwani.webp" alt="Laksh Pradhwani - Web Developer"
-                                    width="600" height="520"
-                                    class="object-cover w-full h-full transition-transform duration-700 hover:scale-105">
-                            </div>
+                        <div class="relative w-full lg:w-1/2 h-[520px] rounded-2xl overflow-hidden shadow-2xl group">
+                            <img src="assets/images/laksh.pradhwani.webp" alt="Laksh Pradhwani - Web Developer"
+                                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105">
 
                             <div class="absolute bottom-5 left-5">
                                 <div
@@ -197,8 +193,7 @@
                             </div>
                         </div>
 
-                        <div class="w-full" style="max-width: 1000px; min-height: 520px;">
-
+                        <div class="w-full lg:w-1/2 h-[520px]">
                             <div
                                 class="relative p-10 rounded-3xl border border-slate-800 bg-slate-900/60 backdrop-blur-md shadow-xl h-full flex flex-col justify-center">
 
@@ -257,7 +252,7 @@
             <section id="experience" class="my-16 sm:my-24 scroll-mt-20" data-aos="fade-up">
                 <h2 class="section-title text-3xl font-bold text-white text-center mb-16 relative">Work Experience</h2>
 
-                <div class="relative max-w-4xl mx-auto">
+                <div class="relative w-full max-w-6xl mx-auto px-6">
                     <div class="absolute left-4 top-0 h-full w-0.5 bg-slate-700 md:left-1/2 md:-translate-x-1/2"></div>
 
                     <div class="relative mb-12 md:mb-20 pl-12 md:pl-0" data-aos="fade-right">
@@ -398,78 +393,153 @@
                 </div>
             </section>
 
-            <section id="skills-and-projects" class="my-16 sm:my-24 scroll-mt-20" data-aos="fade-up">
-                <h2 class="section-title text-3xl font-bold text-white text-center mb-12 relative">My Skillset</h2>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-8 mb-16">
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="0"
-                        data-tooltip="Used for backend logic and data analysis.">
-                        <div class="skill-icon-container"><svg class="skill-icon" xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M15.7,2.8H8.3L2.8,8.3v7.4l5.5,5.5h7.4l5.5-5.5V8.3L15.7,2.8z M19.2,15.7L15.7,19.2h-7.4L4.8,15.7V8.3L8.3,4.8h7.4 l3.5,3.5V15.7z M12,7.5c-1.4,0-2.5,1.1-2.5,2.5s1.1,2.5,2.5,2.5s2.5-1.1,2.5-2.5S13.4,7.5,12,7.5z M12,12.5c-1.4,0-2.5,1.1-2.5,2.5 s1.1,2.5,2.5,2.5s2.5-1.1,2.5-2.5S13.4,12.5,12,12.5z" />
-                            </svg></div>
-                        <h3 class="skill-name">Python</h3>
-                    </div>
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="100"
-                        data-tooltip="Structuring all my web projects.">
-                        <div class="skill-icon-container"><svg class="skill-icon" xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M2.3,1.1l1.8,20.8L12,24l7.9-2.1L21.7,1.1H2.3z M17.6,8.3l-0.3,3.3H12V8.3h5.6z M11,15.7h-4 l0.2,2.3l4.8,1.3v-3.6H11z" />
-                            </svg></div>
-                        <h3 class="skill-name">HTML</h3>
-                    </div>
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="200"
-                        data-tooltip="Building interactive and dynamic features.">
-                        <div class="skill-icon-container"><svg class="skill-icon" xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M2,2h20v20H2V2z M13,18h2V9h-2V18z M9,18h2V9H9V18z" />
-                            </svg></div>
-                        <h3 class="skill-name">JavaScript</h3>
-                    </div>
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="300"
-                        data-tooltip="Creating responsive and animated designs.">
-                        <div class="skill-icon-container"><svg class="skill-icon" xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M2.3,1.1l1.8,20.8L12,24l7.9-2.1L21.7,1.1H2.3z M17.6,8.3l-0.3,3.3H12V8.3h5.6z M11,15.7h-4 l0.2,2.3l4.8,1.3v-3.6H11z" />
-                            </svg></div>
-                        <h3 class="skill-name">CSS Styling</h3>
-                    </div>
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="400"
-                        data-tooltip="Version control for all my projects.">
-                        <div class="skill-icon-container"><svg class="skill-icon" xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M23.955 10.533c-.03-.245-.223-.424-.468-.424h-3.073c-.245 0-.438.179-.468.424l-1.396 9.875c-.03.245.163.49.407.49h2.327c.245 0 .438-.245.408-.49l.962-9.875zm-6.02-6.55c.245 0 .438-.18.468-.424l.962-9.11C19.425.18 19.232 0 18.988 0h-2.327c-.244 0-.437.245-.407.49l1.396 9.05c.03.244.223.424.468.424h.94v.019zm-5.998 19.952c-6.626 0-11.996-5.37-11.996-11.996S5.311.004 11.937.004s11.996 5.37 11.996 11.996-5.37 11.985-11.996 11.985zM9.542 8.528h2.094c.306 0 .407.245.407.489v2.296l2.094-2.122c.183-.153.316-.184.499-.184.366 0 .468.275.468.489v5.18c0 .245-.102.49-.468.49-.183 0-.316-.03-.499-.184l-2.094-2.122v2.296c0 .244-.102.489-.407.489H9.542c-.306 0-.407-.245-.407-.49V9.017c0-.244.101-.489.407-.489z" />
-                            </svg></div>
-                        <h3 class="skill-name">Git</h3>
-                    </div>
-                    <div class="skill-card" data-aos="fade-up" data-aos-delay="500"
-                        data-tooltip="Hosting and managing all my code.">
-                        <div class="skill-icon-container"><svg class="skill-icon" xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2.1c-3.2.7-3.9-1.5-3.9-1.5-.5-1.2-1.1-1.6-1.1-1.6-.9-.6.1-.6.1-.6 1 .1 1.6 1 1.6 1 .9 1.6 2.5 1.1 3.1.8.1-.7.4-1.1.7-1.4-2.6-.3-5.4-1.3-5.4-5.9 0-1.3.5-2.4 1.1-3.3-.1-.3-.5-1.5.1-3.1 0 0 .9-.3 3.4 1.2a11.5 11.5 0 0 1 6.2 0c2.5-1.5 3.4-1.2 3.4-1.2.6 1.6.2 2.8.1 3.1.7.9 1.1 2 1.1 3.3 0 4.6-2.8 5.6-5.5 5.9.4.3.8 1 .8 2v3c0 .4.2.7.8.6 4.6-1.5 7.9-5.9 7.9-10.9C23.5 5.65 18.35.5 12 .5z" />
-                            </svg></div>
-                        <h3 class="skill-name">GitHub</h3>
-                    </div>
-                </div>
+            <section id="skills-and-projects" class="my-16 sm:my-32 scroll-mt-20 relative z-10" data-aos="fade-up">
+                <div class="w-full px-6 md:px-12">
 
-                <h2 class="section-title text-3xl font-bold text-white text-center mb-12 relative">My GitHub Projects
-                </h2>
-                <p class="text-slate-400 text-center mb-12 max-w-lg mx-auto">
-                    My Latest Commits.
-                </p>
+                    <div class="text-center mb-20">
+                        <h2
+                            class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-purple-500 inline-block mb-4">
+                            Technical Arsenal
+                        </h2>
+                        <p class="text-slate-400 max-w-2xl mx-auto text-lg">
+                            My weapons of choice for building digital products.
+                        </p>
+                    </div>
 
-                <div id="github-projects-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                    <p class="text-slate-400 col-span-full text-center">Loading projects from GitHub...</p>
-                </div>
-                <div class="view-more-container" data-aos="fade-up">
-                    <a href="https://github.com/TheRealLaksh?tab=repositories" target="_blank" rel="noopener noreferrer"
-                        class="view-more-button">
-                        View More on GitHub
-                    </a>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-24 max-w-[1600px] mx-auto">
+
+                        <div class="skill-card-glass group rounded-2xl p-6 flex flex-col items-center justify-center gap-4 relative overflow-hidden"
+                            data-tilt data-tilt-glare data-tilt-max-glare="0.3" data-tilt-scale="1.05">
+                            <div
+                                class="absolute -bottom-6 -right-6 text-9xl opacity-[0.03] rotate-12 group-hover:opacity-10 transition-opacity duration-500">
+                                <i class="fa-brands fa-python"></i>
+                            </div>
+                            <div
+                                class="glow-python absolute inset-0 rounded-2xl border-2 border-transparent transition-all duration-300">
+                            </div>
+                            <div
+                                class="w-16 h-16 text-sky-400 relative z-10 drop-shadow-[0_0_10px_rgba(56,189,248,0.5)]">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M15.7,2.8H8.3L2.8,8.3v7.4l5.5,5.5h7.4l5.5-5.5V8.3L15.7,2.8z M19.2,15.7L15.7,19.2h-7.4L4.8,15.7V8.3L8.3,4.8h7.4 l3.5,3.5V15.7z M12,7.5c-1.4,0-2.5,1.1-2.5,2.5s1.1,2.5,2.5,2.5s2.5-1.1,2.5-2.5S13.4,7.5,12,7.5z M12,12.5c-1.4,0-2.5,1.1-2.5,2.5 s1.1,2.5,2.5,2.5s2.5-1.1,2.5-2.5S13.4,12.5,12,12.5z" />
+                                </svg>
+                            </div>
+                            <h3
+                                class="font-bold text-slate-200 relative z-10 group-hover:text-sky-400 transition-colors">
+                                Python</h3>
+                        </div>
+
+                        <div class="skill-card-glass group rounded-2xl p-6 flex flex-col items-center justify-center gap-4 relative overflow-hidden"
+                            data-tilt data-tilt-glare data-tilt-max-glare="0.3" data-tilt-scale="1.05">
+                            <div
+                                class="glow-html absolute inset-0 rounded-2xl border-2 border-transparent transition-all duration-300">
+                            </div>
+                            <div
+                                class="w-16 h-16 text-orange-500 relative z-10 drop-shadow-[0_0_10px_rgba(249,115,22,0.5)]">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M2.3,1.1l1.8,20.8L12,24l7.9-2.1L21.7,1.1H2.3z M17.6,8.3l-0.3,3.3H12V8.3h5.6z M11,15.7h-4 l0.2,2.3l4.8,1.3v-3.6H11z" />
+                                </svg>
+                            </div>
+                            <h3
+                                class="font-bold text-slate-200 relative z-10 group-hover:text-orange-400 transition-colors">
+                                HTML5</h3>
+                        </div>
+
+                        <div class="skill-card-glass group rounded-2xl p-6 flex flex-col items-center justify-center gap-4 relative overflow-hidden"
+                            data-tilt data-tilt-glare data-tilt-max-glare="0.3" data-tilt-scale="1.05">
+                            <div
+                                class="glow-js absolute inset-0 rounded-2xl border-2 border-transparent transition-all duration-300">
+                            </div>
+                            <div
+                                class="w-16 h-16 text-yellow-400 relative z-10 drop-shadow-[0_0_10px_rgba(250,204,21,0.5)]">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M2,2h20v20H2V2z M13,18h2V9h-2V18z M9,18h2V9H9V18z" />
+                                </svg>
+                            </div>
+                            <h3
+                                class="font-bold text-slate-200 relative z-10 group-hover:text-yellow-400 transition-colors">
+                                JavaScript</h3>
+                        </div>
+
+                        <div class="skill-card-glass group rounded-2xl p-6 flex flex-col items-center justify-center gap-4 relative overflow-hidden"
+                            data-tilt data-tilt-glare data-tilt-max-glare="0.3" data-tilt-scale="1.05">
+                            <div
+                                class="glow-css absolute inset-0 rounded-2xl border-2 border-transparent transition-all duration-300">
+                            </div>
+                            <div
+                                class="w-16 h-16 text-blue-500 relative z-10 drop-shadow-[0_0_10px_rgba(59,130,246,0.5)]">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M2.3,1.1l1.8,20.8L12,24l7.9-2.1L21.7,1.1H2.3z M17.6,8.3l-0.3,3.3H12V8.3h5.6z M11,15.7h-4 l0.2,2.3l4.8,1.3v-3.6H11z" />
+                                </svg>
+                            </div>
+                            <h3
+                                class="font-bold text-slate-200 relative z-10 group-hover:text-blue-400 transition-colors">
+                                CSS3</h3>
+                        </div>
+
+                        <div class="skill-card-glass group rounded-2xl p-6 flex flex-col items-center justify-center gap-4 relative overflow-hidden"
+                            data-tilt data-tilt-glare data-tilt-max-glare="0.3" data-tilt-scale="1.05">
+                            <div
+                                class="glow-git absolute inset-0 rounded-2xl border-2 border-transparent transition-all duration-300">
+                            </div>
+                            <div
+                                class="w-16 h-16 text-rose-500 relative z-10 drop-shadow-[0_0_10px_rgba(244,63,94,0.5)]">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M23.955 10.533c-.03-.245-.223-.424-.468-.424h-3.073c-.245 0-.438.179-.468.424l-1.396 9.875c-.03.245.163.49.407.49h2.327c.245 0 .438-.245.408-.49l.962-9.875zm-6.02-6.55c.245 0 .438-.18.468-.424l.962-9.11C19.425.18 19.232 0 18.988 0h-2.327c-.244 0-.437.245-.407.49l1.396 9.05c.03.244.223.424.468.424h.94v.019zm-5.998 19.952c-6.626 0-11.996-5.37-11.996-11.996S5.311.004 11.937.004s11.996 5.37 11.996 11.996-5.37 11.985-11.996 11.985zM9.542 8.528h2.094c.306 0 .407.245.407.489v2.296l2.094-2.122c.183-.153.316-.184.499-.184.366 0 .468.275.468.489v5.18c0 .245-.102.49-.468.49-.183 0-.316-.03-.499-.184l-2.094-2.122v2.296c0 .244-.102.489-.407.489H9.542c-.306 0-.407-.245-.407-.49V9.017c0-.244.101-.489.407-.489z" />
+                                </svg>
+                            </div>
+                            <h3
+                                class="font-bold text-slate-200 relative z-10 group-hover:text-rose-400 transition-colors">
+                                Git</h3>
+                        </div>
+
+                        <div class="skill-card-glass group rounded-2xl p-6 flex flex-col items-center justify-center gap-4 relative overflow-hidden"
+                            data-tilt data-tilt-glare data-tilt-max-glare="0.3" data-tilt-scale="1.05">
+                            <div
+                                class="glow-github absolute inset-0 rounded-2xl border-2 border-transparent transition-all duration-300">
+                            </div>
+                            <div
+                                class="w-16 h-16 text-white relative z-10 drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2.1c-3.2.7-3.9-1.5-3.9-1.5-.5-1.2-1.1-1.6-1.1-1.6-.9-.6.1-.6.1-.6 1 .1 1.6 1 1.6 1 .9 1.6 2.5 1.1 3.1.8.1-.7.4-1.1.7-1.4-2.6-.3-5.4-1.3-5.4-5.9 0-1.3.5-2.4 1.1-3.3-.1-.3-.5-1.5.1-3.1 0 0 .9-.3 3.4 1.2a11.5 11.5 0 0 1 6.2 0c2.5-1.5 3.4-1.2 3.4-1.2.6 1.6.2 2.8.1 3.1.7.9 1.1 2 1.1 3.3 0 4.6-2.8 5.6-5.5 5.9.4.3.8 1 .8 2v3c0 .4.2.7.8.6 4.6-1.5 7.9-5.9 7.9-10.9C23.5 5.65 18.35.5 12 .5z" />
+                                </svg>
+                            </div>
+                            <h3 class="font-bold text-slate-200 relative z-10 group-hover:text-white transition-colors">
+                                GitHub</h3>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between mb-8 max-w-[1600px] mx-auto">
+                        <h2 class="text-3xl font-bold text-white">GitHub Shipments</h2>
+                        <div class="h-[1px] flex-grow bg-gradient-to-r from-slate-700 to-transparent ml-6"></div>
+                    </div>
+
+                    <div id="github-projects-grid"
+                        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-[1600px] mx-auto">
+                        <p class="text-slate-400 col-span-full text-center">Loading neural interface...</p>
+                    </div>
+
+                    <div class="view-more-container mt-16" data-aos="fade-up">
+                        <a href="https://github.com/TheRealLaksh?tab=repositories" target="_blank"
+                            rel="noopener noreferrer"
+                            class="relative inline-flex group items-center justify-center px-8 py-3 overflow-hidden font-medium text-sky-400 border border-sky-400/30 rounded-lg hover:bg-sky-400/10 transition-all duration-300">
+                            <span
+                                class="absolute w-0 h-0 transition-all duration-500 ease-out bg-sky-400 rounded-full group-hover:w-56 group-hover:h-56 opacity-10"></span>
+                            <span class="relative flex items-center gap-2">
+                                Explore GitHub
+                                <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+
                 </div>
             </section>
 
@@ -544,40 +614,139 @@
 
         </main>
 
-        <footer class="site-footer" data-aos="fade-up">
-            <div class="footer-content max-w-4xl mx-auto px-4">
-                <div class="footer-socials">
-                    <a href="https://www.linkedin.com/in/laksh-pradhwani" aria-label="LinkedIn Profile" target="_blank"
-                        rel="noopener noreferrer" class="social-icon-link"><svg class="w-6 h-6"
-                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
-                            </path>
-                            <rect x="2" y="9" width="4" height="12"></rect>
-                            <circle cx="4" cy="4" r="2"></circle>
-                        </svg></a>
-                    <a href="https://github.com/TheRealLaksh" aria-label="GitHub Profile" target="_blank"
-                        rel="noopener noreferrer" class="social-icon-link"><svg class="w-6 h-6"
-                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2.1c-3.2.7-3.9-1.5-3.9-1.5-.5-1.2-1.1-1.6-1.1-1.6-.9-.6.1-.6.1-.6 1 .1 1.6 1 1.6 1 .9 1.6 2.5 1.1 3.1.8.1-.7.4-1.1.7-1.4-2.6-.3-5.4-1.3-5.4-5.9 0-1.3.5-2.4 1.1-3.3-.1-.3-.5-1.5.1-3.1 0 0 .9-.3 3.4 1.2a11.5 11.5 0 0 1 6.2 0c2.5-1.5 3.4-1.2 3.4-1.2.6 1.6.2 2.8.1 3.1.7.9 1.1 2 1.1 3.3 0 4.6-2.8 5.6-5.5 5.9.4.3.8 1 .8 2v3c0 .4.2.7.8.6 4.6-1.5 7.9-5.9 7.9-10.9C23.5 5.65 18.35.5 12 .5z" />
-                        </svg></a>
-                    <a href="https://www.instagram.com/_.lakshp/" aria-label="Instagram Profile" target="_blank"
-                        rel="noopener noreferrer" class="social-icon-link"><svg class="w-6 h-6"
-                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                        </svg></a>
-                    <a href="https://open.spotify.com/user/your-username" aria-label="Spotify Profile" target="_blank"
-                        rel="noopener noreferrer" class="social-icon-link"><svg class="w-6 h-6"
-                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                            <path
-                                d="M12 0C5.37 0 0 5.37 0 12c0 6.62 5.37 12 12 12s12-5.38 12-12c0-6.63-5.37-12-12-12zm5.49 17.36a.74.74 0 0 1-1.02.25c-2.81-1.72-6.35-2.11-10.52-1.13a.75.75 0 1 1-.33-1.47c4.61-1.06 8.55-.61 11.66 1.3.35.22.46.68.21 1.05zm1.44-3.2a.93.93 0 0 1-1.29.31c-3.22-1.98-8.13-2.55-11.92-1.36a.93.93 0 1 1-.55-1.78c4.29-1.33 9.7-.7 13.43 1.54.45.28.6.88.33 1.29zm.13-3.38c-3.78-2.25-10.04-2.46-13.65-1.31a1.11 1.11 0 0 1-.65-2.12c4.19-1.29 11.07-1.04 15.39 1.54a1.1 1.1 0 1 1-1.09 1.89z" />
-                        </svg></a>
+        <footer class="relative mt-32 text-slate-400 font-light">
+            <div class="absolute top-0 left-0 w-full overflow-hidden -translate-y-[98%] leading-none z-0">
+                <svg class="relative block w-[calc(100%+1.3px)] h-[70px] sm:h-[120px]" data-name="Layer 1"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path
+                        d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+                        class="fill-slate-900/90"></path>
+                </svg>
+            </div>
+
+            <div
+                class="relative bg-slate-900/90 backdrop-blur-xl pt-12 pb-8 px-6 sm:px-12 border-t border-slate-800/50 z-10 w-full">
+                <div class="w-full">
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16 border-b border-slate-800 pb-12">
+
+                        <div class="space-y-6">
+                            <h2 class="text-2xl font-bold text-white tracking-tight">Laksh Pradhwani</h2>
+                            <p class="text-slate-400 text-sm leading-relaxed max-w-xs">
+                                Building digital experiences with a focus on performance, accessibility, and clean
+                                design.
+                            </p>
+                            <div
+                                class="flex items-center gap-3 px-4 py-2 bg-slate-800/50 rounded-full w-fit border border-slate-700/50">
+                                <span class="relative flex h-3 w-3">
+                                    <span
+                                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                                </span>
+                                <span class="text-xs font-medium text-green-400 uppercase tracking-wide">Open to
+                                    Work</span>
+                            </div>
+                        </div>
+
+                        <div class="md:pl-12">
+                            <h3 class="text-white font-semibold mb-6">Quick Links</h3>
+                            <ul class="space-y-4 text-sm">
+                                <li><a href="#home"
+                                        class="hover:text-sky-400 transition-colors duration-300 flex items-center gap-2 group">
+                                        <span
+                                            class="w-1.5 h-1.5 rounded-full bg-sky-500 opacity-0 group-hover:opacity-100 transition-all"></span>
+                                        Home
+                                    </a></li>
+                                <li><a href="#about"
+                                        class="hover:text-sky-400 transition-colors duration-300 flex items-center gap-2 group">
+                                        <span
+                                            class="w-1.5 h-1.5 rounded-full bg-sky-500 opacity-0 group-hover:opacity-100 transition-all"></span>
+                                        About
+                                    </a></li>
+                                <li><a href="#skills-and-projects"
+                                        class="hover:text-sky-400 transition-colors duration-300 flex items-center gap-2 group">
+                                        <span
+                                            class="w-1.5 h-1.5 rounded-full bg-sky-500 opacity-0 group-hover:opacity-100 transition-all"></span>
+                                        Projects
+                                    </a></li>
+                                <li><a href="#contact"
+                                        class="hover:text-sky-400 transition-colors duration-300 flex items-center gap-2 group">
+                                        <span
+                                            class="w-1.5 h-1.5 rounded-full bg-sky-500 opacity-0 group-hover:opacity-100 transition-all"></span>
+                                        Contact
+                                    </a></li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 class="text-white font-semibold mb-6">Connect</h3>
+                            <div class="flex gap-5 mb-6">
+                                <a href="https://github.com/TheRealLaksh" target="_blank" rel="noopener noreferrer"
+                                    aria-label="GitHub"
+                                    class="w-10 h-10 flex items-center justify-center rounded-lg bg-slate-800 text-slate-400 hover:bg-slate-700 hover:text-white hover:-translate-y-1 transition-all duration-300 shadow-lg shadow-black/20">
+                                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2.1c-3.2.7-3.9-1.5-3.9-1.5-.5-1.2-1.1-1.6-1.1-1.6-.9-.6.1-.6.1-.6 1 .1 1.6 1 1.6 1 .9 1.6 2.5 1.1 3.1.8.1-.7.4-1.1.7-1.4-2.6-.3-5.4-1.3-5.4-5.9 0-1.3.5-2.4 1.1-3.3-.1-.3-.5-1.5.1-3.1 0 0 .9-.3 3.4 1.2a11.5 11.5 0 0 1 6.2 0c2.5-1.5 3.4-1.2 3.4-1.2.6 1.6.2 2.8.1 3.1.7.9 1.1 2 1.1 3.3 0 4.6-2.8 5.6-5.5 5.9.4.3.8 1 .8 2v3c0 .4.2.7.8.6 4.6-1.5 7.9-5.9 7.9-10.9C23.5 5.65 18.35.5 12 .5z" />
+                                    </svg>
+                                </a>
+                                <a href="https://www.linkedin.com/in/laksh-pradhwani" target="_blank"
+                                    rel="noopener noreferrer" aria-label="LinkedIn"
+                                    class="w-10 h-10 flex items-center justify-center rounded-lg bg-slate-800 text-slate-400 hover:bg-[#0077b5] hover:text-white hover:-translate-y-1 transition-all duration-300 shadow-lg shadow-black/20">
+                                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                            d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                        </path>
+                                        <rect x="2" y="9" width="4" height="12"></rect>
+                                        <circle cx="4" cy="4" r="2"></circle>
+                                    </svg>
+                                </a>
+                                <a href="https://www.instagram.com/_.lakshp/" target="_blank" rel="noopener noreferrer"
+                                    aria-label="Instagram"
+                                    class="w-10 h-10 flex items-center justify-center rounded-lg bg-slate-800 text-slate-400 hover:bg-pink-600 hover:text-white hover:-translate-y-1 transition-all duration-300 shadow-lg shadow-black/20">
+                                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                    </svg>
+                                </a>
+                                <a href="mailto:contact@lakshp.live" aria-label="Email"
+                                    class="w-10 h-10 flex items-center justify-center rounded-lg bg-slate-800 text-slate-400 hover:bg-emerald-500 hover:text-white hover:-translate-y-1 transition-all duration-300 shadow-lg shadow-black/20">
+                                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" viewBox="0 0 24 24">
+                                        <path
+                                            d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                        </path>
+                                        <polyline points="22,6 12,13 2,6"></polyline>
+                                    </svg>
+                                </a>
+                            </div>
+                            <p class="text-xs text-slate-500">
+                                Varanasi, India<br>
+                                <span id="local-time" class="text-slate-600 mt-1 block"></span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+                        <p>© <span id="year">2025</span> Laksh Pradhwani. All Rights Reserved.</p>
+
+                        <div
+                            class="flex items-center gap-2 bg-slate-800/30 px-3 py-1.5 rounded-full border border-slate-700/30">
+                            <span>Built with</span>
+                            <span class="text-sky-400 font-medium">Tailwind</span>
+                            <span class="w-1 h-1 rounded-full bg-slate-600"></span>
+                            <span class="text-purple-400 font-medium">HTML5</span>
+                            <span class="w-1 h-1 rounded-full bg-slate-600"></span>
+                            <span class="text-pink-400 font-medium">Vanta.js</span>
+                        </div>
+                    </div>
+
                 </div>
-                <p class="footer-copyright">© 2025 Laksh Pradhwani. All Rights Reserved.</p>
             </div>
         </footer>
     </div>
@@ -638,6 +807,23 @@
     <script>
         // Load heavy background scripts only after the main site is ready
         window.addEventListener('load', function () {
+            // 1. Dynamic Year
+            const yearEl = document.getElementById('year');
+            if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+            // 2. Dynamic Time
+            function updateTime() {
+                const options = { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit' };
+                const timeString = new Date().toLocaleTimeString('en-US', options);
+                const timeElement = document.getElementById('local-time');
+                if (timeElement) {
+                    timeElement.textContent = `Local time: ${timeString}`;
+                }
+            }
+            updateTime();
+            setInterval(updateTime, 60000);
+
+            // 3. Load Visuals
             var script1 = document.createElement('script');
             script1.src = "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js";
             script1.defer = true;
@@ -668,6 +854,22 @@
                 };
             };
         });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+
+    <script>
+        // 2. Spotlight Effect Logic
+        document.getElementById("github-projects-grid").onmousemove = e => {
+            for (const card of document.getElementsByClassName("spotlight-card")) {
+                const rect = card.getBoundingClientRect(),
+                    x = e.clientX - rect.left,
+                    y = e.clientY - rect.top;
+
+                card.style.setProperty("--mouse-x", `${x}px`);
+                card.style.setProperty("--mouse-y", `${y}px`);
+            }
+        };
+
     </script>
 </body>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ETE24Q0PR1"></script>

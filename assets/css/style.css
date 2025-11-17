@@ -260,3 +260,43 @@ section {
     position: relative;
     z-index: 10;
 }
+/* Neon Glow for Skills */
+.skill-card-glass {
+    background: rgba(30, 41, 59, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Individual Glow Colors on Hover */
+.group:hover .glow-python { box-shadow: 0 0 20px rgba(56, 189, 248, 0.4); border-color: rgba(56, 189, 248, 0.5); }
+.group:hover .glow-html { box-shadow: 0 0 20px rgba(249, 115, 22, 0.4); border-color: rgba(249, 115, 22, 0.5); }
+.group:hover .glow-js { box-shadow: 0 0 20px rgba(250, 204, 21, 0.4); border-color: rgba(250, 204, 21, 0.5); }
+.group:hover .glow-css { box-shadow: 0 0 20px rgba(59, 130, 246, 0.4); border-color: rgba(59, 130, 246, 0.5); }
+.group:hover .glow-git { box-shadow: 0 0 20px rgba(244, 63, 94, 0.4); border-color: rgba(244, 63, 94, 0.5); }
+.group:hover .glow-github { box-shadow: 0 0 20px rgba(255, 255, 255, 0.3); border-color: rgba(255, 255, 255, 0.5); }
+
+/* Spotlight Effect for Projects */
+.spotlight-card {
+    background-color: rgba(15, 23, 42, 0.6);
+    position: relative;
+    overflow: hidden;
+}
+.spotlight-card::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent 40%);
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none;
+    z-index: 2;
+}
+.spotlight-card:hover::before {
+    opacity: 1;
+}

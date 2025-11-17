@@ -16,7 +16,6 @@
 
     <meta name="theme-color" content="#0ea5e9">
 
-
     <meta property="og:title" content="Laksh Pradhwani | Personal Portfolio">
     <meta property="og:description"
         content="An aspiring AI/ML Engineer and passionate Web Developer. Explore my projects and skills on my single-page portfolio.">
@@ -26,7 +25,6 @@
     <meta property="og:image:width" content="1584">
     <meta property="og:image:height" content="396">
 
-
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Laksh Pradhwani | Personal Portfolio">
     <meta name="twitter:description"
@@ -34,14 +32,12 @@
     <meta name="twitter:image" content="https://www.lakshp.live/assets/images/linkedin-banner.png">
     <meta name="twitter:url" content="https://www.lakshp.live/">
 
-
     <link href="assets/css/output.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="assets/css/style.css">
-    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
 </head>
 
 <body class="text-slate-300 overflow-x-hidden" id="vanta-bg">
@@ -64,7 +60,7 @@
                 <a href="#contact" class="nav-link">Contact</a>
             </nav>
 
-            <button id="mobile-menu-button" class="md:hidden z-50 text-white">
+            <button id="mobile-menu-button" class="md:hidden z-50 text-white" aria-label="Toggle menu">
                 <svg class="hamburger-icon h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                 </svg>
@@ -85,7 +81,6 @@
 
         <main class="pt-24">
 
-
             <section id="home" class="min-h-screen flex flex-col justify-center relative z-10 px-4 sm:px-0">
                 <div class="max-w-4xl mx-auto w-full text-center">
 
@@ -102,13 +97,12 @@
 
                     <p class="max-w-2xl mx-auto text-slate-400 text-lg leading-relaxed mb-10" data-aos="fade-up"
                         data-aos-delay="300">
-                        A passionate Web Developer based in Varanasi - Uttar Pradesh , dedicated to turning innovative
-                        ideas into
-                        beautiful, high-performance digital solutions.
+                        A passionate Web Developer based in Varanasi - Uttar Pradesh, dedicated to turning innovative
+                        ideas into beautiful, high-performance digital solutions.
                     </p>
                     <div class="flex flex-wrap justify-center gap-4 mb-12" data-aos="fade-up" data-aos-delay="400">
                         <a href="#skills-and-projects"
-                            class="px-8 py-3 bg-sky-600 text-white font-semibold rounded-lg shadow-lg shadow-sky-900/20 hover:bg-sky-500 hover:-translate-y-1 transition-all duration-300">
+                            class="px-8 py-3 bg-sky-700 text-white font-semibold rounded-lg shadow-lg shadow-sky-900/20 hover:bg-sky-600 hover:-translate-y-1 transition-all duration-300">
                             View Projects
                         </a>
                         <a href="#contact"
@@ -178,18 +172,16 @@
                         About Me
                     </h2>
 
-                    <!-- FLEX CONTAINER -->
                     <div class="flex flex-col lg:flex-row items-start justify-center gap-12">
 
-                        <!-- LEFT: WIDE IMAGE CARD -->
-                        <div class="relative" style="width: 600px; height: 520px;">
+                        <div class="relative" style="width: 600px; height: 520px; max-width: 100%;">
 
                             <div class="absolute inset-0 rounded-2xl overflow-hidden shadow-2xl">
-                                <img src="assets/images/laksh.pradhwani.jpg"
+                                <img src="assets/images/laksh.pradhwani.webp" alt="Laksh Pradhwani - Web Developer"
+                                    width="600" height="520"
                                     class="object-cover w-full h-full transition-transform duration-700 hover:scale-105">
                             </div>
 
-                            <!-- Availability Badge -->
                             <div class="absolute bottom-5 left-5">
                                 <div
                                     class="flex items-center gap-3 bg-slate-900/50 backdrop-blur-md px-5 py-3 rounded-xl border border-white/10 shadow-lg">
@@ -205,11 +197,10 @@
                             </div>
                         </div>
 
-                        <!-- RIGHT: TEXT CARD (SEPARATE CONTAINER) -->
                         <div class="w-full" style="max-width: 1000px; min-height: 520px;">
 
                             <div
-                                class="relative p-10 rounded-3xl border border-slate-800 bg-slate-900/60 backdrop-blur-md shadow-xl">
+                                class="relative p-10 rounded-3xl border border-slate-800 bg-slate-900/60 backdrop-blur-md shadow-xl h-full flex flex-col justify-center">
 
                                 <div class="text-slate-300 text-lg leading-relaxed space-y-6">
                                     <p>
@@ -262,8 +253,6 @@
 
                 </div>
             </section>
-
-
 
             <section id="experience" class="my-16 sm:my-24 scroll-mt-20" data-aos="fade-up">
                 <h2 class="section-title text-3xl font-bold text-white text-center mb-16 relative">Work Experience</h2>
@@ -469,6 +458,10 @@
 
                 <h2 class="section-title text-3xl font-bold text-white text-center mb-12 relative">My GitHub Projects
                 </h2>
+                <p class="text-slate-400 text-center mb-12 max-w-lg mx-auto">
+                    My Latest Commits.
+                </p>
+
                 <div id="github-projects-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-8">
                     <p class="text-slate-400 col-span-full text-center">Loading projects from GitHub...</p>
                 </div>
@@ -542,7 +535,9 @@
                         <input type="email" name="email" class="form-input" placeholder="Your Email" required>
                         <input type="text" name="subject" class="form-input" placeholder="Subject" required>
                         <textarea name="message" class="form-textarea" placeholder="Your Message" required></textarea>
-                        <button type="submit" class="submit-button">Send Message</button>
+                        <button type="submit"
+                            class="submit-button px-8 py-3 bg-sky-700 text-white font-semibold rounded-lg hover:bg-sky-600 hover:-translate-y-1 transition-all duration-300 shadow-lg shadow-sky-900/20">Send
+                            Message</button>
                     </form>
                 </div>
             </section>
@@ -637,26 +632,42 @@
 
 
     </div>
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="assets/js/script.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.topology.min.js"></script>
     <script>
-        VANTA.TOPOLOGY({
-            el: "#vanta-bg",
-            mouseControls: true,
-            touchControls: true,
-            gyroControls: false,
-            minHeight: 200.00,
-            minWidth: 200.00,
-            scale: 1.00,
-            scaleMobile: 1.00,
-            color: 0x38bdf8, // Original Accent Color
-            backgroundColor: 0x000000, // Original Background Color
-            waveSpeed: 15,
-            waveHeight: 15.00,
-            shininess: 30.00
-        })
+        // Load heavy background scripts only after the main site is ready
+        window.addEventListener('load', function () {
+            var script1 = document.createElement('script');
+            script1.src = "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js";
+            script1.defer = true;
+            document.body.appendChild(script1);
+
+            script1.onload = function () {
+                var script2 = document.createElement('script');
+                script2.src = "https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.topology.min.js";
+                script2.defer = true;
+                document.body.appendChild(script2);
+
+                script2.onload = function () {
+                    VANTA.TOPOLOGY({
+                        el: "#vanta-bg",
+                        mouseControls: true,
+                        touchControls: true,
+                        gyroControls: false,
+                        minHeight: 200.00,
+                        minWidth: 200.00,
+                        scale: 1.00,
+                        scaleMobile: 1.00,
+                        color: 0x38bdf8,
+                        backgroundColor: 0x000000,
+                        waveSpeed: 15,
+                        waveHeight: 15.00,
+                        shininess: 30.00
+                    });
+                };
+            };
+        });
     </script>
 </body>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ETE24Q0PR1"></script>

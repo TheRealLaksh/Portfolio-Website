@@ -27,29 +27,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ---------------------------
-    // 3. MOBILE MENU
+    // 3. MOBILE BOTTOM NAV SCROLL SPY
     // ---------------------------
-    const mobileMenuBtn = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll(".nav-link-mobile");
 
-    if (mobileMenuBtn && mobileMenu) {
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            mobileMenu.classList.toggle('flex');
-            mobileMenuBtn.querySelector('.hamburger-icon').classList.toggle('hidden');
-            mobileMenuBtn.querySelector('.close-icon').classList.toggle('hidden');
+    window.addEventListener("scroll", () => {
+        let current = "";
+
+        sections.forEach((section) => {
+            const sectionTop = section.offsetTop;
+            // 300px offset helps trigger the active state a bit earlier for better UX
+            if (pageYOffset >= sectionTop - 300) {
+                current = section.getAttribute("id");
+            }
         });
 
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                mobileMenu.classList.remove('flex');
-                mobileMenuBtn.querySelector('.hamburger-icon').classList.remove('hidden');
-                mobileMenuBtn.querySelector('.close-icon').classList.add('hidden');
-            });
+        navLinks.forEach((link) => {
+            link.classList.remove("active-mobile-link");
+            if (link.getAttribute("href").includes(current)) {
+                link.classList.add("active-mobile-link");
+            }
         });
-    }
-
+    });
     // ---------------------------
     // 4. FETCH PROJECTS
     // ---------------------------

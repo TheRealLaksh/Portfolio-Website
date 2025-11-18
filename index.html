@@ -61,13 +61,6 @@
             </nav>
 
             <button id="mobile-menu-button" class="md:hidden z-50 text-white" aria-label="Toggle menu">
-                <svg class="hamburger-icon h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-                </svg>
-                <svg class="close-icon h-8 w-8 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
         </header>
 
         <div id="mobile-menu"
@@ -174,7 +167,8 @@
 
                     <div class="flex flex-col lg:flex-row items-stretch justify-center gap-12 max-w-[1600px] mx-auto">
 
-                        <div class="relative w-full lg:w-1/2 h-[520px] rounded-2xl overflow-hidden shadow-2xl group">
+                        <div
+                            class="relative w-full lg:w-1/2 h-[350px] sm:h-[450px] lg:h-[520px] rounded-2xl overflow-hidden shadow-2xl group">
                             <img src="assets/images/laksh.pradhwani.webp" alt="Laksh Pradhwani - Web Developer"
                                 class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105">
 
@@ -193,9 +187,9 @@
                             </div>
                         </div>
 
-                        <div class="w-full lg:w-1/2 h-[520px]">
+                        <div class="w-full lg:w-1/2 h-auto lg:h-[520px]">
                             <div
-                                class="relative p-10 rounded-3xl border border-slate-800 bg-slate-900/60 backdrop-blur-md shadow-xl h-full flex flex-col justify-center">
+                                class="relative p-6 sm:p-10 rounded-3xl border border-slate-800 bg-slate-900/60 backdrop-blur-md shadow-xl h-full flex flex-col justify-center">
 
                                 <div class="text-slate-300 text-lg leading-relaxed space-y-6">
                                     <p>
@@ -227,7 +221,7 @@
                                     <div>
                                         <div class="text-xs uppercase tracking-widest text-slate-500 mb-1">Email</div>
                                         <a href="mailto:contact@lakshp.live"
-                                            class="text-sky-400 font-semibold hover:text-sky-300">contact@lakshp.live</a>
+                                            class="text-sky-400 font-semibold hover:text-sky-300 break-all">contact@lakshp.live</a>
                                     </div>
                                     <div>
                                         <div class="text-xs uppercase tracking-widest text-slate-500 mb-1">Location
@@ -614,7 +608,7 @@
 
         </main>
 
-        <footer class="w-full bg-[#020203] border-t border-white/5 px-6 sm:px-12 py-14 text-slate-400">
+        <footer class="w-full bg-[#020203] border-t border-white/5 px-6 sm:px-12 py-14 text-slate-400 pb-28 md:pb-14">
 
             <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
 
@@ -717,12 +711,15 @@
     <button id="scroll-to-top"
         class="fixed bottom-8 right-8 z-50 hidden p-3 bg-sky-600/80 hover:bg-sky-500 text-white rounded-full shadow-lg shadow-sky-900/20 backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:ring-offset-2 focus:ring-offset-slate-900 group"
         aria-label="Scroll to top">
+
         <svg xmlns="http://www.w3.org/2000/svg"
             class="h-6 w-6 transition-transform duration-300 group-hover:-translate-y-0.5" fill="none"
             viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
         </svg>
+
     </button>
+
     <div id="copy-notification" class="copy-notification"></div>
     <div class="fixed bottom-10 left-8 z-50 hidden md:flex flex-col items-center gap-6 text-slate-400">
 
@@ -764,6 +761,56 @@
 
 
     </div>
+    <nav id="mobile-bottom-nav"
+        class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#0f172a]/90 backdrop-blur-lg border-t border-white/10 pb-[env(safe-area-inset-bottom)] shadow-[0_-4px_20px_rgba(0,0,0,0.4)]">
+        <div class="flex justify-around items-center h-16">
+            <a href="#home"
+                class="nav-link-mobile active-mobile-link flex flex-col items-center justify-center w-full h-full text-slate-400 transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mb-1" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                <span class="text-[10px] font-medium">Home</span>
+            </a>
+            <a href="#about"
+                class="nav-link-mobile flex flex-col items-center justify-center w-full h-full text-slate-400 hover:text-sky-400 transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mb-1" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                <span class="text-[10px] font-medium">About</span>
+            </a>
+            <a href="#experience"
+                class="nav-link-mobile flex flex-col items-center justify-center w-full h-full text-slate-400 hover:text-sky-400 transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mb-1" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <span class="text-[10px] font-medium">Work</span>
+            </a>
+            <a href="#skills-and-projects"
+                class="nav-link-mobile flex flex-col items-center justify-center w-full h-full text-slate-400 hover:text-sky-400 transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mb-1" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                </svg>
+                <span class="text-[10px] font-medium">Projects</span>
+            </a>
+            <a href="#contact"
+                class="nav-link-mobile flex flex-col items-center justify-center w-full h-full text-slate-400 hover:text-sky-400 transition-colors duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mb-1" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 00-2-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <span class="text-[10px] font-medium">Contact</span>
+            </a>
+        </div>
+    </nav>
     <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="assets/js/script.js"></script>

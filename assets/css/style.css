@@ -300,3 +300,14 @@ section {
 .spotlight-card:hover::before {
     opacity: 1;
 }
+/* ==========================================================================
+   MOBILE NAVIGATION (APP STYLE)
+   ========================================================================== */
+.active-mobile-link {
+    color: #38bdf8 !important; /* Sky-400 */
+}
+
+.active-mobile-link svg {
+    fill: rgba(56, 189, 248, 0.15); /* Light background fill for active icon */
+    stroke: #38bdf8;
+}

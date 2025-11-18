@@ -82,39 +82,45 @@ document.addEventListener('DOMContentLoaded', () => {
             loop: true
         });
     }
-
     // ---------------------------
-    // 5. EXPANDABLE TABS SCROLL SPY (Existing Logic)
+    // 5. EXPANDABLE TABS SCROLL SPY (FIXED)
     // ---------------------------
     const sections = document.querySelectorAll("section");
     const navTabs = document.querySelectorAll(".expandable-tab");
 
     const updateActiveTab = () => {
         let current = "";
+        const scrollPosition = window.pageYOffset;
+
+        // Adjusted offset to 100px (approx header height/visual space) instead of 350px
+        const offset = 100;
+
         sections.forEach((section) => {
             const sectionTop = section.offsetTop;
-            if (window.pageYOffset >= sectionTop - 350) {
+            const sectionHeight = section.offsetHeight;
+
+            // Logic: If scroll is within this section's top and bottom boundaries
+            if (scrollPosition >= (sectionTop - offset) && scrollPosition < (sectionTop + sectionHeight - offset)) {
                 current = section.getAttribute("id");
             }
         });
 
+        // Fallback: If user is at the very bottom of page, activate the last tab (Contact)
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
+            current = "contact";
+        }
+
         navTabs.forEach((tab) => {
             tab.classList.remove("active");
-            if (tab.getAttribute("href").includes(current)) {
+            // Check if the tab matches the current section
+            if (tab.getAttribute("href") === `#${current}`) {
                 tab.classList.add("active");
             }
         });
     };
 
     window.addEventListener("scroll", updateActiveTab);
-    updateActiveTab();
-    navTabs.forEach(tab => {
-        tab.addEventListener('click', function () {
-            navTabs.forEach(t => t.classList.remove("active"));
-            this.classList.add("active");
-        });
-    });
-
+    updateActiveTab(); // Initial call
 
     // ---------------------------
     // 6. FETCH PROJECTS
@@ -184,64 +190,64 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // =================================================
-// 9. SPOTIFY WIDGET (Via Last.fm API) - The Easy Way
-// =================================================
-async function checkSpotify() {
-    const widget = document.getElementById('spotify-widget');
-    const songEl = document.getElementById('spotify-song');
-    const artistEl = document.getElementById('spotify-artist');
-    const coverEl = document.getElementById('spotify-cover');
-    
-    // 👉 REPLACE THESE TWO VALUES:
-    const username = 'lakshp'; 
-    const apiKey = '0b1d51f7f741582cd0895125d1da45c3';
+    // 9. SPOTIFY WIDGET (Via Last.fm API) - The Easy Way
+    // =================================================
+    async function checkSpotify() {
+        const widget = document.getElementById('spotify-widget');
+        const songEl = document.getElementById('spotify-song');
+        const artistEl = document.getElementById('spotify-artist');
+        const coverEl = document.getElementById('spotify-cover');
 
-    if (!widget) return;
+        // 👉 REPLACE THESE TWO VALUES:
+        const username = 'lakshp';
+        const apiKey = '0b1d51f7f741582cd0895125d1da45c3';
 
-    const API_URL = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${username}&api_key=${apiKey}&format=json&limit=1`;
+        if (!widget) return;
 
-    try {
-        const response = await fetch(API_URL);
-        const data = await response.json();
-        const track = data.recenttracks.track[0];
+        const API_URL = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${username}&api_key=${apiKey}&format=json&limit=1`;
 
-        // Check if music is currently playing (Last.fm adds '@attr': { nowplaying: "true" } if playing)
-        const isPlaying = track['@attr'] && track['@attr'].nowplaying === 'true';
+        try {
+            const response = await fetch(API_URL);
+            const data = await response.json();
+            const track = data.recenttracks.track[0];
 
-        if (isPlaying) {
-            // Reveal widget
-            widget.classList.remove('hidden');
-            widget.classList.add('flex');
-            
-            // Update text
-            songEl.textContent = track.name;
-            artistEl.textContent = track.artist['#text'];
-            
-            // Update image (Last.fm provides multiple sizes, 'extralarge' is usually good quality)
-            const image = track.image.find(img => img.size === 'extralarge')['#text'];
-            if(image) {
-                coverEl.src = image;
-                coverEl.classList.add('animate-[spin_6s_linear_infinite]');
+            // Check if music is currently playing (Last.fm adds '@attr': { nowplaying: "true" } if playing)
+            const isPlaying = track['@attr'] && track['@attr'].nowplaying === 'true';
+
+            if (isPlaying) {
+                // Reveal widget
+                widget.classList.remove('hidden');
+                widget.classList.add('flex');
+
+                // Update text
+                songEl.textContent = track.name;
+                artistEl.textContent = track.artist['#text'];
+
+                // Update image (Last.fm provides multiple sizes, 'extralarge' is usually good quality)
+                const image = track.image.find(img => img.size === 'extralarge')['#text'];
+                if (image) {
+                    coverEl.src = image;
+                    coverEl.classList.add('animate-[spin_6s_linear_infinite]');
+                }
+
+                // Link to song
+                widget.onclick = () => window.open(track.url, '_blank');
+                widget.style.cursor = 'pointer';
+
+            } else {
+                // Hide widget if not playing
+                widget.classList.add('hidden');
+                widget.classList.remove('flex');
             }
-            
-            // Link to song
-            widget.onclick = () => window.open(track.url, '_blank');
-            widget.style.cursor = 'pointer';
-
-        } else {
-            // Hide widget if not playing
+        } catch (e) {
+            console.error("Spotify/Last.fm Widget Error:", e);
             widget.classList.add('hidden');
-            widget.classList.remove('flex');
         }
-    } catch (e) {
-        console.error("Spotify/Last.fm Widget Error:", e);
-        widget.classList.add('hidden');
     }
-}
 
-// Run immediately, then check every 10 seconds
-checkSpotify();
-setInterval(checkSpotify, 10000);
+    // Run immediately, then check every 10 seconds
+    checkSpotify();
+    setInterval(checkSpotify, 10000);
 
     // =================================================
     // 10. SERVICE WORKER (PWA)

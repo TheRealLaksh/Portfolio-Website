@@ -558,3 +558,16 @@ canvas {
 .timeline-item:nth-child(2) { transition-delay: 0.1s; }
 .timeline-item:nth-child(3) { transition-delay: 0.3s; }
 .timeline-item:nth-child(4) { transition-delay: 0.5s; }
+
+/* =========================================
+   PHASE 3: SPOTIFY WIDGET ANIMATION
+   ========================================= */
+@keyframes music-bar {
+    0%, 100% { height: 30%; }
+    50% { height: 100%; }
+}
+
+.music-bar-anim {
+    animation: music-bar 0.8s ease-in-out infinite;
+    transform-origin: bottom;
+}

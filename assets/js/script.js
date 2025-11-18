@@ -184,39 +184,64 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // =================================================
-    // 9. SPOTIFY WIDGET (Simulation)
-    // =================================================
-    async function checkSpotify() {
-        const widget = document.getElementById('spotify-widget');
-        if (!widget) return;
+// 9. SPOTIFY WIDGET (Via Last.fm API) - The Easy Way
+// =================================================
+async function checkSpotify() {
+    const widget = document.getElementById('spotify-widget');
+    const songEl = document.getElementById('spotify-song');
+    const artistEl = document.getElementById('spotify-artist');
+    const coverEl = document.getElementById('spotify-cover');
+    
+    // 👉 REPLACE THESE TWO VALUES:
+    const username = 'lakshp'; 
+    const apiKey = '0b1d51f7f741582cd0895125d1da45c3';
 
-        // SIMULATED DATA
-        // To show: isListening = true
-        // To hide: isListening = false
-        const isListening = true;
-        const data = {
-            song: "Starboy",
-            artist: "The Weeknd",
-            cover: "https://i.scdn.co/image/ab67616d0000b2734718e28d24f2f713640e4795"
-        };
+    if (!widget) return;
 
-        if (isListening) {
+    const API_URL = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${username}&api_key=${apiKey}&format=json&limit=1`;
+
+    try {
+        const response = await fetch(API_URL);
+        const data = await response.json();
+        const track = data.recenttracks.track[0];
+
+        // Check if music is currently playing (Last.fm adds '@attr': { nowplaying: "true" } if playing)
+        const isPlaying = track['@attr'] && track['@attr'].nowplaying === 'true';
+
+        if (isPlaying) {
+            // Reveal widget
             widget.classList.remove('hidden');
-            const songEl = document.getElementById('spotify-song');
-            const artistEl = document.getElementById('spotify-artist');
-            const coverEl = document.getElementById('spotify-cover');
+            widget.classList.add('flex');
+            
+            // Update text
+            songEl.textContent = track.name;
+            artistEl.textContent = track.artist['#text'];
+            
+            // Update image (Last.fm provides multiple sizes, 'extralarge' is usually good quality)
+            const image = track.image.find(img => img.size === 'extralarge')['#text'];
+            if(image) {
+                coverEl.src = image;
+                coverEl.classList.add('animate-[spin_6s_linear_infinite]');
+            }
+            
+            // Link to song
+            widget.onclick = () => window.open(track.url, '_blank');
+            widget.style.cursor = 'pointer';
 
-            if (songEl) songEl.textContent = data.song;
-            if (artistEl) artistEl.textContent = data.artist;
-            if (coverEl) coverEl.src = data.cover;
         } else {
+            // Hide widget if not playing
             widget.classList.add('hidden');
+            widget.classList.remove('flex');
         }
+    } catch (e) {
+        console.error("Spotify/Last.fm Widget Error:", e);
+        widget.classList.add('hidden');
     }
+}
 
-    setInterval(checkSpotify, 10000);
-    checkSpotify();
-
+// Run immediately, then check every 10 seconds
+checkSpotify();
+setInterval(checkSpotify, 10000);
 
     // =================================================
     // 10. SERVICE WORKER (PWA)

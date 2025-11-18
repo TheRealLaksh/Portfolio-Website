@@ -2,7 +2,7 @@
    1. VARIABLES & BASE STYLES
    ========================================================================== */
 :root {
-    --bg-color: #000000;
+    --bg-color: #050505
     --spotlight-color: rgba(56, 189, 248, 0.05);
     --particle-color: #0058d3;
     --grid-color: rgb(0, 0, 0);
@@ -11,11 +11,9 @@
 body {
     font-family: 'Inter', sans-serif;
     background-color: var(--bg-color);
+    /* Deep Space Gradient */
+    background-image: radial-gradient(circle at center, #0f172a 0%, #000000 100%);
     color: #e2e8f0;
-    background-image:
-        linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
-        linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
-    background-size: 40px 40px;
 }
 
 section {
@@ -310,4 +308,29 @@ section {
 .active-mobile-link svg {
     fill: rgba(56, 189, 248, 0.15); /* Light background fill for active icon */
     stroke: #38bdf8;
+}
+/* ==========================================================================
+   PARTICLES.JS BACKGROUND FIX
+   ========================================================================== */
+.particles-js-canvas-el {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 0; /* Sits behind content (which is z-10) */
+    pointer-events: none; /* Ensures you can click buttons on top of it */
+}
+/* ==========================================================================
+   3D UNIVERSE BACKGROUND FIX
+   ========================================================================== */
+canvas {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: -1 !important; /* Puts it behind everything */
+    pointer-events: none;   /* Lets you click links on top of it */
+    background: #000000;    /* Fallback black */
 }

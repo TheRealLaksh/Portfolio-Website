@@ -904,57 +904,102 @@
     <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="assets/js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+
     <script>
-        // Load heavy background scripts only after the main site is ready
         window.addEventListener('load', function () {
-            // 1. Dynamic Year
-            const yearEl = document.getElementById('year');
-            if (yearEl) yearEl.textContent = new Date().getFullYear();
+            // --- CONFIGURATION ---
+            const STAR_COUNT = 15000; // Increased for "realistic" density
+            const STAR_SIZE = 0.7;    // Small, crisp points of light
+            const SPEED = 0.0005;     // Slow, majestic rotation
 
-            // 2. Dynamic Time
-            function updateTime() {
-                const options = { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit' };
-                const timeString = new Date().toLocaleTimeString('en-US', options);
-                const timeElement = document.getElementById('local-time');
-                if (timeElement) {
-                    timeElement.textContent = `Local time: ${timeString}`;
-                }
+            // --- SETUP SCENE ---
+            const scene = new THREE.Scene();
+            // Deep black fog to fade distant stars (Realistic depth)
+            scene.fog = new THREE.FogExp2(0x000000, 0.0008);
+
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
+            // Start camera further back to see more depth
+            camera.position.z = 1;
+
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+
+            // Force Fixed Background Styles
+            renderer.domElement.style.position = 'fixed';
+            renderer.domElement.style.top = '0';
+            renderer.domElement.style.left = '0';
+            renderer.domElement.style.width = '100%';
+            renderer.domElement.style.height = '100%';
+            renderer.domElement.style.zIndex = '-1';
+            document.body.appendChild(renderer.domElement);
+
+            // --- CREATE REALISTIC STARFIELD ---
+            const geometry = new THREE.BufferGeometry();
+            const positions = [];
+
+            // Generate random stars in a huge sphere
+            for (let i = 0; i < STAR_COUNT; i++) {
+                const x = (Math.random() - 0.5) * 3000; // Wide spread
+                const y = (Math.random() - 0.5) * 3000;
+                const z = (Math.random() - 0.5) * 3000;
+                positions.push(x, y, z);
             }
-            updateTime();
-            setInterval(updateTime, 60000);
 
-            // 3. Load Visuals
-            var script1 = document.createElement('script');
-            script1.src = "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js";
-            script1.defer = true;
-            document.body.appendChild(script1);
+            geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
 
-            script1.onload = function () {
-                var script2 = document.createElement('script');
-                script2.src = "https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.topology.min.js";
-                script2.defer = true;
-                document.body.appendChild(script2);
+            // "White White" Material
+            const material = new THREE.PointsMaterial({
+                color: 0xffffff,      // Pure White
+                size: STAR_SIZE,
+                sizeAttenuation: true, // Stars shrink in distance (Realism)
+                transparent: true,
+                opacity: 0.9          // Bright stars
+            });
 
-                script2.onload = function () {
-                    VANTA.TOPOLOGY({
-                        el: "#vanta-bg",
-                        mouseControls: true,
-                        touchControls: true,
-                        gyroControls: false,
-                        minHeight: 200.00,
-                        minWidth: 200.00,
-                        scale: 1.00,
-                        scaleMobile: 1.00,
-                        color: 0x38bdf8,
-                        backgroundColor: 0x000000,
-                        waveSpeed: 15,
-                        waveHeight: 15.00,
-                        shininess: 30.00
-                    });
-                };
-            };
+            const stars = new THREE.Points(geometry, material);
+            scene.add(stars);
+
+            // --- INTERACTIVITY & ANIMATION ---
+            let mouseX = 0;
+            let mouseY = 0;
+
+            // Add smooth interaction
+            document.addEventListener('mousemove', (event) => {
+                mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+                mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+            });
+
+            function animate() {
+                requestAnimationFrame(animate);
+
+                // 1. Slow Universe Rotation
+                stars.rotation.y += SPEED;
+                stars.rotation.x += SPEED * 0.5;
+
+                // 2. Subtle Mouse Parallax (Realistic drift)
+                // We move the rotation target slightly based on mouse, not position
+                const targetX = mouseX * 0.001;
+                const targetY = mouseY * 0.001;
+
+                stars.rotation.y += 0.05 * (targetX - stars.rotation.y);
+                stars.rotation.x += 0.05 * (targetY - stars.rotation.x);
+
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            // Handle Resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
         });
     </script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
 
     <script>
@@ -969,7 +1014,6 @@
                 card.style.setProperty("--mouse-y", `${y}px`);
             }
         };
-
     </script>
 </body>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ETE24Q0PR1"></script>

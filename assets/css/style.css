@@ -370,3 +370,47 @@ canvas {
         stroke-dashoffset: 0;
     }
 }
+/* ==========================================================================
+   NEW SKILL GLOWS
+   ========================================================================== */
+.group:hover .glow-django { box-shadow: 0 0 20px rgba(16, 185, 129, 0.4); border-color: rgba(16, 185, 129, 0.5); } /* Emerald */
+.group:hover .glow-firebase { box-shadow: 0 0 20px rgba(245, 158, 11, 0.4); border-color: rgba(245, 158, 11, 0.5); } /* Amber */
+.group:hover .glow-kali { box-shadow: 0 0 20px rgba(59, 130, 246, 0.4); border-color: rgba(59, 130, 246, 0.5); } /* Blue */
+.group:hover .glow-security { box-shadow: 0 0 20px rgba(239, 68, 68, 0.4); border-color: rgba(239, 68, 68, 0.5); } /* Red */
+.group:hover .glow-ai { box-shadow: 0 0 20px rgba(168, 85, 247, 0.4); border-color: rgba(168, 85, 247, 0.5); } /* Purple */
+.group:hover .glow-db { box-shadow: 0 0 20px rgba(20, 184, 166, 0.4); border-color: rgba(20, 184, 166, 0.5); } /* Teal */
+/* ==========================================================================
+   EXPANDABLE TABS NAVBAR (Dark Glass Theme)
+   ========================================================================== */
+.expandable-tab {
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.expandable-tab-text {
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Active State: White Glass background */
+.expandable-tab.active {
+    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+    color: #ffffff; 
+    padding-left: 1rem;
+    padding-right: 1rem;
+    gap: 0.5rem;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.05); /* Subtle glow */
+}
+
+.expandable-tab.active .expandable-tab-text {
+    max-width: 150px;
+    opacity: 1;
+}
+
+/* Hover State: Slightly lighter than base */
+.expandable-tab:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+}

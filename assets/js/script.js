@@ -27,38 +27,44 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ---------------------------
-    // 3. NAVIGATION SCROLL SPY (Mobile & Desktop)
+    // 3. EXPANDABLE TABS SCROLL SPY
     // ---------------------------
     const sections = document.querySelectorAll("section");
-    const mobileLinks = document.querySelectorAll(".nav-link-mobile");
-    const desktopLinks = document.querySelectorAll(".nav-link"); // Select desktop links
+    const navTabs = document.querySelectorAll(".expandable-tab");
 
-    window.addEventListener("scroll", () => {
+    // Function to update active tab
+    const updateActiveTab = () => {
         let current = "";
 
-        // 1. Determine which section is currently in view
         sections.forEach((section) => {
             const sectionTop = section.offsetTop;
-            // 300px offset helps trigger the active state a bit earlier for better UX
-            if (pageYOffset >= sectionTop - 300) {
+            // Trigger slightly before the section hits top of viewport
+            if (window.pageYOffset >= sectionTop - 350) {
                 current = section.getAttribute("id");
             }
         });
 
-        // 2. Update Mobile Bottom Nav
-        mobileLinks.forEach((link) => {
-            link.classList.remove("active-mobile-link");
-            if (link.getAttribute("href").includes(current)) {
-                link.classList.add("active-mobile-link");
+        navTabs.forEach((tab) => {
+            tab.classList.remove("active");
+            // Check if the tab's href matches the current section
+            if (tab.getAttribute("href").includes(current)) {
+                tab.classList.add("active");
             }
         });
+    };
 
-        // 3. Update Desktop Top Nav (The Fix)
-        desktopLinks.forEach((link) => {
-            link.classList.remove("active-link");
-            if (link.getAttribute("href").includes(current)) {
-                link.classList.add("active-link");
-            }
+    // Listen for scroll events
+    window.addEventListener("scroll", updateActiveTab);
+
+    // Update on initial load
+    updateActiveTab();
+
+    // Add click handler for smooth scroll (optional, if CSS scroll-behavior isn't enough)
+    navTabs.forEach(tab => {
+        tab.addEventListener('click', function () {
+            // Remove active from all immediately for snappy feel
+            navTabs.forEach(t => t.classList.remove("active"));
+            this.classList.add("active");
         });
     });
     // ---------------------------

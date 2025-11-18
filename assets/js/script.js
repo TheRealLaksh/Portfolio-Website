@@ -2,36 +2,102 @@
     assets/js/script.js
     ---------------------
     Purpose: DOM behaviors and page interactions for Portfolio-Website.
-
-    Contents:
-        1. AOS initialization (Animate On Scroll)
-        2. Hero typed text using Typed.js
-        3. Expandable tabs / scroll spy for the top nav
-        4. Fetch projects from GitHub and render project cards
-        5. Footer hover interactivity and minor UI helpers
-
-    Notes for maintainers:
-        - This file is intentionally written in vanilla JS for portability.
-        - Keep async network code (GitHub fetch) resilient to failures.
-        - Non-functional comments were added for clarity; no code behavior changed.
 */
 
 document.addEventListener('DOMContentLoaded', () => {
 
-        // ---------------------------
-        // 1. AOS INIT
-        // ---------------------------
-    if (typeof AOS !== 'undefined') {
-        AOS.init({
-            duration: 800,
-            once: true,
-            offset: 30,
-            easing: 'ease-out-cubic'
+    // =================================================
+    // 1. PRELOADER LOGIC (LAKSH Auto-Scan + Progress)
+    // =================================================
+    const preloader = document.getElementById('preloader');
+    const percentText = document.getElementById('loader-percent');
+    const bar = document.getElementById('loader-bar');
+    const loaderSpotlight = document.getElementById('loaderSpotlight'); // Spotlight for the loader
+
+    if (preloader && percentText && bar) {
+        let progress = 0;
+        let scanPos = 0;
+        let direction = 1;
+
+        // Function to update progress and animation frame
+        const updateLoader = () => {
+            // Increment progress randomly up to 100
+            progress += Math.random() * 4;
+            if (progress > 100) progress = 100;
+
+            // Update UI
+            percentText.textContent = `${Math.floor(progress)}%`;
+            bar.style.width = `${progress}%`;
+
+            // Auto-Scan Spotlight animation (0% to 100% and back)
+            if (loaderSpotlight) {
+                scanPos += 1.5 * direction; // Speed of scan
+                if (scanPos >= 100 || scanPos <= 0) direction *= -1;
+                loaderSpotlight.setAttribute('cx', `${scanPos}%`);
+            }
+
+            // End Condition
+            if (progress === 100) {
+                // Use a short timeout to ensure the progress bar hits 100% visibly
+                setTimeout(() => {
+                    preloader.style.opacity = '0'; // Start fade out
+                    preloader.classList.add('pointer-events-none');
+
+                    // Remove from DOM after fade transition (700ms from CSS)
+                    setTimeout(() => {
+                        preloader.style.display = 'none';
+                    }, 700);
+                }, 500); // Delay before hiding
+                return;
+            }
+
+            requestAnimationFrame(updateLoader); // Keep looping
+        };
+
+        // Start the loader animation
+        setTimeout(() => {
+            requestAnimationFrame(updateLoader);
+        }, 100); // Initial delay to ensure all elements are painted
+    }
+
+
+    // =================================================
+    // 2. FOOTER HOVER EFFECT (Mouse Tracking)
+    // =================================================
+    const footerContainer = document.getElementById('footer-hover-container');
+    const revealMask = document.getElementById('revealMask'); // This ID is in the footer's SVG
+
+    if (footerContainer && revealMask) {
+        footerContainer.addEventListener('mousemove', (e) => {
+            const rect = footerContainer.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            // Calculate percentage position
+            const cxPercent = (x / rect.width) * 100;
+            const cyPercent = (y / rect.height) * 100;
+
+            // Update the mask position based on mouse
+            revealMask.setAttribute('cx', `${cxPercent}%`);
+            revealMask.setAttribute('cy', `${cyPercent}%`);
+        });
+
+        // Reset spotlight on mouse leave
+        footerContainer.addEventListener('mouseleave', () => {
+            revealMask.setAttribute('cx', '50%');
+            revealMask.setAttribute('cy', '50%');
         });
     }
 
     // ---------------------------
-    // 2. HERO TYPING
+    // 3. AOS INIT
+    // ---------------------------
+    if (typeof AOS !== 'undefined') {
+        AOS.init({ duration: 800, once: true, offset: 30, easing: 'ease-out-cubic' });
+    }
+
+    // ---------------------------
+    // 4. HERO TYPING (Existing Logic)
     // ---------------------------
     const typedTextElement = document.getElementById('typed-text');
     if (typedTextElement && typeof Typed !== 'undefined') {
@@ -45,18 +111,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ---------------------------
-    // 3. EXPANDABLE TABS SCROLL SPY
+    // 5. EXPANDABLE TABS SCROLL SPY (Existing Logic)
     // ---------------------------
     const sections = document.querySelectorAll("section");
     const navTabs = document.querySelectorAll(".expandable-tab");
 
-    // Function to update active tab
     const updateActiveTab = () => {
         let current = "";
-
         sections.forEach((section) => {
             const sectionTop = section.offsetTop;
-            // Trigger slightly before the section hits top of viewport
             if (window.pageYOffset >= sectionTop - 350) {
                 current = section.getAttribute("id");
             }
@@ -64,66 +127,136 @@ document.addEventListener('DOMContentLoaded', () => {
 
         navTabs.forEach((tab) => {
             tab.classList.remove("active");
-            // Check if the tab's href matches the current section
             if (tab.getAttribute("href").includes(current)) {
                 tab.classList.add("active");
             }
         });
     };
 
-    // Listen for scroll events
     window.addEventListener("scroll", updateActiveTab);
-
-    // Update on initial load
     updateActiveTab();
-
-    // Add click handler for smooth scroll (optional, if CSS scroll-behavior isn't enough)
     navTabs.forEach(tab => {
         tab.addEventListener('click', function () {
-            // Remove active from all immediately for snappy feel
             navTabs.forEach(t => t.classList.remove("active"));
             this.classList.add("active");
         });
     });
+
+
     // ---------------------------
-    // 4. FETCH PROJECTS
+    // 6. FETCH PROJECTS (Existing Logic)
     // ---------------------------
     loadProjectsFromGitHub();
 
-    // ---------------------------
-    // 5. FOOTER HOVER EFFECT (LAKSH)
-    // ---------------------------
-    const footerContainer = document.getElementById('footer-hover-container');
-    const revealMask = document.getElementById('revealMask');
 
-    if (footerContainer && revealMask) {
-        footerContainer.addEventListener('mousemove', (e) => {
-            const rect = footerContainer.getBoundingClientRect();
-            // Calculate mouse position relative to the SVG container
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
+    // =================================================
+    // 7. TIMELINE ANIMATION (Existing Logic)
+    // =================================================
+    const observerOptions = { threshold: 0.2 };
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
 
-            // Convert to percentage for the gradient coordinates
-            const cxPercentage = (x / rect.width) * 100;
-            const cyPercentage = (y / rect.height) * 100;
-
-            // Update the SVG mask position
-            revealMask.setAttribute('cx', `${cxPercentage}%`);
-            revealMask.setAttribute('cy', `${cyPercentage}%`);
+                if (entry.target.classList.contains('timeline-container')) {
+                    const fillLine = document.getElementById('timeline-line-fill');
+                    if (fillLine) fillLine.style.transform = 'scaleY(1)';
+                }
+            }
         });
+    }, observerOptions);
 
-        // Optional: Reset to center on leave
-        footerContainer.addEventListener('mouseleave', () => {
-            revealMask.setAttribute('cx', '50%');
-            revealMask.setAttribute('cy', '50%');
+    document.querySelectorAll('.timeline-item, .timeline-container').forEach(el => observer.observe(el));
+
+
+    // =================================================
+    // 8. AJAX CONTACT FORM (Existing Logic)
+    // =================================================
+    const form = document.querySelector('form[action*="formspree"]');
+    if (form) {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = form.querySelector('button');
+            const originalText = btn.innerHTML;
+
+            btn.disabled = true;
+            btn.innerHTML = 'Sending...';
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    form.reset();
+                    btn.innerHTML = `
+                        <div class="flex items-center gap-2 text-green-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            <span>Message Sent!</span>
+                        </div>
+                    `;
+                    setTimeout(() => { btn.innerHTML = originalText; btn.disabled = false; }, 5000);
+                } else {
+                    throw new Error('Failed');
+                }
+            } catch (err) {
+                btn.innerHTML = 'Error. Try again.';
+                btn.disabled = false;
+                setTimeout(() => { btn.innerHTML = originalText; }, 3000);
+            }
         });
     }
+
+
+    // =================================================
+    // 9. SPOTIFY WIDGET (Simulation)
+    // =================================================
+    async function checkSpotify() {
+        const widget = document.getElementById('spotify-widget');
+        if (!widget) return;
+
+        // SIMULATED DATA (Replace this block with real fetch logic if available)
+        const isListening = true;
+        const data = {
+            song: "Starboy",
+            artist: "The Weeknd",
+            cover: "https://i.scdn.co/image/ab67616d0000b2734718e28d24f2f713640e4795"
+        };
+
+        if (isListening) {
+            widget.classList.remove('hidden');
+            const songEl = document.getElementById('spotify-song');
+            const artistEl = document.getElementById('spotify-artist');
+            const coverEl = document.getElementById('spotify-cover');
+
+            if (songEl) songEl.textContent = data.song;
+            if (artistEl) artistEl.textContent = data.artist;
+            if (coverEl) coverEl.src = data.cover;
+        } else {
+            widget.classList.add('hidden');
+        }
+    }
+
+    setInterval(checkSpotify, 10000);
+    checkSpotify();
+
+
+    // =================================================
+    // 10. SERVICE WORKER (PWA)
+    // =================================================
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js')
+            .then(reg => console.log('Service Worker registered', reg))
+            .catch(err => console.error('Service Worker failed', err));
+    }
+
 });
 
 
-
 // ===============================================================
-//  ⭐ AUTO FETCH GITHUB REPO DATA ⭐
+//  ⭐ GITHUB REPO DATA FUNCTIONS (Outside DOMContentLoaded) ⭐
 // ===============================================================
 
 const REPOS = [
@@ -137,34 +270,38 @@ const REPOS = [
 
 const GITHUB_TOKEN = null; // optional
 
-
 async function fetchRepoData(ownerRepo) {
     const headers = GITHUB_TOKEN ? { Authorization: `token ${GITHUB_TOKEN}` } : {};
     const [owner, repo] = ownerRepo.split("/");
     const base = `https://api.github.com/repos/${owner}/${repo}`;
 
-    const r1 = await fetch(base, { headers });
-    if (!r1.ok) throw new Error("GitHub error loading " + ownerRepo);
-    const info = await r1.json();
-
-    let languages = [];
     try {
-        const r2 = await fetch(`${base}/languages`, { headers });
-        languages = Object.keys(await r2.json());
-    } catch (_) {
-        languages = info.language ? [info.language] : [];
-    }
+        const r1 = await fetch(base, { headers });
+        if (!r1.ok) throw new Error("GitHub error loading " + ownerRepo);
+        const info = await r1.json();
 
-    return {
-        name: info.name,
-        genre: guessGenre(repo),
-        description: info.description || "No description provided.",
-        languages: languages.length ? languages : [info.language || "Unknown"],
-        html_url: info.html_url,
-        homepage: info.homepage || "",
-        stars: info.stargazers_count || 0,
-        status: info.homepage ? "Live" : "Repo"
-    };
+        let languages = [];
+        try {
+            const r2 = await fetch(`${base}/languages`, { headers });
+            languages = Object.keys(await r2.json());
+        } catch (_) {
+            languages = info.language ? [info.language] : [];
+        }
+
+        return {
+            name: info.name,
+            genre: guessGenre(repo),
+            description: info.description || "No description provided.",
+            languages: languages.length ? languages : [info.language || "Unknown"],
+            html_url: info.html_url,
+            homepage: info.homepage || "",
+            stars: info.stargazers_count || 0,
+            status: info.homepage ? "Live" : "Repo"
+        };
+    } catch (error) {
+        console.warn(`Skipping ${ownerRepo}: ${error.message}`);
+        return null;
+    }
 }
 
 function guessGenre(name) {
@@ -180,7 +317,7 @@ function guessGenre(name) {
 async function loadProjectsFromGitHub() {
     try {
         const results = await Promise.all(REPOS.map(r => fetchRepoData(r)));
-        window.myProjects = results;
+        window.myProjects = results.filter(r => r !== null);
 
         const grid = document.getElementById("github-projects-grid");
         if (grid) grid.innerHTML = "";
@@ -188,14 +325,10 @@ async function loadProjectsFromGitHub() {
         loadPremiumProjects();
     } catch (e) {
         console.error("GitHub fetch failed:", e);
+        const grid = document.getElementById("github-projects-grid");
+        if (grid) grid.innerHTML = `<p class="text-red-400 col-span-full text-center">Failed to load projects. Please check connection.</p>`;
     }
 }
-
-
-
-// ===============================================================
-//  ⭐ PREMIUM PROJECT RENDERER (UPDATED WITH ICONS) ⭐
-// ===============================================================
 
 function loadPremiumProjects() {
     const projectsGrid = document.getElementById('github-projects-grid');
@@ -215,12 +348,13 @@ function loadPremiumProjects() {
     window.myProjects.forEach(repo => {
 
         const languagesHtml = repo.languages
+            .slice(0, 3) // Limit to top 3 languages
             .map(lang => `<span class="text-[10px] font-medium text-zinc-400 bg-zinc-800/80 px-2 py-1 rounded border border-zinc-700/50">${lang}</span>`)
             .join("");
 
         const liveIcon = repo.homepage ? `
             <a href="${repo.homepage}" target="_blank" title="Live Demo"
-                class="p-2 rounded-lg bg-zinc-900 border border-zinc-700 hover:border-zinc-500 hover:text-white transition-all">
+                class="p-2 rounded-lg bg-zinc-900 border border-zinc-700 hover:border-emerald-500/50 hover:text-emerald-400 transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-5 h-5"
                     viewBox="0 0 24 24">
                     <path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3ZM5 5h5V3H5c-1.1 0-2 .9-2 2v5h2V5Zm0 9H3v5c0 1.1.9 2 2 2h5v-2H5v-5Zm14-2h2v5c0 1.1-.9 2-2 2h-5v-2h5v-5Z"/>
@@ -230,7 +364,7 @@ function loadPremiumProjects() {
 
         const githubIcon = `
             <a href="${repo.html_url}" target="_blank" title="GitHub Code"
-                class="p-2 rounded-lg bg-zinc-900 border border-zinc-700 hover:border-zinc-500 hover:text-white transition-all">
+                class="p-2 rounded-lg bg-zinc-900 border border-zinc-700 hover:border-sky-500/50 hover:text-sky-400 transition-all">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                     class="w-5 h-5" viewBox="0 0 24 24">
                     <path d="M12 .5C5.73.5.5 5.73.5 12c0 5.09 3.29 9.4 7.86 10.93.58.11.79-.25.79-.56v-2c-3.2.69-3.87-1.39-3.87-1.39-.53-1.35-1.3-1.71-1.3-1.71-1.06-.73.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.79 2.73 1.27 3.4.97.11-.75.41-1.27.75-1.56-2.55-.29-5.23-1.28-5.23-5.72 0-1.27.45-2.31 1.2-3.13-.12-.3-.52-1.52.11-3.17 0 0 .97-.31 3.18 1.2a10.9 10.9 0 0 1 5.79 0c2.21-1.51 3.18-1.2 3.18-1.2.63 1.65.23 2.87.11 3.17a4.57 4.57 0 0 1 1.2 3.13c0 4.45-2.69 5.43-5.25 5.71.42.36.8 1.07.8 2.16v3.2c0 .31.21.68.8.56A10.99 10.99 0 0 0 23.5 12c0-6.27-5.23-11.5-11.5-11.5Z"/>
@@ -262,8 +396,8 @@ function loadPremiumProjects() {
                     </p>
 
                     <div class="mt-6 pt-4 border-t border-zinc-800/60 flex items-center justify-between">
-                        <div class="flex gap-2">${languagesHtml}</div>
-                    </div>
+                        <div class="flex gap-2 flex-wrap">${languagesHtml}</div>
+                        </div>
 
                 </div>
             </div>

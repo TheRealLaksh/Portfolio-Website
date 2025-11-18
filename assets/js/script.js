@@ -1,8 +1,26 @@
+/*
+    assets/js/script.js
+    ---------------------
+    Purpose: DOM behaviors and page interactions for Portfolio-Website.
+
+    Contents:
+        1. AOS initialization (Animate On Scroll)
+        2. Hero typed text using Typed.js
+        3. Expandable tabs / scroll spy for the top nav
+        4. Fetch projects from GitHub and render project cards
+        5. Footer hover interactivity and minor UI helpers
+
+    Notes for maintainers:
+        - This file is intentionally written in vanilla JS for portability.
+        - Keep async network code (GitHub fetch) resilient to failures.
+        - Non-functional comments were added for clarity; no code behavior changed.
+*/
+
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ---------------------------
-    // 1. AOS INIT
-    // ---------------------------
+        // ---------------------------
+        // 1. AOS INIT
+        // ---------------------------
     if (typeof AOS !== 'undefined') {
         AOS.init({
             duration: 800,

@@ -1,6 +1,29 @@
+:root {
+        --bg-color: #050505
+        --spotlight-color: rgba(56, 189, 248, 0.05);
+        --particle-color: #0058d3;
+        --grid-color: rgb(0, 0, 0);
+}
+
+/*
+    assets/css/style.css
+    ----------------------
+    Hand-crafted stylesheet for Portfolio-Website. This file contains the site's
+    non-Tailwind customizations (visual polish, fixes for canvas backgrounds,
+    component-level styling and utility classes). It is intentionally authored
+    for clarity and maintainability.
+
+    Important:
+        - Tailwind-generated CSS lives in `assets/css/output.css` and should not be
+            edited directly.
+        - Use `src/input.css` to change Tailwind utilities and rebuild `output.css`.
+
+    Sections are grouped and labeled; modify only style rules you understand.
+*/
+
 /* ==========================================================================
-   1. VARIABLES & BASE STYLES
-   ========================================================================== */
+     1. VARIABLES & BASE STYLES
+     ========================================================================== */
 :root {
     --bg-color: #050505
     --spotlight-color: rgba(56, 189, 248, 0.05);

@@ -19,74 +19,47 @@ document.addEventListener('DOMContentLoaded', () => {
         let scanPos = 0;
         let direction = 1;
 
-        // Function to update progress and animation frame
-        const updateLoader = () => {
-            // Increment progress randomly up to 100
-            progress += Math.random() * 4;
+        // Function for animating the LAKSH SVG spotlight
+        const animateSpotlight = () => {
+            if (loaderSpotlight) {
+                scanPos += 1.5 * direction; // Speed of scan
+                if (scanPos >= 100 || scanPos <= 0) direction *= -1;
+                loaderSpotlight.setAttribute('cx', `${scanPos}%`);
+                // Use requestAnimationFrame to loop the spotlight animation
+                requestAnimationFrame(animateSpotlight);
+            }
+        };
+
+        // Start the LAKSH spotlight animation immediately
+        if (loaderSpotlight) {
+            animateSpotlight();
+        }
+
+        // Timer for Progress Bar (Controls the 2-second delay)
+        // FIX: The loader now runs on a strict timer to guarantee the 2-second minimum duration.
+        const progressTimer = setInterval(() => {
+            progress += Math.random() * 4; // Increments progress
             if (progress > 100) progress = 100;
 
             // Update UI
             percentText.textContent = `${Math.floor(progress)}%`;
             bar.style.width = `${progress}%`;
 
-            // Auto-Scan Spotlight animation (0% to 100% and back)
-            if (loaderSpotlight) {
-                scanPos += 1.5 * direction; // Speed of scan
-                if (scanPos >= 100 || scanPos <= 0) direction *= -1;
-                loaderSpotlight.setAttribute('cx', `${scanPos}%`);
-            }
-
-            // End Condition
             if (progress === 100) {
-                // Use a short timeout to ensure the progress bar hits 100% visibly
+                clearInterval(progressTimer);
+
+                // Start fade-out process
                 setTimeout(() => {
-                    preloader.style.opacity = '0'; // Start fade out
+                    preloader.style.opacity = '0'; // Start CSS fade out
                     preloader.classList.add('pointer-events-none');
 
-                    // Remove from DOM after fade transition (700ms from CSS)
+                    // Final removal after CSS transition completes
                     setTimeout(() => {
                         preloader.style.display = 'none';
                     }, 700);
-                }, 500); // Delay before hiding
-                return;
+                }, 500); // 0.5s delay to show 100%
             }
-
-            requestAnimationFrame(updateLoader); // Keep looping
-        };
-
-        // Start the loader animation
-        setTimeout(() => {
-            requestAnimationFrame(updateLoader);
-        }, 100); // Initial delay to ensure all elements are painted
-    }
-
-
-    // =================================================
-    // 2. FOOTER HOVER EFFECT (Mouse Tracking)
-    // =================================================
-    const footerContainer = document.getElementById('footer-hover-container');
-    const revealMask = document.getElementById('revealMask'); // This ID is in the footer's SVG
-
-    if (footerContainer && revealMask) {
-        footerContainer.addEventListener('mousemove', (e) => {
-            const rect = footerContainer.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            // Calculate percentage position
-            const cxPercent = (x / rect.width) * 100;
-            const cyPercent = (y / rect.height) * 100;
-
-            // Update the mask position based on mouse
-            revealMask.setAttribute('cx', `${cxPercent}%`);
-            revealMask.setAttribute('cy', `${cyPercent}%`);
-        });
-
-        // Reset spotlight on mouse leave
-        footerContainer.addEventListener('mouseleave', () => {
-            revealMask.setAttribute('cx', '50%');
-            revealMask.setAttribute('cy', '50%');
-        });
+        }, 50); // Updates every 50ms, resulting in approx 2.5s total visible time.
     }
 
     // ---------------------------
@@ -144,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // ---------------------------
-    // 6. FETCH PROJECTS (Existing Logic)
+    // 6. FETCH PROJECTS
     // ---------------------------
     loadProjectsFromGitHub();
 
@@ -217,7 +190,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const widget = document.getElementById('spotify-widget');
         if (!widget) return;
 
-        // SIMULATED DATA (Replace this block with real fetch logic if available)
+        // SIMULATED DATA
+        // To show: isListening = true
+        // To hide: isListening = false
         const isListening = true;
         const data = {
             song: "Starboy",
@@ -315,19 +290,30 @@ function guessGenre(name) {
 }
 
 async function loadProjectsFromGitHub() {
+    const grid = document.getElementById("github-projects-grid");
+
+    // --- STEP 1: Fetch all data concurrently and filter out failures ---
     try {
         const results = await Promise.all(REPOS.map(r => fetchRepoData(r)));
         window.myProjects = results.filter(r => r !== null);
-
-        const grid = document.getElementById("github-projects-grid");
-        if (grid) grid.innerHTML = "";
-
-        loadPremiumProjects();
     } catch (e) {
-        console.error("GitHub fetch failed:", e);
-        const grid = document.getElementById("github-projects-grid");
-        if (grid) grid.innerHTML = `<p class="text-red-400 col-span-full text-center">Failed to load projects. Please check connection.</p>`;
+        // This catch handles critical initial errors (e.g., network down)
+        console.error("Critical GitHub fetch failed:", e);
+        if (grid) grid.innerHTML = `<p class="text-red-400 col-span-full text-center py-10">⚠️ Failed to connect to GitHub API. Projects cannot be loaded right now.</p>`;
+        window.myProjects = [];
+        return;
     }
+
+    // --- STEP 2: Render results ---
+    if (!window.myProjects || window.myProjects.length === 0) {
+        if (grid) grid.innerHTML = `<p class="text-red-400 col-span-full text-center py-10">
+            No projects loaded. All requested GitHub repositories might be private or the API limit has been reached.
+         </p>`;
+        return;
+    }
+
+    if (grid) grid.innerHTML = "";
+    loadPremiumProjects();
 }
 
 function loadPremiumProjects() {
@@ -397,7 +383,7 @@ function loadPremiumProjects() {
 
                     <div class="mt-6 pt-4 border-t border-zinc-800/60 flex items-center justify-between">
                         <div class="flex gap-2 flex-wrap">${languagesHtml}</div>
-                        </div>
+                    </div>
 
                 </div>
             </div>

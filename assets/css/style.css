@@ -537,3 +537,24 @@ canvas {
     80% { clip-path: inset(50% 0 40% 0); }
     100% { clip-path: inset(0% 0 10% 0); }
 }
+/* =========================================
+   PHASE 2: TIMELINE ANIMATION
+   ========================================= */
+
+/* Initial hidden state */
+.timeline-item {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Active state (triggered by JS IntersectionObserver) */
+.timeline-item.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger delays so they don't all appear at once if screen is tall */
+.timeline-item:nth-child(2) { transition-delay: 0.1s; }
+.timeline-item:nth-child(3) { transition-delay: 0.3s; }
+.timeline-item:nth-child(4) { transition-delay: 0.5s; }

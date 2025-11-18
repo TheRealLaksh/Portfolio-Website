@@ -447,3 +447,39 @@ canvas {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
 }
+
+/* ==========================================================================
+   FLOW BUTTON ANIMATION
+   ========================================================================== */
+@keyframes flow-gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.btn-flow {
+    position: relative;
+    /* The gradient colors: Sky Blue -> Indigo -> Pink -> Back to Sky Blue */
+    background: linear-gradient(300deg, #0ea5e9, #6366f1, #ec4899, #0ea5e9);
+    background-size: 300% 300%;
+    animation: flow-gradient 3s ease infinite;
+    z-index: 1;
+    border: none;
+}
+
+/* Optional: Adds a glowing blur behind the button */
+.btn-flow::after {
+    content: '';
+    position: absolute;
+    top: -2px; left: -2px; right: -2px; bottom: -2px;
+    background: inherit;
+    z-index: -1;
+    filter: blur(10px);
+    opacity: 0;
+    border-radius: inherit;
+    transition: opacity 0.3s;
+}
+
+.btn-flow:hover::after {
+    opacity: 0.5;
+}

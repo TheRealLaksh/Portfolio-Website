@@ -27,14 +27,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ---------------------------
-    // 3. MOBILE BOTTOM NAV SCROLL SPY
+    // 3. NAVIGATION SCROLL SPY (Mobile & Desktop)
     // ---------------------------
     const sections = document.querySelectorAll("section");
-    const navLinks = document.querySelectorAll(".nav-link-mobile");
+    const mobileLinks = document.querySelectorAll(".nav-link-mobile");
+    const desktopLinks = document.querySelectorAll(".nav-link"); // Select desktop links
 
     window.addEventListener("scroll", () => {
         let current = "";
 
+        // 1. Determine which section is currently in view
         sections.forEach((section) => {
             const sectionTop = section.offsetTop;
             // 300px offset helps trigger the active state a bit earlier for better UX
@@ -43,10 +45,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        navLinks.forEach((link) => {
+        // 2. Update Mobile Bottom Nav
+        mobileLinks.forEach((link) => {
             link.classList.remove("active-mobile-link");
             if (link.getAttribute("href").includes(current)) {
                 link.classList.add("active-mobile-link");
+            }
+        });
+
+        // 3. Update Desktop Top Nav (The Fix)
+        desktopLinks.forEach((link) => {
+            link.classList.remove("active-link");
+            if (link.getAttribute("href").includes(current)) {
+                link.classList.add("active-link");
             }
         });
     });

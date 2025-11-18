@@ -47,11 +47,16 @@
     <div class="content-wrapper w-full overflow-hidden">
 
         <!-- Primary navigation (centered expandable tabs) -->
-        <nav
-            class="fixed top-6 left-1/2 -translate-x-1/2 z-50 flex flex-wrap items-center gap-1 rounded-2xl border border-white/5 bg-black/20 backdrop-blur-md p-2 shadow-2xl shadow-black/50 transition-all duration-300">
+        <nav class="fixed bottom-6 md:bottom-auto md:top-6 left-1/2 -translate-x-1/2 z-50 
+            flex flex-nowrap items-center gap-1 
+            rounded-full md:rounded-2xl 
+            border border-white/10 bg-black/20 backdrop-blur-xl 
+            p-2 shadow-2xl shadow-black/50 
+            transition-all duration-300 
+            max-w-[95vw] overflow-x-auto no-scrollbar">
 
             <a href="#home"
-                class="expandable-tab active relative flex items-center rounded-xl px-2 py-2 text-sm font-medium text-slate-400 transition-all duration-300"
+                class="expandable-tab active relative flex items-center rounded-full md:rounded-xl px-3 py-2.5 md:px-2 md:py-2 text-sm font-medium text-slate-400 transition-all duration-300 shrink-0"
                 data-target="home">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -61,10 +66,10 @@
                 <span class="expandable-tab-text">Home</span>
             </a>
 
-            <div class="mx-1 h-6 w-[1px] bg-white/10"></div>
+            <div class="mx-1 h-6 w-[1px] bg-white/10 shrink-0"></div>
 
             <a href="#about"
-                class="expandable-tab relative flex items-center rounded-xl px-2 py-2 text-sm font-medium text-slate-400 transition-all duration-300"
+                class="expandable-tab relative flex items-center rounded-full md:rounded-xl px-3 py-2.5 md:px-2 md:py-2 text-sm font-medium text-slate-400 transition-all duration-300 shrink-0"
                 data-target="about">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -75,7 +80,7 @@
             </a>
 
             <a href="#experience"
-                class="expandable-tab relative flex items-center rounded-xl px-2 py-2 text-sm font-medium text-slate-400 transition-all duration-300"
+                class="expandable-tab relative flex items-center rounded-full md:rounded-xl px-3 py-2.5 md:px-2 md:py-2 text-sm font-medium text-slate-400 transition-all duration-300 shrink-0"
                 data-target="experience">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -86,7 +91,7 @@
             </a>
 
             <a href="#skills-and-projects"
-                class="expandable-tab relative flex items-center rounded-xl px-2 py-2 text-sm font-medium text-slate-400 transition-all duration-300"
+                class="expandable-tab relative flex items-center rounded-full md:rounded-xl px-3 py-2.5 md:px-2 md:py-2 text-sm font-medium text-slate-400 transition-all duration-300 shrink-0"
                 data-target="skills-and-projects">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -96,10 +101,10 @@
                 <span class="expandable-tab-text">Projects</span>
             </a>
 
-            <div class="mx-1 h-6 w-[1px] bg-white/10"></div>
+            <div class="mx-1 h-6 w-[1px] bg-white/10 shrink-0"></div>
 
             <a href="#contact"
-                class="expandable-tab relative flex items-center rounded-xl px-2 py-2 text-sm font-medium text-slate-400 transition-all duration-300"
+                class="expandable-tab relative flex items-center rounded-full md:rounded-xl px-3 py-2.5 md:px-2 md:py-2 text-sm font-medium text-slate-400 transition-all duration-300 shrink-0"
                 data-target="contact">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

@@ -334,3 +334,39 @@ canvas {
     pointer-events: none;   /* Lets you click links on top of it */
     background: #000000;    /* Fallback black */
 }
+
+/* ==========================================================================
+   FOOTER ANIMATIONS & STYLES
+   ========================================================================== */
+.social-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: #0f172a; /* Slate-900 */
+    border: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #94a3b8;
+    transition: all 0.3s ease;
+}
+
+.social-btn:hover {
+    color: white;
+    border-color: rgba(56, 189, 248, 0.5);
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+}
+
+/* The "Draw" animation for LAKSH text */
+.footer-text-anim {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: drawStroke 2s ease-in-out infinite alternate;
+}
+
+@keyframes drawStroke {
+    to {
+        stroke-dashoffset: 0;
+    }
+}

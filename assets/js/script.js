@@ -65,6 +65,35 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. FETCH PROJECTS
     // ---------------------------
     loadProjectsFromGitHub();
+
+    // ---------------------------
+    // 5. FOOTER HOVER EFFECT (LAKSH)
+    // ---------------------------
+    const footerContainer = document.getElementById('footer-hover-container');
+    const revealMask = document.getElementById('revealMask');
+
+    if (footerContainer && revealMask) {
+        footerContainer.addEventListener('mousemove', (e) => {
+            const rect = footerContainer.getBoundingClientRect();
+            // Calculate mouse position relative to the SVG container
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            // Convert to percentage for the gradient coordinates
+            const cxPercentage = (x / rect.width) * 100;
+            const cyPercentage = (y / rect.height) * 100;
+
+            // Update the SVG mask position
+            revealMask.setAttribute('cx', `${cxPercentage}%`);
+            revealMask.setAttribute('cy', `${cyPercentage}%`);
+        });
+
+        // Optional: Reset to center on leave
+        footerContainer.addEventListener('mouseleave', () => {
+            revealMask.setAttribute('cx', '50%');
+            revealMask.setAttribute('cy', '50%');
+        });
+    }
 });
 
 

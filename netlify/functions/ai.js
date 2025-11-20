@@ -1,6 +1,5 @@
 // netlify/functions/ai.js
 
-import fetch from "node-fetch";
 import path from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
@@ -16,7 +15,6 @@ export async function handler(event, context) {
         return { statusCode: 400, body: "Missing message" };
     }
 
-    // Load laksh.json
     try {
         const __dirname = path.dirname(fileURLToPath(import.meta.url));
         const filePath = path.resolve(__dirname, "../../assets/data/laksh.json");
@@ -57,6 +55,7 @@ ${JSON.stringify(profileData)}
             statusCode: 200,
             body: JSON.stringify({ reply })
         };
+
     } catch (err) {
         return {
             statusCode: 500,

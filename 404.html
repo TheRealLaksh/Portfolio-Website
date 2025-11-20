@@ -17,7 +17,7 @@
         html,
         body {
             height: 100%;
-            margin: 0
+            margin: 0;
         }
 
         body {
@@ -26,28 +26,28 @@
             color: var(--fg);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            overflow: hidden;
+            overflow: auto;
         }
 
         /* full-canvas container */
         .canvas-wrap {
             position: fixed;
             inset: 0;
-            display: block
+            display: block;
         }
 
         /* UI overlay */
         .ui {
-            position: fixed;
+            position: relative;
             left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
+            transform: translateX(-50%);
             text-align: center;
             z-index: 20;
             pointer-events: auto;
             padding: 20px;
             max-width: 920px;
             width: 92%;
+            margin-top: 120px;
         }
 
         .title-404 {
@@ -57,7 +57,6 @@
             letter-spacing: -0.03em;
             margin: 0;
             color: transparent;
-            /* fill via background-clip */
             background-image: linear-gradient(90deg, rgba(125, 211, 252, 0.95), rgba(120, 145, 255, 0.9));
             -webkit-background-clip: text;
             background-clip: text;
@@ -66,16 +65,10 @@
         }
 
         #footer-404 {
-            position: fixed;
-            bottom: 0;
-            left: 0;
+            position: relative;
             width: 100%;
-            z-index: 30;
-            background: rgba(2, 2, 3, 0.85);
-            /* subtle transparent backdrop */
-            backdrop-filter: blur(10px);
+            margin-top: 80px;
         }
-
 
         .glitch {
             position: relative;
@@ -204,15 +197,10 @@
         <div class="cta">
             <a class="btn" href="https://lakshp.live" aria-label="Go back home">Return Home</a>
         </div>
-
-
     </div>
 
     <div class="overlay"></div>
     <div class="noise"></div>
-
-
-
     <script src="https://unpkg.com/three@0.152.2/build/three.min.js"></script>
     <script>
         // --- PWA SERVICE WORKER REGISTRATION ---
@@ -381,7 +369,7 @@
         });
     </script>
     <script>
-        // Basic Three.js scene: animated starfield + planet + parallax mouse
+        // Basic Three.js scene: animated starfield + parallax mouse (planet lines removed)
         const container = document.getElementById('canvasWrap');
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, 0.1, 2000);
@@ -436,7 +424,7 @@
         const fill = new THREE.AmbientLight(0x2a3b44, 0.35);
         scene.add(fill);
 
-        // subtle camera parallax using mouse and small rotation of planet
+        // subtle camera parallax using mouse and small rotation removed for planet
         const mouse = { x: 0, y: 0 };
         window.addEventListener('mousemove', (e) => {
             mouse.x = (e.clientX / innerWidth) * 2 - 1;
@@ -471,11 +459,7 @@
             }
             stars.geometry.attributes.position.needsUpdate = true;
 
-            // planet slow rotation and bob
-            planet.rotation.y += 0.0015 + velocity.x * 0.002;
-            planet.rotation.x = Math.sin(t * 0.25) * 0.03;
-            planetGroup.position.x += (mouse.x * 8 - planetGroup.position.x) * 0.02;
-            planetGroup.position.y += (-mouse.y * 6 - planetGroup.position.y) * 0.02;
+            // planet-related lines removed (no planet on this page)
 
             // damp velocity
             velocity.x *= 0.95; velocity.y *= 0.95;
@@ -486,21 +470,22 @@
         animate();
 
         // small accessibility for explore btn: push camera into scene briefly
-        document.getElementById('exploreBtn').addEventListener('click', (e) => {
-            e.preventDefault();
-            // simple camera zoom animation
-            const startZ = camera.position.z; const targetZ = Math.max(20, startZ * 0.45);
-            let dur = 800; let start = performance.now();
-            function step(now) {
-                const p = Math.min(1, (now - start) / dur);
-                const ease = 1 - Math.pow(1 - p, 3);
-                camera.position.z = startZ * (1 - ease) + targetZ * ease;
-                if (p < 1) requestAnimationFrame(step);
-            }
-            requestAnimationFrame(step);
-            // after a beat, send back to homepage
-            setTimeout(() => { window.location.href = 'https://lakshp.live' }, 1100);
-        });
+        const exploreBtn = document.getElementById('exploreBtn');
+        if (exploreBtn) {
+            exploreBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const startZ = camera.position.z; const targetZ = Math.max(20, startZ * 0.45);
+                let dur = 800; let start = performance.now();
+                function step(now) {
+                    const p = Math.min(1, (now - start) / dur);
+                    const ease = 1 - Math.pow(1 - p, 3);
+                    camera.position.z = startZ * (1 - ease) + targetZ * ease;
+                    if (p < 1) requestAnimationFrame(step);
+                }
+                requestAnimationFrame(step);
+                setTimeout(() => { window.location.href = 'https://lakshp.live' }, 1100);
+            });
+        }
 
         // performance fallback: if WebGL is not available, show a dark static background and keep UI usable
         if (!renderer.capabilities.isWebGL2 && !renderer.capabilities.isWebGL1) {
@@ -513,7 +498,9 @@
             if (document.hidden) { renderer.setAnimationLoop(null) } else { renderer.setAnimationLoop(() => renderer.render(scene, camera)) }
         });
     </script>
-    <footer id="footer-404" class="relative w-full bg-[#020203] border-t border-white/5 overflow-hidden pt-14 pb-28 md:pb-14">
+
+    <footer id="footer-404"
+        class="relative w-full bg-[#020203] border-t border-white/5 overflow-hidden pt-14 pb-28 md:pb-14">
 
         <div class="absolute inset-0 z-0 pointer-events-none"
             style="background: radial-gradient(125% 125% at 50% 10%, rgba(0, 0, 0, 0) 40%, rgba(60, 162, 250, 0.1) 100%);">

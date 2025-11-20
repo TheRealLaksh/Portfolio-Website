@@ -483,183 +483,101 @@ setTimeout(() => {
     removeTyping(); // Remove dots
     addMessage(reply, false); // Show actual reply
 }, 1500);
-
 /* =========================================
-   🤖 AI CHATBOT LOGIC (THE BRAIN)
+   🤖 ULTIMATE AI CHATBOT (Features: NLP, Context, Actions, Easter Eggs)
    ========================================= */
 const chatData = {
-    // --- 1. Personality & Chit-Chat ---
-    "greetings": [
-        "Hey there! 👋 I'm Laksh's digital twin. Ask me about his **projects**, **skills**, or **experience**!",
-        "Hi! 🤖 Ready to explore Laksh's world? I know everything from his **GitHub** stats to his **Badminton** skills.",
-        "Hello! I'm online and ready. Want to see Laksh's **resume** or hear about his **hackathon** wins?",
-        "Beep Boop! 🤖 Just kidding. Hi! Ask me anything regarding Laksh's work."
-    ],
-    "how_are_you": [
-        "I'm just a bunch of code, but I'm feeling bug-free today! 🐛 How can I help you?",
-        "Running on 100% efficiency! Thanks for asking. What do you want to know about Laksh?",
-        "I'm great! Just waiting for someone to ask about my **neural networks** knowledge. 😉"
-    ],
-    "joke": [
-        "Why do programmers prefer dark mode? Because light attracts bugs. 🕶️",
-        "I would tell you a UDP joke, but you might not get it. 📦",
-        "Laksh told me this one: A SQL query walks into a bar, walks up to two tables and asks... 'Can I join you?'"
-    ],
-    "cool": [
-        "Right? Laksh works hard to make things look awesome! 😎",
-        "Glad you like it! The 3D background is pretty sick, isn't it?",
-        "Thanks! Takes a lot of coffee to code this cool. ☕"
-    ],
-    "bye": [
-        "Goodbye! Feel free to come back if you need more info. Have a great day! 👋",
-        "See ya! Don't forget to check out the projects before you go! 🚀",
-        "Logging off... Just kidding, I'm always here. Bye! 💻"
-    ],
-    "who_made_you": "I was built by Laksh Pradhwani using vanilla JavaScript and Tailwind CSS. No heavy frameworks, just pure performance! ⚡",
-
-    // --- 2. Core Bio ---
-    "about": "Laksh Pradhwani is an 18-year-old **Full-Stack Developer** & **Aspiring AI/ML Engineer** from Varanasi, India. 🇮🇳<br><br>He's a Class 12 student at <b>Sunbeam School Lahartara</b> (PCM + CS). He moved from 'Hello World' to building scalable apps like <b>GigX</b> and <b>CaliBridge</b>. He loves hackathons, robotics, and clean UI.",
-
-    // --- 3. Education ---
-    "education": "🎓 <b>Sunbeam School Lahartara</b> (2024–2026)<br>Class 12 — PCM + Computer Science<br><i>Activities:</i> Coding, Robotics, Shooting, Badminton<br><br>🏫 <b>Chinmaya International Residential School</b> (2019–2024)<br>Class 10 — House Captain, Leadership Programs, Sports",
-
-    // --- 4. Experience (Detailed) ---
-    "experience": "<b>💼 Full-Stack Developer @ Unified Mentor</b> (Oct–Dec 2025)<br>Remote | React, Redux, Firebase. Built dynamic UIs and managed state.<br><br><b>💼 Web Developer @ MoreYeahs</b> (Aug–Sep 2025)<br>Remote | Built <b>GigX platform</b> core features, Auth pages, and CRUD dashboards using Django & REST APIs.<br><br><b>💼 IT Intern @ Hotel Kavana</b> (Jun 2025)<br>On-site | Managed hotel software, automation workflows, and IT security.",
-
-    // --- 5. Projects (Overview) ---
-    "projects": "Here is Laksh's project lineup:<br><br>1. <b>Portfolio Website</b>: 3D & Animated (You are here!)<br>2. <b>Artist Portfolio</b>: Minimalist site for actors.<br>3. <b>CaliBridge</b>: JS Event Calendar with LocalStorage.<br>4. <b>Helios</b>: Aesthetic Web Music Player.<br>5. <b>MVP Webstore</b>: Frontend E-commerce demo.<br>6. <b>Code & Canvas</b>: Modern blog with comments.<br><br>Check the code on <a href='https://github.com/TheRealLaksh' target='_blank' class='text-sky-400 underline'>GitHub</a>!",
-
-    // Specific Project Details
-    "calibridge": "<b>CaliBridge</b> is a JavaScript-based event calendar. It supports event creation, month switching, and LocalStorage sync. Smooth animations and a responsive UI make it a great productivity tool.",
-    "helios": "<b>Helios Music Player</b> is a lightweight web player. It features dynamic track switching, a beautiful UI, and responsive controls for an aesthetic listening experience.",
-    "codecanvas": "<b>Code & Canvas</b> is a modern blog platform featuring dark mode, real-time comments (Firebase), search functionality, and social sharing. Built with Tailwind & Vanilla JS.",
-    "mvp": "<b>MVP Webstore</b> is a front-end e-commerce MVP. It features product listings, a functional cart system, and a clean UI, built entirely with HTML, CSS, and JS.",
-    "artist": "<b>Artist Portfolio</b> is designed for actors and creatives. It features a balanced gallery, smooth transitions, and a minimal design to showcase artwork professionally.",
-    "portfolio": "<b>Portfolio Website</b> is this very site! It features 3D elements (Three.js), GSAP-like animations (AOS), and a fully responsive glassmorphism design.",
-
-    // --- 6. Skills ---
-    "skills": "<b>🚀 Web Development:</b><br>HTML, CSS, JavaScript, MERN Stack (Basics), Firebase, Tailwind CSS, Git/GitHub.<br><br><b>🐍 Backend:</b><br>Python, Django, REST APIs, CRUD operations.<br><br><b>🤖 AI & ML:</b><br>Neural Networks, Feature Engineering, Clustering, Prompt Engineering.<br><br><b>🔐 Cybersecurity:</b><br>Kali Linux, Digital Forensics, Pentesting Basics.",
-
-    // --- 7. Certifications ---
-    "certifications": "📜 <b>Data Science & AI</b> — IIT Madras<br>📜 <b>Generative AI Mastermind</b> — Outskill<br>📜 <b>Cyber Investigator</b> — DeepCytes Cyber Labs (UK)<br>📜 <b>Google Play Academy</b> — Store Listing Certificate<br>📜 <b>Advanced Drone Technology</b> — Bharat Space Education",
-
-    // --- 8. Workshops ---
-    "workshops": "Laksh is always learning! Workshops attended:<br>• <b>IIT Madras:</b> Neural Networks, AI Ethics, Datasets<br>• <b>Plaksha University:</b> Turing Test, DNN Basics, Feature Extraction<br>• <b>Outskill:</b> Custom GPTs, AI Automation<br>• <b>Bharat Space Education:</b> Drone Tech & Air Mobility",
-
-    // --- 9. Achievements ---
-    "achievements": "<b>🏆 Technology:</b><br>• 2nd Place: Robowars (Impetus ’25)<br>• National Finalist: Manual HTML/CSS Dev<br>• VVM Science Exam: School & District Topper<br>• Multiple Hackathon recognitions (WebWiz, Tech Ramble)<br><br><b>🎖 Leadership:</b><br>• House Captain (CIRS)<br>• NCC 'A' Certificate",
-
-    // --- 10. Sports ---
-    "sports": "Laksh is an athlete too! 🏃‍♂️<br>🔫 <b>Shooting:</b> State-Level Air Pistol Shooter<br>🏸 <b>Badminton:</b> District-Level Player<br>🏐 <b>Volleyball:</b> 1st Place (School)<br>🏊 <b>Swimming:</b> 2nd Place (Relay)<br>🧘 <b>Yoga:</b> Completed 108 Surya Namaskars",
-
-    // --- 11. Contact ---
-    "contact": "Let's connect! 🤝<br>📧 Email: <a href='mailto:laksh.pradhwani@gmail.com' class='text-sky-400'>laksh.pradhwani@gmail.com</a><br>🔗 <a href='https://linkedin.com/in/laksh-pradhwani' target='_blank' class='text-sky-400'>LinkedIn</a><br>📸 <a href='https://www.instagram.com/_.lakshp/' target='_blank' class='text-sky-400'>Instagram</a>",
-
-    // --- Fallback ---
-    "default": "I'm not sure about that specific detail. 😅<br>But I can tell you about Laksh's <b>projects</b>, <b>skills</b>, <b>sports</b>, <b>achievements</b>, or <b>certifications</b>. What's on your mind?"
+    "greetings": ["Hey there! 👋 I'm Laksh's AI. How can I help?", "Hi! 🤖 Ready to explore?", "Hello! Ask me about projects, skills, or contact info."],
+    "about": "Laksh is an 18-year-old **Full-Stack Developer** & **AI/ML Aspirant** from Varanasi. He studies at Sunbeam School Lahartara.",
+    "contact": "Let's connect! 🤝<br>📧 <a href='mailto:laksh.pradhwani@gmail.com' class='text-sky-400'>Email Me</a><br>🔗 <a href='https://linkedin.com/in/laksh-pradhwani' target='_blank' class='text-sky-400'>LinkedIn</a>",
+    "skills": "<b>🚀 Web:</b> React, Tailwind, JS, Firebase<br><b>🐍 Backend:</b> Python, Django, REST APIs<br><b>🤖 AI:</b> Neural Networks, ML",
+    "experience": "<b>Unified Mentor:</b> Full Stack (React/Redux)<br><b>MoreYeahs:</b> Django/Python Dev<br><b>Hotel Kavana:</b> IT Intern",
+    "default": "I'm not sure about that. Try asking about **projects**, **skills**, or **contact**."
 };
 
-// Helper: Check if text contains any of the keywords
-function hasKeyword(text, keywords) {
-    return keywords.some(keyword => text.includes(keyword));
+// Chat State for Context
+let chatState = {
+    userName: localStorage.getItem('chatUserName') || null,
+    step: 'normal'
+};
+
+// Helper: Levenshtein Distance for Fuzzy Matching
+function similarity(s1, s2) {
+    var longer = s1;
+    var shorter = s2;
+    if (s1.length < s2.length) { longer = s2; shorter = s1; }
+    var longerLength = longer.length;
+    if (longerLength == 0) { return 1.0; }
+    return (longerLength - editDistance(longer, shorter)) / parseFloat(longerLength);
+}
+function editDistance(s1, s2) {
+    s1 = s1.toLowerCase(); s2 = s2.toLowerCase();
+    var costs = new Array();
+    for (var i = 0; i <= s1.length; i++) {
+        var lastValue = i;
+        for (var j = 0; j <= s2.length; j++) {
+            if (i == 0) costs[j] = j;
+            else {
+                if (j > 0) {
+                    var newValue = costs[j - 1];
+                    if (s1.charAt(i - 1) != s2.charAt(j - 1)) newValue = Math.min(Math.min(newValue, lastValue), costs[j]) + 1;
+                    costs[j - 1] = lastValue;
+                    lastValue = newValue;
+                }
+            }
+        }
+        if (i > 0) costs[s2.length] = lastValue;
+    }
+    return costs[s2.length];
 }
 
-// Helper: Get Random Array Item
-function getRandomResponse(arr) {
-    return Array.isArray(arr) ? arr[Math.floor(Math.random() * arr.length)] : arr;
+// Helper: Format Bot Reply (Markdown)
+function formatMessage(text) {
+    return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" class="text-sky-400 underline">$1</a>');
 }
 
-// Main Logic: Analyze Text and Get Reply
-function getBotReply(text) {
-    const lowerText = text.toLowerCase();
+// Helper: Sound Effect
+const playPopSound = () => {
+    const audio = new Audio("data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU"); // Placeholder short beep
+    audio.volume = 0.2;
+    audio.play().catch(() => { }); // Ignore auto-play errors
+};
 
-    // --- 1. Personality & Chit-Chat ---
-    if (hasKeyword(lowerText, ['hi', 'hello', 'hey', 'hola', 'yo', 'sup', 'morning', 'afternoon', 'evening']))
-        return getRandomResponse(chatData.greetings);
-
-    if (hasKeyword(lowerText, ['how are you', 'how are u', 'how r u', 'doing today', 'whats up']))
-        return getRandomResponse(chatData.how_are_you);
-
-    if (hasKeyword(lowerText, ['joke', 'funny', 'laugh', 'entertain']))
-        return getRandomResponse(chatData.joke);
-
-    if (hasKeyword(lowerText, ['cool', 'awesome', 'wow', 'amazing', 'sick', 'great', 'nice']))
-        return getRandomResponse(chatData.cool);
-
-    if (hasKeyword(lowerText, ['bye', 'goodbye', 'see ya', 'cya', 'later']))
-        return getRandomResponse(chatData.bye);
-
-    if (hasKeyword(lowerText, ['who made', 'who built', 'creator', 'developer', 'author']))
-        return chatData.who_made_you;
-
-    // --- 2. Specific Personal Info ---
-    if (hasKeyword(lowerText, ['location', 'where are you', 'live', 'city', 'from', 'based']))
-        return chatData.location;
-
-    if (hasKeyword(lowerText, ['age', 'how old', 'birth']))
-        return chatData.age;
-
-    // --- 3. Contact & Socials ---
-    if (hasKeyword(lowerText, ['contact', 'email', 'mail', 'gmail', 'reach', 'connect', 'hire', 'message', 'ping']))
-        return chatData.contact;
-
-    if (hasKeyword(lowerText, ['insta', 'instagram', 'ig', 'handle', 'id', 'social']))
-        return chatData.contact; // Reusing contact as it has the links
-
-    if (hasKeyword(lowerText, ['link', 'linkedin', 'github', 'git']))
-        return chatData.contact;
-
-    // --- 4. Bio & Professional ---
-    if (hasKeyword(lowerText, ['about', 'who are you', 'bio', 'intro', 'background', 'profile', 'name', 'student', 'laksh', 'yourself']))
-        return chatData.about;
-
-    if (hasKeyword(lowerText, ['experience', 'job', 'intern', 'work', 'company', 'unified', 'moreyeahs', 'hotel', 'kavana', 'profession', 'employment']))
-        return chatData.experience;
-
-    if (hasKeyword(lowerText, ['resume', 'cv', 'curriculum']))
-        return "You can view or download my Resume from the **Resume** section below! 📄";
-
-    if (hasKeyword(lowerText, ['educat', 'school', 'college', 'university', 'study', 'class', 'grade', 'degree', 'sunbeam', 'cirs', '12th', '10th', 'board']))
-        return chatData.education;
-
-    // --- 5. Skills & Tech ---
-    if (hasKeyword(lowerText, ['skill', 'tech', 'stack', 'code', 'programming', 'language', 'react', 'python', 'django', 'js', 'html', 'css', 'tailwind', 'firebase', 'ai', 'ml', 'cyber', 'linux']))
-        return chatData.skills;
-
-    if (hasKeyword(lowerText, ['certif', 'course', 'license', 'iit', 'google', 'deepcytes']))
-        return chatData.certifications;
-
-    if (hasKeyword(lowerText, ['workshop', 'seminar', 'bootcamp', 'training']))
-        return chatData.workshops;
-
-    // --- 6. Achievements & Interests ---
-    if (hasKeyword(lowerText, ['achieve', 'award', 'prize', 'win', 'won', 'medal', 'hackathon', 'rank', 'topper', 'robowar', 'robot']))
-        return chatData.achievements;
-
-    if (hasKeyword(lowerText, ['sport', 'game', 'hobby', 'shoot', 'badminton', 'volley', 'swim', 'yoga', 'football', 'surya', 'namaskar']))
-        return chatData.sports;
-
-    // --- 7. Specific Projects ---
-    if (hasKeyword(lowerText, ['calibridge', 'calendar', 'event'])) return chatData.calibridge;
-    if (hasKeyword(lowerText, ['helios', 'music', 'player', 'song'])) return chatData.helios;
-    if (hasKeyword(lowerText, ['canvas', 'blog', 'article', 'write'])) return chatData.codecanvas;
-    if (hasKeyword(lowerText, ['shop', 'store', 'ecommerce', 'cart', 'mvp', 'buy'])) return chatData.mvp;
-    if (hasKeyword(lowerText, ['artist', 'actor', 'gallery', 'portfolio'])) return chatData.artist; // Matches "portfolio" here too
-
-    // --- 8. General Projects ---
-    if (hasKeyword(lowerText, ['project', 'build', 'app', 'application', 'demo', 'repo', 'site', 'web', 'website']))
-        return chatData.projects;
-
-    return chatData.default;
-}
-
-// --- CHAT UI INTERACTION ---
+// --- CHAT UI LOGIC ---
 const chatToggle = document.getElementById('chatbot-toggle');
 const chatWindow = document.getElementById('chat-window');
 const closeChat = document.getElementById('close-chat');
 const chatForm = document.getElementById('chat-form');
 const userInput = document.getElementById('user-input');
 const messagesArea = document.getElementById('chat-messages');
+
+// Inject CSS for Typing & Chips
+const style = document.createElement('style');
+style.textContent = `
+    .typing-dot { width: 6px; height: 6px; background: #94a3b8; border-radius: 50%; animation: typing 1.4s infinite ease-in-out both; }
+    .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+    .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+    @keyframes typing { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1); } }
+    .quick-chip { font-size: 0.75rem; padding: 4px 10px; background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.2); color: #38bdf8; border-radius: 99px; cursor: pointer; transition: all 0.2s; }
+    .quick-chip:hover { background: rgba(56, 189, 248, 0.2); transform: translateY(-1px); }
+`;
+document.head.appendChild(style);
+
+// Add Quick Chips to UI
+const chipContainer = document.createElement('div');
+chipContainer.className = "flex gap-2 p-3 overflow-x-auto border-t border-white/5";
+chipContainer.innerHTML = `
+    <span class="quick-chip" onclick="sendChip('Projects')">Projects</span>
+    <span class="quick-chip" onclick="sendChip('Skills')">Skills</span>
+    <span class="quick-chip" onclick="sendChip('Contact')">Contact</span>
+`;
+chatForm.parentElement.insertBefore(chipContainer, chatForm);
+
+window.sendChip = (text) => {
+    userInput.value = text;
+    chatForm.dispatchEvent(new Event('submit'));
+};
 
 // Toggle Window
 function toggleChat() {
@@ -668,46 +586,136 @@ function toggleChat() {
     if (isHidden) {
         chatWindow.classList.remove('opacity-0', 'scale-90', 'pointer-events-none', 'translate-y-4');
         chatWindow.classList.add('opacity-100', 'scale-100', 'pointer-events-auto', 'translate-y-0');
+        if (!chatState.userName && messagesArea.children.length <= 1) {
+            setTimeout(() => botResponse("Hi! What's your name?"), 1000);
+        }
     } else {
         chatWindow.classList.add('opacity-0', 'scale-90', 'pointer-events-none', 'translate-y-4');
         chatWindow.classList.remove('opacity-100', 'scale-100', 'pointer-events-auto', 'translate-y-0');
     }
 }
-
 if (chatToggle) chatToggle.addEventListener('click', toggleChat);
 if (closeChat) closeChat.addEventListener('click', toggleChat);
 
-// Add Message to UI
-function addMessage(content, isUser = false) {
-    if (!messagesArea) return;
+// Typing Indicator
+function showTyping() {
+    const div = document.createElement('div');
+    div.id = 'typing-indicator';
+    div.className = 'flex items-center gap-3';
+    div.innerHTML = `
+        <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center border border-white/10">🤖</div>
+        <div class="bg-slate-800/50 border border-white/5 rounded-2xl p-3 flex gap-1">
+            <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
+        </div>`;
+    messagesArea.appendChild(div);
+    messagesArea.scrollTop = messagesArea.scrollHeight;
+}
+function removeTyping() {
+    const el = document.getElementById('typing-indicator');
+    if (el) el.remove();
+}
+
+function botResponse(text) {
+    showTyping();
+    setTimeout(() => {
+        removeTyping();
+        addMessage(formatMessage(text), false);
+        playPopSound();
+    }, 1000);
+}
+
+function addMessage(html, isUser) {
     const div = document.createElement('div');
     div.className = 'flex items-start gap-3 ' + (isUser ? 'justify-end' : '');
-
-    // User vs Bot Message Styling
     div.innerHTML = isUser ?
-        `<div class="bg-sky-600 text-white rounded-2xl rounded-tr-none p-3 text-sm shadow-md max-w-[80%]"><p>${content}</p></div>` :
+        `<div class="bg-sky-600 text-white rounded-2xl rounded-tr-none p-3 text-sm shadow-md max-w-[85%]"><p>${html}</p></div>` :
         `<div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center border border-white/10 shrink-0">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10H12V2z"></path><path d="M12 2a10 10 0 0 1 10 10"></path><path d="M2 12a10 10 0 0 1 10-10v10Z"></path></svg>
+             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg>
          </div>
-         <div class="bg-slate-800/50 border border-white/5 rounded-2xl rounded-tl-none p-3 text-sm text-slate-300 shadow-sm max-w-[80%]"><p>${content}</p></div>`;
-
+         <div class="bg-slate-800/50 border border-white/5 rounded-2xl rounded-tl-none p-3 text-sm text-slate-300 shadow-sm max-w-[85%]"><p>${html}</p></div>`;
     messagesArea.appendChild(div);
     messagesArea.scrollTop = messagesArea.scrollHeight;
 }
 
-// Handle Form Submit
+// Core Brain Logic
+function getBotReply(text) {
+    const lower = text.toLowerCase();
+
+    // 0. Easter Eggs
+    if (lower === 'konami code' || lower === 'dance') {
+        document.getElementById('chatbot-toggle').classList.add('animate-spin');
+        return "🕺 Disco mode activated! (Check the button)";
+    }
+    if (lower.includes('light mode')) {
+        return "😎 My eyes! I only exist in the shadows (Dark Mode).";
+    }
+
+    // 1. Context / Memory
+    if (chatState.step === 'awaiting_name') {
+        chatState.userName = text;
+        localStorage.setItem('chatUserName', text);
+        chatState.step = 'normal';
+        return `Nice to meet you, ${text}! How can I help?`;
+    }
+    if (lower.includes('my name') || lower.includes('who am i')) {
+        return chatState.userName ? `You're ${chatState.userName}!` : "I don't know yet. What is your name?";
+    }
+
+    // 2. Integrations
+    if (lower.includes('music') || lower.includes('listening') || lower.includes('spotify')) {
+        const songEl = document.getElementById('spotify-song');
+        if (songEl && songEl.innerText) return `🎶 Laksh is vibing to **${songEl.innerText}** right now.`;
+        return "🎵 Laksh isn't listening to anything on Spotify currently.";
+    }
+    if (lower.includes('time') || lower.includes('awake')) {
+        const time = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata", hour: 'numeric', minute: 'numeric', hour12: true });
+        return `🕒 It's **${time}** in Varanasi.`;
+    }
+    if (lower.includes('latest project')) {
+        if (window.myProjects && window.myProjects.length > 0) {
+            const p = window.myProjects[0];
+            return `🔥 Latest drop: **${p.name}** - ${p.description}. [Check it out](${p.html_url})`;
+        }
+    }
+
+    // 3. Keyword Matching (Fuzzy)
+    const topics = [
+        { keys: ['hello', 'hi', 'hey'], reply: chatData.greetings[Math.floor(Math.random() * chatData.greetings.length)] },
+        { keys: ['project', 'work', 'portfolio'], reply: chatData.projects },
+        { keys: ['skill', 'stack', 'tech'], reply: chatData.skills },
+        { keys: ['experience', 'job', 'intern'], reply: chatData.experience },
+        { keys: ['contact', 'email', 'hire', 'social'], reply: chatData.contact },
+        { keys: ['about', 'who', 'bio'], reply: chatData.about }
+    ];
+
+    for (const topic of topics) {
+        if (topic.keys.some(k => lower.includes(k) || similarity(lower, k) > 0.7)) {
+            return topic.reply;
+        }
+    }
+
+    return chatData.default;
+}
+
+// Handle Submit
 if (chatForm) {
     chatForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const text = userInput.value.trim();
         if (!text) return;
-
         addMessage(text, true);
         userInput.value = '';
+        botResponse(getBotReply(text));
+    });
 
-        setTimeout(() => {
-            const reply = getBotReply(text);
-            addMessage(reply, false);
-        }, 600);
+    // Keydown for Konami (↑ ↑ ↓ ↓ ← → ← → b a)
+    let konami = [];
+    const code = "ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRightba";
+    document.addEventListener('keydown', (e) => {
+        konami.push(e.key);
+        if (konami.join('').includes(code)) {
+            alert("🥚 EASTER EGG FOUND!");
+            konami = [];
+        }
     });
 }

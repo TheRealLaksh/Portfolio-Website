@@ -17,7 +17,7 @@ export async function handler(event, context) {
 
     try {
         const __dirname = path.dirname(fileURLToPath(import.meta.url));
-        const filePath = path.resolve(__dirname, "./data/laksh.json");
+        const filePath = path.resolve(__dirname, "laksh.json");
 
         const profileData = JSON.parse(fs.readFileSync(filePath, "utf-8"));
 

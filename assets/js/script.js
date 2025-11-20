@@ -249,6 +249,15 @@ document.addEventListener('DOMContentLoaded', () => {
     checkSpotify();
     setInterval(checkSpotify, 10000);
 
+    if (location.hostname === "localhost") {
+        console.log("Service Worker disabled on Localhost");
+    } else {
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("/sw.js");
+        }
+    }
+
+
     // =================================================
     // 10. SERVICE WORKER (PWA)
     // =================================================

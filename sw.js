@@ -1,10 +1,9 @@
 const CACHE_NAME = 'portfolio-v1';
 const ASSETS = [
-  '/',
-  '/index.html',
-  '/assets/css/output.css',
-  '/assets/css/style.css',
-  '/assets/js/script.js',
+  './index.html',
+  './assets/css/output.css',
+  './assets/css/style.css',
+  './assets/js/script.js',
   '/assets/images/favicon.png',
   '/assets/images/laksh.pradhwani.webp'
 ];

@@ -457,12 +457,13 @@ function loadPremiumProjects() {
     });
 }
 
-
 /* =========================================
    🤖 ULTIMATE AI CHATBOT LOGIC & DATABASE
    ========================================= */
 
-// 1. THE BRAIN (Your Knowledge Base)
+/* -------------------------
+   1. THE BRAIN (Knowledge)
+   ------------------------- */
 const chatData = {
     "greetings": [
         "Hey there! 👋 I'm Laksh's digital twin. Ask me about his **projects**, **skills**, or **experience**!",
@@ -492,57 +493,36 @@ const chatData = {
         "Logging off... Just kidding, I'm always here. Bye! 💻"
     ],
     "who_made_you": "I was built by **Laksh Pradhwani** using vanilla JavaScript, Tailwind CSS, and some AI magic. No heavy frameworks, just pure performance! ⚡",
-
-    // --- Core Bio & Info ---
     "about": "Laksh Pradhwani is an 18-year-old **Full-Stack Developer** & **Aspiring AI/ML Engineer** from **Varanasi, India** 🇮🇳.<br><br>He's a Class 12 student at <b>Sunbeam School Lahartara</b> (PCM + CS). He moved from 'Hello World' to building scalable apps like <b>GigX</b> and <b>CaliBridge</b>. He loves hackathons, robotics, and clean UI.",
     "location": "Laksh is based in the spiritual capital of India, **Varanasi, Uttar Pradesh**. 🕉️",
     "age": "Laksh is **18 years old**. Young, but coding like a pro! 🚀",
-
-    // --- Education ---
     "education": "🎓 <b>Sunbeam School Lahartara</b> (2024–2026)<br>Class 12 — PCM + Computer Science<br><i>Activities:</i> Coding, Robotics, Shooting, Badminton<br><br>🏫 <b>Chinmaya International Residential School</b> (2019–2024)<br>Class 10 — House Captain, Leadership Programs, Sports",
-
-    // --- Experience ---
     "experience": "<b>💼 Full-Stack Developer @ Unified Mentor</b> (Oct–Dec 2025)<br>Remote | React, Redux, Firebase. Built dynamic UIs and managed state.<br><br><b>💼 Web Developer @ MoreYeahs</b> (Aug–Sep 2025)<br>Remote | Built <b>GigX platform</b> core features, Auth pages, and CRUD dashboards using Django & REST APIs.<br><br><b>💼 IT Intern @ Hotel Kavana</b> (Jun 2025)<br>On-site | Managed hotel software, automation workflows, and IT security.",
-
-    // --- Projects ---
     "projects": "Here is Laksh's project lineup:<br><br>1. <b>Portfolio Website</b>: 3D & Animated (You are here!)<br>2. <b>Artist Portfolio</b>: Minimalist site for actors.<br>3. <b>CaliBridge</b>: JS Event Calendar with LocalStorage.<br>4. <b>Helios</b>: Aesthetic Web Music Player.<br>5. <b>MVP Webstore</b>: Frontend E-commerce demo.<br>6. <b>Code & Canvas</b>: Modern blog with comments.<br><br>Check the code on <a href='https://github.com/TheRealLaksh' target='_blank' class='text-sky-400 underline'>GitHub</a>!",
-
     "calibridge": "<b>CaliBridge</b> is a JavaScript-based event calendar. It supports event creation, month switching, and LocalStorage sync. Smooth animations and a responsive UI make it a great productivity tool.",
     "helios": "<b>Helios Music Player</b> is a lightweight web player. It features dynamic track switching, a beautiful UI, and responsive controls for an aesthetic listening experience.",
     "codecanvas": "<b>Code & Canvas</b> is a modern blog platform featuring dark mode, real-time comments (Firebase), search functionality, and social sharing. Built with Tailwind & Vanilla JS.",
     "mvp": "<b>MVP Webstore</b> is a front-end e-commerce MVP. It features product listings, a functional cart system, and a clean UI, built entirely with HTML, CSS, and JS.",
     "artist": "<b>Artist Portfolio</b> is designed for actors and creatives. It features a balanced gallery, smooth transitions, and a minimal design to showcase artwork professionally.",
     "portfolio": "<b>Portfolio Website</b> is this very site! It features 3D elements (Three.js), GSAP-like animations (AOS), and a fully responsive glassmorphism design.",
-
-    // --- Skills ---
     "skills": "<b>🚀 Web Development:</b><br>HTML, CSS, JavaScript, MERN Stack (Basics), Firebase, Tailwind CSS, Git/GitHub.<br><br><b>🐍 Backend:</b><br>Python, Django, REST APIs, CRUD operations.<br><br><b>🤖 AI & ML:</b><br>Neural Networks, Feature Engineering, Clustering, Prompt Engineering.<br><br><b>🔐 Cybersecurity:</b><br>Kali Linux, Digital Forensics, Pentesting Basics.",
-
-    // --- Certifications ---
     "certifications": "📜 <b>Data Science & AI</b> — IIT Madras<br>📜 <b>Generative AI Mastermind</b> — Outskill<br>📜 <b>Cyber Investigator</b> — DeepCytes Cyber Labs (UK)<br>📜 <b>Google Play Academy</b> — Store Listing Certificate<br>📜 <b>Advanced Drone Technology</b> — Bharat Space Education",
-
-    // --- Workshops ---
     "workshops": "Laksh is always learning! Workshops attended:<br>• <b>IIT Madras:</b> Neural Networks, AI Ethics, Datasets<br>• <b>Plaksha University:</b> Turing Test, DNN Basics, Feature Extraction<br>• <b>Outskill:</b> Custom GPTs, AI Automation<br>• <b>Bharat Space Education:</b> Drone Tech & Air Mobility",
-
-    // --- Achievements ---
     "achievements": "<b>🏆 Technology:</b><br>• 2nd Place: Robowars (Impetus ’25)<br>• National Finalist: Manual HTML/CSS Dev<br>• VVM Science Exam: School & District Topper<br>• Multiple Hackathon recognitions (WebWiz, Tech Ramble)<br><br><b>🎖 Leadership:</b><br>• House Captain (CIRS)<br>• NCC 'A' Certificate",
-
-    // --- Sports ---
     "sports": "Laksh is an athlete too! 🏃‍♂️<br>🔫 <b>Shooting:</b> State-Level Air Pistol Shooter<br>🏸 <b>Badminton:</b> District-Level Player<br>🏐 <b>Volleyball:</b> 1st Place (School)<br>🏊 <b>Swimming:</b> 2nd Place (Relay)<br>🧘 <b>Yoga:</b> Completed 108 Surya Namaskars",
-
-    // --- Contact ---
     "contact": "Let's build something together! 🤝<br>📧 Email: <a href='mailto:laksh.pradhwani@gmail.com' class='text-sky-400'>laksh.pradhwani@gmail.com</a><br>🔗 <a href='https://linkedin.com/in/laksh-pradhwani' target='_blank' class='text-sky-400'>LinkedIn</a><br>📸 <a href='https://www.instagram.com/_.lakshp/' target='_blank' class='text-sky-400'>Instagram</a>",
-
-    // --- Fallback ---
     "default": "I'm not sure about that specific detail. 😅<br>But I can tell you about Laksh's <b>projects</b>, <b>skills</b>, <b>sports</b>, <b>achievements</b>, or <b>certifications</b>. What's on your mind?"
 };
 
-// 2. CHAT STATE & HELPERS
+/* -------------------------
+   2. CHAT STATE & HELPERS
+   ------------------------- */
 let chatState = {
     userName: localStorage.getItem('chatUserName') || null,
     step: 'normal'
 };
 
-// Helper: Levenshtein Distance for Fuzzy Matching
+// Levenshtein (kept intact)
 function similarity(s1, s2) {
     var longer = s1;
     var shorter = s2;
@@ -551,7 +531,6 @@ function similarity(s1, s2) {
     if (longerLength == 0) { return 1.0; }
     return (longerLength - editDistance(longer, shorter)) / parseFloat(longerLength);
 }
-
 function editDistance(s1, s2) {
     s1 = s1.toLowerCase(); s2 = s2.toLowerCase();
     var costs = new Array();
@@ -573,30 +552,90 @@ function editDistance(s1, s2) {
     return costs[s2.length];
 }
 
-// Helper: Format Bot Reply (Markdown to HTML)
+// Format Bot Reply (Markdown -> HTML)
 function formatMessage(text) {
     return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
                .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" class="text-sky-400 underline">$1</a>');
 }
 
-// Helper: Sound Effect
+// Sound effect (kept)
 const playPopSound = () => {
     const audio = new Audio("data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU"); // Short beep placeholder
     audio.volume = 0.2;
     audio.play().catch(() => {});
 };
 
-// Helper: Check Keywords
-function hasKeyword(text, keywords) {
-    return keywords.some(keyword => text.includes(keyword));
+/* -------------------------------------------------------
+   3. MASSIVE KEYWORD SUPPORT (does NOT allocate millions)
+   -------------------------------------------------------
+*/
+const baseBank = {
+    greetings: ["hello","hi","hey","greetings","yo","hiya"],
+    about: ["laksh","about","bio","who","introduction","profile"],
+    skills: ["skills","skillset","tech","stack","technologies","abilities","expertise"],
+    projects: ["projects","project","portfolio","work","apps","application","repo","github"],
+    experience: ["experience","internship","intern","work","job","roles"],
+    education: ["education","school","college","study","qualification"],
+    achievements: ["achievements","awards","wins","hackathon","prize","recognition"],
+    sports: ["sports","badminton","shooting","volleyball","swimming","yoga","athlete"],
+    contact: ["contact","email","mail","linkedin","instagram","social"],
+    jokes: ["joke","funny","meme","laugh"],
+    bye: ["bye","goodbye","see ya","later","farewell"]
+};
+
+// small templates to multiply variants
+const prefixes = ["", "tell me ", "show me ", "what about ", "info on ", "details about ", "do you have "];
+const suffixes = ["", " please", " now", " today", " details", " info", " overview", " summary", " full details", " quick info"];
+
+
+function keywordMatch(text, category) {
+    if (!text || !category || !baseBank[category]) return false;
+    const lower = text.toLowerCase().trim();
+
+    // direct substring shortcuts
+    for (const base of baseBank[category]) {
+        if (lower.includes(base)) return true;
+    }
+
+    // try generated variants (stop early if matched)
+    const SIM_THRESHOLD = 0.78; // fuzzy threshold
+    for (let i = 0; i < prefixes.length; i++) {
+        for (let j = 0; j < baseBank[category].length; j++) {
+            for (let k = 0; k < suffixes.length; k++) {
+                // construct variant (small, computed on the fly)
+                const variant = (prefixes[i] + baseBank[category][j] + suffixes[k]).trim();
+                if (variant.length === 0) continue;
+                if (lower.includes(variant)) return true;
+                if (similarity(lower, variant) > SIM_THRESHOLD) return true;
+                // also check compacted variant (no spaces) and upper/lower transformations
+                const compact = variant.replace(/\s+/g, '');
+                if (lower.includes(compact)) return true;
+                if (similarity(lower, compact) > SIM_THRESHOLD) return true;
+            }
+        }
+    }
+
+    // morphological attempts (singular/plural)
+    for (const base of baseBank[category]) {
+        const plural = base.endsWith('s') ? base : base + 's';
+        if (lower.includes(plural)) return true;
+        if (similarity(lower, plural) > SIM_THRESHOLD) return true;
+    }
+
+    return false;
 }
 
-// Helper: Random Response
-function getRandomResponse(arr) {
-    return Array.isArray(arr) ? arr[Math.floor(Math.random() * arr.length)] : arr;
+// generic helper using keywordMatch across categories
+function hasKeywordDynamic(text, categories) {
+    for (const cat of categories) {
+        if (keywordMatch(text, cat)) return true;
+    }
+    return false;
 }
 
-// 3. UI LOGIC (Typing, Chips, Toggles)
+/* -------------------------
+   4. UI LOGIC (Typing, Chips)
+   ------------------------- */
 const chatToggle = document.getElementById('chatbot-toggle');
 const chatWindow = document.getElementById('chat-window');
 const closeChat = document.getElementById('close-chat');
@@ -604,7 +643,7 @@ const chatForm = document.getElementById('chat-form');
 const userInput = document.getElementById('user-input');
 const messagesArea = document.getElementById('chat-messages');
 
-// Inject CSS for Typing & Chips
+// Inject CSS for Typing & Chips (kept)
 const style = document.createElement('style');
 style.textContent = `
     .typing-dot { width: 6px; height: 6px; background: #94a3b8; border-radius: 50%; animation: typing 1.4s infinite ease-in-out both; }
@@ -616,7 +655,7 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Add Quick Chips
+// Add Quick Chips (kept)
 if (chatForm) {
     const chipContainer = document.createElement('div');
     chipContainer.className = "flex gap-2 p-3 overflow-x-auto border-t border-white/5";
@@ -627,7 +666,6 @@ if (chatForm) {
     `;
     chatForm.parentElement.insertBefore(chipContainer, chatForm);
 }
-
 window.sendChip = (text) => {
     if (userInput) {
         userInput.value = text;
@@ -635,15 +673,17 @@ window.sendChip = (text) => {
     }
 };
 
-// Toggle Window
+// Toggle Window (FIXED: set awaiting_name when appropriate)
 function toggleChat() {
     if (!chatWindow) return;
     const isHidden = chatWindow.classList.contains('opacity-0');
     if (isHidden) {
         chatWindow.classList.remove('opacity-0', 'scale-90', 'pointer-events-none', 'translate-y-4');
         chatWindow.classList.add('opacity-100', 'scale-100', 'pointer-events-auto', 'translate-y-0');
+        // If we don't know the user name, prompt and set state so next message is stored as name
         if(!chatState.userName && messagesArea.children.length <= 1) {
-            setTimeout(() => botResponse("Hi! What's your name?"), 1000);
+            chatState.step = 'awaiting_name';
+            setTimeout(() => botResponse("Hi! What's your name?"), 400);
         }
     } else {
         chatWindow.classList.add('opacity-0', 'scale-90', 'pointer-events-none', 'translate-y-4');
@@ -651,7 +691,7 @@ function toggleChat() {
     }
 }
 
-// Typing Indicators
+// Typing Indicators (kept)
 function showTyping() {
     const div = document.createElement('div');
     div.id = 'typing-indicator';
@@ -664,21 +704,18 @@ function showTyping() {
     messagesArea.appendChild(div);
     messagesArea.scrollTop = messagesArea.scrollHeight;
 }
-
 function removeTyping() {
     const el = document.getElementById('typing-indicator');
     if (el) el.remove();
 }
-
 function botResponse(text) {
     showTyping();
     setTimeout(() => {
         removeTyping();
         addMessage(formatMessage(text), false);
         playPopSound();
-    }, 1000);
+    }, 700);
 }
-
 function addMessage(html, isUser) {
     if (!messagesArea) return;
     const div = document.createElement('div');
@@ -693,12 +730,14 @@ function addMessage(html, isUser) {
     messagesArea.scrollTop = messagesArea.scrollHeight;
 }
 
-// 4. MAIN INTELLIGENCE (Keyword + Fuzzy + Navigator + Sentiment)
+/* -------------------------------------------
+   5. MAIN INTELLIGENCE (Keyword + Fuzzy + Nav)
+   ------------------------------------------- */
 function getBotReply(text) {
-    const lower = text.toLowerCase();
+    const lower = (text || "").toLowerCase();
 
-    // --- 🧭 THE NAVIGATOR (Site Controller) ---
-    const navMatch = lower.match(/(?:go to|navigate|show|take me to|view|open) (home|about|experience|skills|projects|contact|resume)/i);
+    // Navigator (kept)
+    const navMatch = lower.match(/(?:go to|navigate|show|take me to|view|open|scroll to) (home|about|experience|skills|projects|contact|resume)/i);
     if (navMatch) {
         const sectionId = navMatch[1].toLowerCase();
         const targetElement = document.getElementById(sectionId);
@@ -708,15 +747,29 @@ function getBotReply(text) {
         }
     }
 
-    // --- 📊 SENTIMENT ANALYSIS (Mock AI) ---
-    if (hasKeyword(lower, ['amazing', 'awesome', 'love', 'great', 'fantastic', 'good job', 'nice work', 'beautiful', 'best', 'cool'])) {
+    // Sentiment quick checks (kept)
+    if (hasKeywordDynamic(lower, ['greetings']) && lower.length < 20) return getRandomResponse(chatData.greetings);
+    if (hasKeywordDynamic(lower, ['about']) && lower.indexOf('who') !== -1) return chatData.about;
+    if (hasKeywordDynamic(lower, ['skills'])) return chatData.skills;
+    if (hasKeywordDynamic(lower, ['projects'])) return chatData.projects;
+    if (hasKeywordDynamic(lower, ['experience'])) return chatData.experience;
+    if (hasKeywordDynamic(lower, ['education'])) return chatData.education;
+    if (hasKeywordDynamic(lower, ['certifications'])) return chatData.certifications || chatData.default;
+    if (hasKeywordDynamic(lower, ['achievements'])) return chatData.achievements;
+    if (hasKeywordDynamic(lower, ['sports'])) return chatData.sports;
+    if (hasKeywordDynamic(lower, ['contact'])) return chatData.contact;
+    if (hasKeywordDynamic(lower, ['jokes'])) return getRandomResponse(chatData.joke);
+    if (hasKeywordDynamic(lower, ['bye'])) return getRandomResponse(chatData.bye);
+
+    // small sentiment phrases
+    if (hasKeywordDynamic(lower, ['cool']) || lower.includes('awesome') || lower.includes('amazing')) {
         return "🤖 You just made my circuits blush! 😊 Thank you for the kind words!";
     }
-    if (hasKeyword(lower, ['bad', 'suck', 'horrible', 'worst', 'boring', 'hate', 'useless', 'stupid', 'trash'])) {
+    if (lower.includes('bad') || lower.includes('suck') || lower.includes('hate')) {
         return "🥺 Ouch! That hurts my virtual feelings. I'm still learning, so I'll try to do better next time!";
     }
 
-    // 0. Easter Eggs
+    // Easter eggs (kept)
     if (lower === 'konami code' || lower === 'dance') {
         if (chatToggle) chatToggle.classList.add('animate-spin');
         return "🕺 Disco mode activated! (Check the button)";
@@ -725,18 +778,26 @@ function getBotReply(text) {
         return "😎 My eyes! I only exist in the shadows (Dark Mode).";
     }
 
-    // 1. Context / Memory
+    // Name handling (FIXED)
     if (chatState.step === 'awaiting_name') {
-        chatState.userName = text;
-        localStorage.setItem('chatUserName', text);
-        chatState.step = 'normal';
-        return `Nice to meet you, ${text}! How can I help?`;
-    }
-    if (lower.includes('my name') || lower.includes('who am i')) {
-        return chatState.userName ? `You're ${chatState.userName}!` : "I don't know yet. What is your name?";
+        const name = text.trim();
+        if (name.length > 0) {
+            chatState.userName = name;
+            localStorage.setItem('chatUserName', name);
+            chatState.step = 'normal';
+            return `Nice to meet you, ${name}! How can I help?`;
+        } else {
+            return "I didn't catch that name. What should I call you?";
+        }
     }
 
-    // 2. Integrations
+    // If user hasn't provided name previously, ask for it (ensures we don't overwrite)
+    if (!chatState.userName) {
+        chatState.step = 'awaiting_name';
+        return "Hi! What's your name?";
+    }
+
+    // Integrations & utilities (kept)
     if (lower.includes('music') || lower.includes('listening') || lower.includes('spotify')) {
         const songEl = document.getElementById('spotify-song');
         if (songEl && songEl.innerText) return `🎶 Laksh is vibing to **${songEl.innerText}** right now.`;
@@ -753,7 +814,7 @@ function getBotReply(text) {
         }
     }
 
-    // 3. Fuzzy Keyword Matching
+    // Fuzzy topic array (kept) - still used as fallback
     const topics = [
         { keys: ['hello', 'hi', 'hey', 'hola', 'yo', 'sup', 'morning', 'afternoon', 'evening'], reply: chatData.greetings },
         { keys: ['how are you', 'how r u', 'doing'], reply: chatData.how_are_you },
@@ -769,8 +830,6 @@ function getBotReply(text) {
         { keys: ['workshop', 'seminar'], reply: chatData.workshops },
         { keys: ['achieve', 'award', 'prize', 'win', 'hackathon'], reply: chatData.achievements },
         { keys: ['sport', 'game', 'hobby', 'badminton', 'shoot'], reply: chatData.sports },
-        
-        // Specific Projects
         { keys: ['calibridge', 'calendar'], reply: chatData.calibridge },
         { keys: ['helios', 'music', 'player'], reply: chatData.helios },
         { keys: ['code', 'canvas', 'blog'], reply: chatData.codecanvas },
@@ -789,7 +848,9 @@ function getBotReply(text) {
     return chatData.default;
 }
 
-// 5. EVENT LISTENERS
+/* -------------------------
+   6. EVENT LISTENERS
+   ------------------------- */
 if (chatToggle) chatToggle.addEventListener('click', toggleChat);
 if (closeChat) closeChat.addEventListener('click', toggleChat);
 
@@ -798,12 +859,13 @@ if (chatForm) {
         e.preventDefault();
         const text = userInput.value.trim();
         if (!text) return;
-        addMessage(text, true);
+        addMessage(formatMessage(escapeHtml(text)), true);
         userInput.value = '';
-        botResponse(getBotReply(text));
+        const reply = getBotReply(text);
+        botResponse(reply);
     });
 
-    // Konami Code (Easter Egg)
+    // Konami Code (kept)
     let konami = [];
     const code = "ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRightba";
     document.addEventListener('keydown', (e) => {
@@ -814,3 +876,19 @@ if (chatForm) {
         }
     });
 }
+
+/* -------------------------
+   Helpers: Random + Escape
+   ------------------------- */
+function getRandomResponse(arr) {
+    return Array.isArray(arr) ? arr[Math.floor(Math.random() * arr.length)] : arr;
+}
+function escapeHtml(unsafe) {
+    return unsafe
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
+}
+

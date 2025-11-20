@@ -1,8 +1,6 @@
-// netlify/functions/ai.js
-
-import path from "path";
-import { fileURLToPath } from "url";
+import fetch from "node-fetch";
 import fs from "fs";
+import path from "path";
 
 export async function handler(event, context) {
     if (event.httpMethod !== "POST") {
@@ -10,20 +8,20 @@ export async function handler(event, context) {
     }
 
     const { message } = JSON.parse(event.body || "{}");
-
     if (!message) {
         return { statusCode: 400, body: "Missing message" };
     }
 
     try {
-        const __dirname = path.dirname(fileURLToPath(import.meta.url));
-        const filePath = path.resolve(__dirname, "laksh.json");
+        // ✔️ Netlify always places your function in: /var/task/
+        // ✔️ So we locate laksh.json RELATIVE to the function file
+        const filePath = path.join(process.cwd(), "laksh.json");
 
-        const profileData = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+        const profileData = JSON.parse(fs.readFileSync(filePath, "utf8"));
 
         const systemPrompt = `
-You are AI Laksh — a funny + professional personal assistant of Laksh Pradhwani.
-Use ONLY the following profile data to answer questions about him:
+You are AI Laksh — a funny + professional assistant of Laksh Pradhwani.
+Use ONLY the following profile data to answer questions:
 ${JSON.stringify(profileData)}
         `;
 
@@ -47,7 +45,7 @@ ${JSON.stringify(profileData)}
         const data = await response.json();
 
         const reply =
-            data && Array.isArray(data) && data[0] && data[0].generated_text
+            Array.isArray(data) && data[0]?.generated_text
                 ? data[0].generated_text
                 : JSON.stringify(data);
 
@@ -55,7 +53,6 @@ ${JSON.stringify(profileData)}
             statusCode: 200,
             body: JSON.stringify({ reply })
         };
-
     } catch (err) {
         return {
             statusCode: 500,

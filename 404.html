@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>404 — Not Found · lakshp.live</title>
     <meta name="description" content="404 page — lakshp.live — dark space theme" />
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+
+    <link rel="stylesheet" href="assets/css/output.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
     <style>
         :root {
             --bg: #05060a;
@@ -16,7 +22,8 @@
 
         html,
         body {
-            height: 100%;
+            height: auto;
+            min-height: 100%;
             margin: 0;
         }
 
@@ -26,28 +33,35 @@
             color: var(--fg);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            overflow: auto;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         /* full-canvas container */
         .canvas-wrap {
             position: fixed;
+            /* Keeps stars fixed while content scrolls */
             inset: 0;
-            display: block;
+            z-index: -1;
+            pointer-events: none;
         }
 
         /* UI overlay */
         .ui {
             position: relative;
-            left: 50%;
-            transform: translateX(-50%);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             text-align: center;
             z-index: 20;
             pointer-events: auto;
             padding: 20px;
-            max-width: 920px;
-            width: 92%;
-            margin-top: 120px;
+            width: 100%;
+            margin-top: 60px;
+            margin-bottom: 60px;
         }
 
         .title-404 {
@@ -64,41 +78,100 @@
             position: relative;
         }
 
-        #footer-404 {
-            position: relative;
-            width: 100%;
-            margin-top: 80px;
-        }
-
         .glitch {
             position: relative;
-            display: inline-block;
+            font-weight: 900;
+            /* Drastically increased font size for full-page impact */
+            font-size: clamp(100px, 25vw, 250px);
+            line-height: 1;
+            margin: 0;
+            color: transparent;
+            /* Gradient Text Color */
+            background-image: linear-gradient(90deg, #7dd3fc, #8b5cf6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            /* Glow Effect */
+            filter: drop-shadow(0 0 30px rgba(125, 211, 252, 0.5));
         }
 
-        /* Glitch pseudo layers */
+        /* Glitch Layers */
         .glitch::before,
         .glitch::after {
             content: attr(data-text);
             position: absolute;
-            left: 0;
             top: 0;
+            left: 0;
             width: 100%;
-            mix-blend-mode: screen;
-            opacity: 0.85;
-            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+            height: 100%;
+            background: #05060a;
+            /* Matches your bg var */
+            mix-blend-mode: hard-light;
+            opacity: 0.7;
         }
 
         .glitch::before {
-            transform: translate(6px, -6px);
-            filter: hue-rotate(190deg);
-            opacity: 0.7
+            animation: glitch-1 3s infinite linear alternate-reverse;
+            text-shadow: 3px 0 #ff00c1;
+            clip-path: inset(20% 0 80% 0);
         }
 
         .glitch::after {
-            transform: translate(-6px, 6px);
-            filter: hue-rotate(320deg);
-            opacity: 0.6;
-            clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%)
+            animation: glitch-2 2s infinite linear alternate-reverse;
+            text-shadow: -3px 0 #00fff9;
+            clip-path: inset(80% 0 20% 0);
+        }
+
+        /* Keyframes for the glitch animation */
+        @keyframes glitch-1 {
+            0% {
+                clip-path: inset(20% 0 80% 0);
+            }
+
+            20% {
+                clip-path: inset(60% 0 10% 0);
+            }
+
+            40% {
+                clip-path: inset(40% 0 50% 0);
+            }
+
+            60% {
+                clip-path: inset(80% 0 5% 0);
+            }
+
+            80% {
+                clip-path: inset(10% 0 70% 0);
+            }
+
+            100% {
+                clip-path: inset(30% 0 20% 0);
+            }
+        }
+
+        @keyframes glitch-2 {
+            0% {
+                clip-path: inset(10% 0 60% 0);
+            }
+
+            20% {
+                clip-path: inset(30% 0 20% 0);
+            }
+
+            40% {
+                clip-path: inset(70% 0 10% 0);
+            }
+
+            60% {
+                clip-path: inset(20% 0 50% 0);
+            }
+
+            80% {
+                clip-path: inset(60% 0 30% 0);
+            }
+
+            100% {
+                clip-path: inset(5% 0 80% 0);
+            }
         }
 
         .subtitle {
@@ -127,28 +200,6 @@
             backdrop-filter: blur(6px)
         }
 
-        .btn.secondary {
-            background: none;
-            border: 1px solid rgba(125, 211, 252, 0.12);
-            color: var(--accent)
-        }
-
-        footer.info {
-            position: fixed;
-            left: 16px;
-            bottom: 14px;
-            color: var(--muted);
-            font-size: 12px;
-            z-index: 20
-        }
-
-        /* small ephemera */
-        .credits {
-            margin-top: 10px;
-            color: var(--muted);
-            font-size: 13px
-        }
-
         /* subtle vignette + noise */
         .overlay {
             pointer-events: none;
@@ -169,38 +220,54 @@
             mix-blend-mode: overlay;
             pointer-events: none
         }
-
-        /* responsiveness */
-        @media (max-width:600px) {
-            .ui {
-                padding: 14px
-            }
-
-            .subtitle {
-                font-size: 13px
-            }
-
-            .credits {
-                display: none
-            }
-        }
     </style>
 </head>
 
 <body>
     <div class="canvas-wrap" id="canvasWrap"></div>
 
-    <div class="ui" role="main" aria-labelledby="big404">
-        <h1 id="big404" class="title-404 glitch" data-text="404">404</h1>
-        <div class="subtitle">Looks like this star wasn't charted. The page you requested couldn't be found.</div>
+    <main
+        class="relative z-20 min-h-screen w-full flex flex-col items-center justify-center text-center px-4 overflow-hidden">
 
-        <div class="cta">
-            <a class="btn" href="https://lakshp.live" aria-label="Go back home">Return Home</a>
+        <div data-aos="zoom-in" data-aos-duration="1000">
+            <h1 class="glitch" data-text="404">404</h1>
         </div>
-    </div>
+
+        <p class="text-slate-400 text-lg md:text-xl mt-6 max-w-lg leading-relaxed" data-aos="fade-up"
+            data-aos-delay="200">
+            Looks like this star wasn't charted.<br>
+            The page you requested has drifted into deep space.
+        </p>
+
+        <div class="mt-10 flex gap-4" data-aos="fade-up" data-aos-delay="400">
+            <a href="/"
+                class="px-8 py-3.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-semibold transition-all shadow-lg shadow-sky-500/20 flex items-center gap-2 group">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="group-hover:-translate-x-1 transition-transform">
+                    <path d="m12 19-7-7 7-7" />
+                    <path d="M19 12H5" />
+                </svg>
+                Return Home
+            </a>
+        </div>
+
+        <div
+            class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50 animate-bounce">
+            <span class="text-xs font-mono uppercase tracking-widest text-sky-400">Scroll</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="text-white">
+                <path d="m7 13 5 5 5-5" />
+                <path d="m7 6 5 5 5-5" />
+            </svg>
+        </div>
+
+    </main>
 
     <div class="overlay"></div>
     <div class="noise"></div>
+
     <script src="https://unpkg.com/three@0.152.2/build/three.min.js"></script>
     <script>
         // --- PWA SERVICE WORKER REGISTRATION ---
@@ -231,7 +298,7 @@
             renderer.domElement.style.height = '100%';
             renderer.domElement.style.zIndex = '-1';
             renderer.domElement.style.transition = 'filter 0.5s ease';
-            document.body.appendChild(renderer.domElement);
+            document.getElementById('canvasWrap').appendChild(renderer.domElement);
 
             const COLORS = {
                 home: new THREE.Color(0x0ea5e9),
@@ -285,16 +352,6 @@
             document.addEventListener('mousemove', (event) => {
                 mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
                 mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-            });
-
-            window.addEventListener('scroll', () => {
-                const sections = ['home', 'about', 'experience', 'skills', 'projects', 'contact'];
-                let current = 'home';
-                sections.forEach(id => {
-                    const el = document.getElementById(id);
-                    if (el && window.scrollY >= (el.offsetTop - window.innerHeight / 3)) current = id;
-                });
-                if (COLORS[current]) targetColor = COLORS[current];
             });
 
             const clock = new THREE.Clock();
@@ -368,139 +425,8 @@
             });
         });
     </script>
-    <script>
-        // Basic Three.js scene: animated starfield + parallax mouse (planet lines removed)
-        const container = document.getElementById('canvasWrap');
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(50, innerWidth / innerHeight, 0.1, 2000);
-        camera.position.set(0, 0, 60);
 
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        renderer.setSize(innerWidth, innerHeight);
-        container.appendChild(renderer.domElement);
-
-        // Resize
-        window.addEventListener('resize', () => {
-            camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix();
-            renderer.setSize(innerWidth, innerHeight);
-        });
-
-        // STARFIELD as Points
-        const starCount = 20000; // large but okay on modern devices; we'll scale down for mobile
-        function makeStarfield(count) {
-            const geometry = new THREE.BufferGeometry();
-            const positions = new Float32Array(count * 3);
-            const colors = new Float32Array(count * 3);
-            for (let i = 0; i < count; i++) {
-                const idx = i * 3;
-                const r = 400 * Math.random() + 60;
-                // spherical distribution
-                const theta = Math.random() * Math.PI * 2;
-                const phi = Math.acos(2 * Math.random() - 1);
-                positions[idx] = Math.sin(phi) * Math.cos(theta) * r;
-                positions[idx + 1] = Math.sin(phi) * Math.sin(theta) * r;
-                positions[idx + 2] = Math.cos(phi) * r;
-                const c = 0.6 + Math.random() * 0.4;
-                colors[idx] = colors[idx + 1] = colors[idx + 2] = c;
-            }
-            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-            const mat = new THREE.PointsMaterial({ size: 0.4, vertexColors: true, depthWrite: false, transparent: true, opacity: 0.95 });
-            const points = new THREE.Points(geometry, mat);
-            return points;
-        }
-
-        // adjust for device
-        const reduced = /Mobi|Android/i.test(navigator.userAgent);
-        const stars = makeStarfield(reduced ? 8000 : starCount);
-        scene.add(stars);
-
-        // soft lights
-        const keyLight = new THREE.DirectionalLight(0xe8f9ff, 1.0);
-        keyLight.position.set(-40, 20, 60);
-        scene.add(keyLight);
-        const fill = new THREE.AmbientLight(0x2a3b44, 0.35);
-        scene.add(fill);
-
-        // subtle camera parallax using mouse and small rotation removed for planet
-        const mouse = { x: 0, y: 0 };
-        window.addEventListener('mousemove', (e) => {
-            mouse.x = (e.clientX / innerWidth) * 2 - 1;
-            mouse.y = (e.clientY / innerHeight) * 2 - 1;
-        });
-
-        // click-and-drag to pour velocity into scene
-        let drag = false; let last = null; let velocity = { x: 0, y: 0 };
-        renderer.domElement.addEventListener('pointerdown', (e) => { drag = true; last = { x: e.clientX, y: e.clientY }; renderer.domElement.setPointerCapture(e.pointerId) });
-        renderer.domElement.addEventListener('pointerup', (e) => { drag = false; last = null });
-        renderer.domElement.addEventListener('pointermove', (e) => {
-            if (drag && last) { velocity.x += (e.clientX - last.x) * 0.002; velocity.y += (e.clientY - last.y) * 0.002; last = { x: e.clientX, y: e.clientY } }
-        });
-
-        // subtle star twinkle animation via scaling a random subset
-        const starPositions = stars.geometry.attributes.position;
-        const starCountActual = starPositions.count;
-
-        // animate
-        const clock = new THREE.Clock();
-        function animate() {
-            const t = clock.getElapsedTime();
-            // rotate overall starfield slowly
-            stars.rotation.y = t * 0.004 + velocity.x * 0.1;
-            stars.rotation.x = Math.sin(t * 0.05) * 0.001 + velocity.y * 0.05;
-
-            // twinkle by moving positions slightly (cheap noise)
-            const pos = stars.geometry.attributes.position.array;
-            for (let i = 0; i < starCountActual; i += Math.max(1, Math.floor(starCountActual / 800))) {
-                const k = i * 3;
-                pos[k + 2] += Math.sin(t * 0.7 + i) * 0.0009; // small Z wobble
-            }
-            stars.geometry.attributes.position.needsUpdate = true;
-
-            // planet-related lines removed (no planet on this page)
-
-            // damp velocity
-            velocity.x *= 0.95; velocity.y *= 0.95;
-
-            renderer.render(scene, camera);
-            requestAnimationFrame(animate);
-        }
-        animate();
-
-        // small accessibility for explore btn: push camera into scene briefly
-        const exploreBtn = document.getElementById('exploreBtn');
-        if (exploreBtn) {
-            exploreBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                const startZ = camera.position.z; const targetZ = Math.max(20, startZ * 0.45);
-                let dur = 800; let start = performance.now();
-                function step(now) {
-                    const p = Math.min(1, (now - start) / dur);
-                    const ease = 1 - Math.pow(1 - p, 3);
-                    camera.position.z = startZ * (1 - ease) + targetZ * ease;
-                    if (p < 1) requestAnimationFrame(step);
-                }
-                requestAnimationFrame(step);
-                setTimeout(() => { window.location.href = 'https://lakshp.live' }, 1100);
-            });
-        }
-
-        // performance fallback: if WebGL is not available, show a dark static background and keep UI usable
-        if (!renderer.capabilities.isWebGL2 && !renderer.capabilities.isWebGL1) {
-            container.innerHTML = '';
-            container.style.background = 'radial-gradient(circle at 30% 20%, #071426 3%, #03040a 45%, #000 100%)';
-        }
-
-        // Small hint: pause animations when tab not visible
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) { renderer.setAnimationLoop(null) } else { renderer.setAnimationLoop(() => renderer.render(scene, camera)) }
-        });
-    </script>
-
-    <footer id="footer-404"
-        class="relative w-full bg-[#020203] border-t border-white/5 overflow-hidden pt-14 pb-28 md:pb-14">
+    <footer class="relative w-full bg-[#020203] border-t border-white/5 overflow-hidden pt-14 pb-24">
 
         <div class="absolute inset-0 z-0 pointer-events-none"
             style="background: radial-gradient(125% 125% at 50% 10%, rgba(0, 0, 0, 0) 40%, rgba(60, 162, 250, 0.1) 100%);">
@@ -528,13 +454,13 @@
                 <div>
                     <h3 class="text-white font-semibold mb-4">Quick Links</h3>
                     <ul class="space-y-3 text-sm text-slate-400">
-                        <li><a href="#home" class="hover:text-sky-400 transition-colors">Home</a></li>
-                        <li><a href="#about" class="hover:text-sky-400 transition-colors">About</a></li>
-                        <li><a href="#skills" class="hover:text-sky-400 transition-colors">Skills</a></li>
-                        <li><a href="#experience" class="hover:text-sky-400 transition-colors">Work</a></li>
-                        <li><a href="#projects" class="hover:text-sky-400 transition-colors">Projects</a></li>
-                        <li><a href="#resume" class="hover:text-sky-400 transition-colors">Resume</a></li>
-                        <li><a href="#contact" class="hover:text-sky-400 transition-colors">Contact</a></li>
+                        <li><a href="/#home" class="hover:text-sky-400 transition-colors">Home</a></li>
+                        <li><a href="/#about" class="hover:text-sky-400 transition-colors">About</a></li>
+                        <li><a href="/#skills" class="hover:text-sky-400 transition-colors">Skills</a></li>
+                        <li><a href="/#experience" class="hover:text-sky-400 transition-colors">Work</a></li>
+                        <li><a href="/#projects" class="hover:text-sky-400 transition-colors">Projects</a></li>
+                        <li><a href="/#resume" class="hover:text-sky-400 transition-colors">Resume</a></li>
+                        <li><a href="/#contact" class="hover:text-sky-400 transition-colors">Contact</a></li>
                     </ul>
                 </div>
 
@@ -569,12 +495,73 @@
                         </a>
                     </div>
 
+                    <div id="spotify-widget"
+                        class="hidden flex items-center gap-3 bg-[#0a0a0b] border border-white/10 pr-4 pl-2 py-2 rounded-full w-max transition-all hover:border-green-500/30 hover:shadow-[0_0_15px_rgba(34,197,94,0.1)] mb-4">
+                        <div class="relative w-8 h-8 shrink-0">
+                            <img id="spotify-cover" src="" alt="Album Art"
+                                class="w-full h-full rounded-full object-cover border border-white/10 animate-[spin_6s_linear_infinite]">
+                            <div
+                                class="absolute inset-0 flex items-center justify-center gap-0.5 bg-black/30 rounded-full backdrop-blur-[1px]">
+                                <div class="w-0.5 bg-green-400 h-2 music-bar-anim" style="animation-delay: 0s">
+                                </div>
+                                <div class="w-0.5 bg-green-400 h-3 music-bar-anim" style="animation-delay: 0.1s">
+                                </div>
+                                <div class="w-0.5 bg-green-400 h-1.5 music-bar-anim" style="animation-delay: 0.2s">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col justify-center text-left">
+                            <div class="flex items-center gap-1.5">
+                                <svg width="8" height="8" viewBox="0 0 24 24" fill="#22c55e">
+                                    <path
+                                        d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" />
+                                </svg>
+                                <span class="text-[9px] font-bold tracking-widest text-green-500 uppercase">Vibing
+                                    To</span>
+                            </div>
+                            <div class="flex gap-1 text-[10px] max-w-[140px] overflow-hidden">
+                                <span id="spotify-song" class="text-white font-medium truncate"></span>
+                                <span class="text-slate-500">-</span>
+                                <span id="spotify-artist" class="text-slate-400 truncate"></span>
+                            </div>
+                        </div>
+                    </div>
+
                     <p class="text-xs text-slate-500">
                         Varanasi, India<br>
                         <span id="local-time" class="text-slate-600 mt-1 block font-mono"></span>
                     </p>
                 </div>
 
+            </div>
+
+            <div class="w-full h-32 sm:h-48 md:h-64 relative cursor-pointer select-none flex items-center justify-center mb-8"
+                id="footer-hover-container">
+                <svg class="w-full h-full" viewBox="0 0 300 100" preserveAspectRatio="xMidYMid meet">
+                    <defs>
+                        <linearGradient id="textGradient" gradientUnits="userSpaceOnUse" cx="50%" cy="50%" r="25%">
+                            <stop offset="0%" stop-color="#eab308" />
+                            <stop offset="25%" stop-color="#ef4444" />
+                            <stop offset="50%" stop-color="#80eeb4" />
+                            <stop offset="75%" stop-color="#06b6d4" />
+                            <stop offset="100%" stop-color="#8b5cf6" />
+                        </linearGradient>
+                        <radialGradient id="revealMask" gradientUnits="userSpaceOnUse" r="20%" cx="50%" cy="50%">
+                            <stop offset="0%" stop-color="white" />
+                            <stop offset="100%" stop-color="black" />
+                        </radialGradient>
+                        <mask id="textMask">
+                            <rect x="0" y="0" width="100%" height="100%" fill="url(#revealMask)" />
+                        </mask>
+                    </defs>
+                    <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" stroke-width="0.3"
+                        class="font-[helvetica] font-bold fill-transparent stroke-neutral-800 text-7xl opacity-50">LAKSH</text>
+                    <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" stroke-width="0.3"
+                        class="font-[helvetica] font-bold fill-transparent stroke-sky-500 text-7xl footer-text-anim">LAKSH</text>
+                    <text x="50%" y="50%" text-anchor="middle" dominant-baseline="middle" stroke-width="0.3"
+                        class="font-[helvetica] font-bold fill-transparent stroke-[url(#textGradient)] text-7xl"
+                        mask="url(#textMask)">LAKSH</text>
+                </svg>
             </div>
 
             <div
@@ -594,6 +581,10 @@
 
         </div>
     </footer>
+
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 
 </html>

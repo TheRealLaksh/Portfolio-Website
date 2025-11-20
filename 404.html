@@ -65,6 +65,18 @@
             position: relative;
         }
 
+        #footer-404 {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 30;
+            background: rgba(2, 2, 3, 0.85);
+            /* subtle transparent backdrop */
+            backdrop-filter: blur(10px);
+        }
+
+
         .glitch {
             position: relative;
             display: inline-block;
@@ -501,7 +513,7 @@
             if (document.hidden) { renderer.setAnimationLoop(null) } else { renderer.setAnimationLoop(() => renderer.render(scene, camera)) }
         });
     </script>
-    <footer class="relative w-full bg-[#020203] border-t border-white/5 overflow-hidden pt-14 pb-28 md:pb-14">
+    <footer id="footer-404" class="relative w-full bg-[#020203] border-t border-white/5 overflow-hidden pt-14 pb-28 md:pb-14">
 
         <div class="absolute inset-0 z-0 pointer-events-none"
             style="background: radial-gradient(125% 125% at 50% 10%, rgba(0, 0, 0, 0) 40%, rgba(60, 162, 250, 0.1) 100%);">

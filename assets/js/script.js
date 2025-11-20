@@ -547,42 +547,81 @@ function getBotReply(text) {
     const lowerText = text.toLowerCase();
 
     // --- 1. Personality & Chit-Chat ---
-    if (hasKeyword(lowerText, ['hi', 'hello', 'hey', 'hola', 'yo', 'sup', 'morning', 'afternoon', 'evening'])) return getRandomResponse(chatData.greetings);
-    if (hasKeyword(lowerText, ['how are you', 'how r u', 'doing today', 'whats up'])) return getRandomResponse(chatData.how_are_you);
-    if (hasKeyword(lowerText, ['joke', 'funny', 'laugh'])) return getRandomResponse(chatData.joke);
-    if (hasKeyword(lowerText, ['cool', 'awesome', 'wow', 'amazing', 'sick', 'great'])) return getRandomResponse(chatData.cool);
-    if (hasKeyword(lowerText, ['bye', 'goodbye', 'see ya', 'cya', 'later'])) return getRandomResponse(chatData.bye);
-    if (hasKeyword(lowerText, ['who made', 'who built', 'creator', 'developer'])) return chatData.who_made_you;
+    if (hasKeyword(lowerText, ['hi', 'hello', 'hey', 'hola', 'yo', 'sup', 'morning', 'afternoon', 'evening'])) 
+        return getRandomResponse(chatData.greetings);
+    
+    if (hasKeyword(lowerText, ['how are you', 'how are u', 'how r u', 'doing today', 'whats up'])) 
+        return getRandomResponse(chatData.how_are_you);
+    
+    if (hasKeyword(lowerText, ['joke', 'funny', 'laugh', 'entertain'])) 
+        return getRandomResponse(chatData.joke);
+    
+    if (hasKeyword(lowerText, ['cool', 'awesome', 'wow', 'amazing', 'sick', 'great', 'nice'])) 
+        return getRandomResponse(chatData.cool);
+    
+    if (hasKeyword(lowerText, ['bye', 'goodbye', 'see ya', 'cya', 'later'])) 
+        return getRandomResponse(chatData.bye);
+    
+    if (hasKeyword(lowerText, ['who made', 'who built', 'creator', 'developer', 'author'])) 
+        return chatData.who_made_you;
 
-    // --- 2. Socials (Insta, Mail, LinkedIn) ---
-    if (hasKeyword(lowerText, ['insta', 'instagram', 'ig', 'handle', 'id', 'link', 'linkedin', 'mail', 'email', 'contact', 'reach', 'connect', 'hire', 'message', 'ping'])) return chatData.contact;
+    // --- 2. Specific Personal Info ---
+    if (hasKeyword(lowerText, ['location', 'where are you', 'live', 'city', 'from', 'based']))
+        return chatData.location;
+    
+    if (hasKeyword(lowerText, ['age', 'how old', 'birth']))
+        return chatData.age;
 
-    // --- 3. Bio & Info ---
-    if (hasKeyword(lowerText, ['about', 'who are you', 'bio', 'intro', 'background', 'name', 'age', 'student', 'laksh', 'yourself'])) return chatData.about;
+    // --- 3. Contact & Socials ---
+    if (hasKeyword(lowerText, ['contact', 'email', 'mail', 'gmail', 'reach', 'connect', 'hire', 'message', 'ping'])) 
+        return chatData.contact;
+    
+    if (hasKeyword(lowerText, ['insta', 'instagram', 'ig', 'handle', 'id', 'social'])) 
+        return chatData.contact; // Reusing contact as it has the links
 
-    // --- 4. Professional ---
-    if (hasKeyword(lowerText, ['experience', 'job', 'intern', 'work', 'company', 'unified', 'moreyeahs', 'hotel'])) return chatData.experience;
-    if (hasKeyword(lowerText, ['educat', 'school', 'college', 'study', 'class', 'grade', 'degree', 'sunbeam', 'cirs', '12th', '10th'])) return chatData.education;
+    if (hasKeyword(lowerText, ['link', 'linkedin', 'github', 'git'])) 
+        return chatData.contact;
+
+    // --- 4. Bio & Professional ---
+    if (hasKeyword(lowerText, ['about', 'who are you', 'bio', 'intro', 'background', 'profile', 'name', 'student', 'laksh', 'yourself'])) 
+        return chatData.about;
+
+    if (hasKeyword(lowerText, ['experience', 'job', 'intern', 'work', 'company', 'unified', 'moreyeahs', 'hotel', 'kavana', 'profession', 'employment'])) 
+        return chatData.experience;
+    
+    if (hasKeyword(lowerText, ['resume', 'cv', 'curriculum'])) 
+        return "You can view or download my Resume from the **Resume** section below! 📄";
+
+    if (hasKeyword(lowerText, ['educat', 'school', 'college', 'university', 'study', 'class', 'grade', 'degree', 'sunbeam', 'cirs', '12th', '10th', 'board'])) 
+        return chatData.education;
 
     // --- 5. Skills & Tech ---
-    if (hasKeyword(lowerText, ['skill', 'tech', 'stack', 'code', 'programming', 'language', 'react', 'python', 'django', 'js', 'html', 'css', 'ai', 'ml', 'cyber'])) return chatData.skills;
-    if (hasKeyword(lowerText, ['certif', 'course', 'license', 'iit', 'google', 'deepcytes'])) return chatData.certifications;
-    if (hasKeyword(lowerText, ['workshop', 'seminar', 'bootcamp', 'training'])) return chatData.workshops;
+    if (hasKeyword(lowerText, ['skill', 'tech', 'stack', 'code', 'programming', 'language', 'react', 'python', 'django', 'js', 'html', 'css', 'tailwind', 'firebase', 'ai', 'ml', 'cyber', 'linux'])) 
+        return chatData.skills;
+    
+    if (hasKeyword(lowerText, ['certif', 'course', 'license', 'iit', 'google', 'deepcytes'])) 
+        return chatData.certifications;
+    
+    if (hasKeyword(lowerText, ['workshop', 'seminar', 'bootcamp', 'training'])) 
+        return chatData.workshops;
 
     // --- 6. Achievements & Interests ---
-    if (hasKeyword(lowerText, ['achieve', 'award', 'prize', 'win', 'won', 'medal', 'hackathon', 'rank', 'topper'])) return chatData.achievements;
-    if (hasKeyword(lowerText, ['sport', 'game', 'hobby', 'shoot', 'badminton', 'volley', 'swim', 'yoga', 'football'])) return chatData.sports;
+    if (hasKeyword(lowerText, ['achieve', 'award', 'prize', 'win', 'won', 'medal', 'hackathon', 'rank', 'topper', 'robowar', 'robot'])) 
+        return chatData.achievements;
+    
+    if (hasKeyword(lowerText, ['sport', 'game', 'hobby', 'shoot', 'badminton', 'volley', 'swim', 'yoga', 'football', 'surya', 'namaskar'])) 
+        return chatData.sports;
 
-    // --- 7. Projects (Specific) ---
+    // --- 7. Specific Projects ---
     if (hasKeyword(lowerText, ['calibridge', 'calendar', 'event'])) return chatData.calibridge;
     if (hasKeyword(lowerText, ['helios', 'music', 'player', 'song'])) return chatData.helios;
     if (hasKeyword(lowerText, ['canvas', 'blog', 'article', 'write'])) return chatData.codecanvas;
     if (hasKeyword(lowerText, ['shop', 'store', 'ecommerce', 'cart', 'mvp', 'buy'])) return chatData.mvp;
-    if (hasKeyword(lowerText, ['artist', 'actor', 'gallery'])) return chatData.artist;
-    if (hasKeyword(lowerText, ['portfolio', 'site', 'web', 'this website'])) return chatData.portfolio;
-
-    // --- 8. Projects (General) ---
-    if (hasKeyword(lowerText, ['project', 'build', 'app', 'application', 'demo', 'repo', 'git'])) return chatData.projects;
+    if (hasKeyword(lowerText, ['artist', 'actor', 'gallery', 'portfolio'])) return chatData.artist; // Matches "portfolio" here too
+    
+    // --- 8. General Projects ---
+    if (hasKeyword(lowerText, ['project', 'build', 'app', 'application', 'demo', 'repo', 'site', 'web', 'website'])) 
+        return chatData.projects;
 
     return chatData.default;
 }

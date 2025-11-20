@@ -458,43 +458,51 @@ function loadPremiumProjects() {
 }
 
 /* =========================================
-   🤖 AI CHATBOT LOGIC & DATABASE
+   🤖 AI CHATBOT LOGIC (THE BRAIN)
    ========================================= */
-
-// 1. THE BRAIN (Your Knowledge Base)
 const chatData = {
-    // --- Personality & Conversational ---
+    // --- 1. Personality & Chit-Chat ---
     "greetings": [
         "Hey there! 👋 I'm Laksh's digital twin. Ask me about his **projects**, **skills**, or **experience**!",
-        "Hi! 🤖 Ready to explore Laksh's world? I know everything from his **Github** stats to his **Badminton** skills.",
-        "Hello! I'm online and ready. Want to see Laksh's **resume** or hear about his **hackathon** wins?"
+        "Hi! 🤖 Ready to explore Laksh's world? I know everything from his **GitHub** stats to his **Badminton** skills.",
+        "Hello! I'm online and ready. Want to see Laksh's **resume** or hear about his **hackathon** wins?",
+        "Beep Boop! 🤖 Just kidding. Hi! Ask me anything regarding Laksh's work."
     ],
     "how_are_you": [
         "I'm just a bunch of code, but I'm feeling bug-free today! 🐛 How can I help you?",
-        "Running on 100% efficiency! Thanks for asking. What do you want to know about Laksh?"
+        "Running on 100% efficiency! Thanks for asking. What do you want to know about Laksh?",
+        "I'm great! Just waiting for someone to ask about my **neural networks** knowledge. 😉"
     ],
     "joke": [
         "Why do programmers prefer dark mode? Because light attracts bugs. 🕶️",
         "I would tell you a UDP joke, but you might not get it. 📦",
         "Laksh told me this one: A SQL query walks into a bar, walks up to two tables and asks... 'Can I join you?'"
     ],
-    "cool": "Right? Laksh works hard to make things look awesome! 😎",
-    "bye": "Goodbye! Feel free to come back if you need more info. Have a great day! 👋",
+    "cool": [
+        "Right? Laksh works hard to make things look awesome! 😎",
+        "Glad you like it! The 3D background is pretty sick, isn't it?",
+        "Thanks! Takes a lot of coffee to code this cool. ☕"
+    ],
+    "bye": [
+        "Goodbye! Feel free to come back if you need more info. Have a great day! 👋",
+        "See ya! Don't forget to check out the projects before you go! 🚀",
+        "Logging off... Just kidding, I'm always here. Bye! 💻"
+    ],
     "who_made_you": "I was built by Laksh Pradhwani using vanilla JavaScript and Tailwind CSS. No heavy frameworks, just pure performance! ⚡",
 
-    // --- Core Bio ---
+    // --- 2. Core Bio ---
     "about": "Laksh Pradhwani is an 18-year-old **Full-Stack Developer** & **Aspiring AI/ML Engineer** from Varanasi, India. 🇮🇳<br><br>He's a Class 12 student at <b>Sunbeam School Lahartara</b> (PCM + CS). He moved from 'Hello World' to building scalable apps like <b>GigX</b> and <b>CaliBridge</b>. He loves hackathons, robotics, and clean UI.",
 
-    // --- Education ---
+    // --- 3. Education ---
     "education": "🎓 <b>Sunbeam School Lahartara</b> (2024–2026)<br>Class 12 — PCM + Computer Science<br><i>Activities:</i> Coding, Robotics, Shooting, Badminton<br><br>🏫 <b>Chinmaya International Residential School</b> (2019–2024)<br>Class 10 — House Captain, Leadership Programs, Sports",
 
-    // --- Experience (Detailed) ---
+    // --- 4. Experience (Detailed) ---
     "experience": "<b>💼 Full-Stack Developer @ Unified Mentor</b> (Oct–Dec 2025)<br>Remote | React, Redux, Firebase. Built dynamic UIs and managed state.<br><br><b>💼 Web Developer @ MoreYeahs</b> (Aug–Sep 2025)<br>Remote | Built <b>GigX platform</b> core features, Auth pages, and CRUD dashboards using Django & REST APIs.<br><br><b>💼 IT Intern @ Hotel Kavana</b> (Jun 2025)<br>On-site | Managed hotel software, automation workflows, and IT security.",
 
-    // --- Projects (All 6 Included) ---
+    // --- 5. Projects (Overview) ---
     "projects": "Here is Laksh's project lineup:<br><br>1. <b>Portfolio Website</b>: 3D & Animated (You are here!)<br>2. <b>Artist Portfolio</b>: Minimalist site for actors.<br>3. <b>CaliBridge</b>: JS Event Calendar with LocalStorage.<br>4. <b>Helios</b>: Aesthetic Web Music Player.<br>5. <b>MVP Webstore</b>: Frontend E-commerce demo.<br>6. <b>Code & Canvas</b>: Modern blog with comments.<br><br>Check the code on <a href='https://github.com/TheRealLaksh' target='_blank' class='text-sky-400 underline'>GitHub</a>!",
 
-    // Specific Project Details (Triggered by name)
+    // Specific Project Details
     "calibridge": "<b>CaliBridge</b> is a JavaScript-based event calendar. It supports event creation, month switching, and LocalStorage sync. Smooth animations and a responsive UI make it a great productivity tool.",
     "helios": "<b>Helios Music Player</b> is a lightweight web player. It features dynamic track switching, a beautiful UI, and responsive controls for an aesthetic listening experience.",
     "codecanvas": "<b>Code & Canvas</b> is a modern blog platform featuring dark mode, real-time comments (Firebase), search functionality, and social sharing. Built with Tailwind & Vanilla JS.",
@@ -502,29 +510,84 @@ const chatData = {
     "artist": "<b>Artist Portfolio</b> is designed for actors and creatives. It features a balanced gallery, smooth transitions, and a minimal design to showcase artwork professionally.",
     "portfolio": "<b>Portfolio Website</b> is this very site! It features 3D elements (Three.js), GSAP-like animations (AOS), and a fully responsive glassmorphism design.",
 
-    // --- Skills ---
+    // --- 6. Skills ---
     "skills": "<b>🚀 Web Development:</b><br>HTML, CSS, JavaScript, MERN Stack (Basics), Firebase, Tailwind CSS, Git/GitHub.<br><br><b>🐍 Backend:</b><br>Python, Django, REST APIs, CRUD operations.<br><br><b>🤖 AI & ML:</b><br>Neural Networks, Feature Engineering, Clustering, Prompt Engineering.<br><br><b>🔐 Cybersecurity:</b><br>Kali Linux, Digital Forensics, Pentesting Basics.",
 
-    // --- Certifications ---
+    // --- 7. Certifications ---
     "certifications": "📜 <b>Data Science & AI</b> — IIT Madras<br>📜 <b>Generative AI Mastermind</b> — Outskill<br>📜 <b>Cyber Investigator</b> — DeepCytes Cyber Labs (UK)<br>📜 <b>Google Play Academy</b> — Store Listing Certificate<br>📜 <b>Advanced Drone Technology</b> — Bharat Space Education",
 
-    // --- Workshops ---
+    // --- 8. Workshops ---
     "workshops": "Laksh is always learning! Workshops attended:<br>• <b>IIT Madras:</b> Neural Networks, AI Ethics, Datasets<br>• <b>Plaksha University:</b> Turing Test, DNN Basics, Feature Extraction<br>• <b>Outskill:</b> Custom GPTs, AI Automation<br>• <b>Bharat Space Education:</b> Drone Tech & Air Mobility",
 
-    // --- Achievements ---
+    // --- 9. Achievements ---
     "achievements": "<b>🏆 Technology:</b><br>• 2nd Place: Robowars (Impetus ’25)<br>• National Finalist: Manual HTML/CSS Dev<br>• VVM Science Exam: School & District Topper<br>• Multiple Hackathon recognitions (WebWiz, Tech Ramble)<br><br><b>🎖 Leadership:</b><br>• House Captain (CIRS)<br>• NCC 'A' Certificate",
 
-    // --- Sports ---
+    // --- 10. Sports ---
     "sports": "Laksh is an athlete too! 🏃‍♂️<br>🔫 <b>Shooting:</b> State-Level Air Pistol Shooter<br>🏸 <b>Badminton:</b> District-Level Player<br>🏐 <b>Volleyball:</b> 1st Place (School)<br>🏊 <b>Swimming:</b> 2nd Place (Relay)<br>🧘 <b>Yoga:</b> Completed 108 Surya Namaskars",
 
-    // --- Contact ---
-    "contact": "Let's build something together! 🤝<br>📧 Email: <a href='mailto:laksh.pradhwani@gmail.com' class='text-sky-400'>laksh.pradhwani@gmail.com</a><br>🔗 <a href='https://linkedin.com/in/laksh-pradhwani' target='_blank' class='text-sky-400'>LinkedIn</a><br>📸 <a href='https://www.instagram.com/_.lakshp/' target='_blank' class='text-sky-400'>Instagram</a>",
+    // --- 11. Contact ---
+    "contact": "Let's connect! 🤝<br>📧 Email: <a href='mailto:laksh.pradhwani@gmail.com' class='text-sky-400'>laksh.pradhwani@gmail.com</a><br>🔗 <a href='https://linkedin.com/in/laksh-pradhwani' target='_blank' class='text-sky-400'>LinkedIn</a><br>📸 <a href='https://www.instagram.com/_.lakshp/' target='_blank' class='text-sky-400'>Instagram</a>",
 
     // --- Fallback ---
     "default": "I'm not sure about that specific detail. 😅<br>But I can tell you about Laksh's <b>projects</b>, <b>skills</b>, <b>sports</b>, <b>achievements</b>, or <b>certifications</b>. What's on your mind?"
 };
 
-// 2. CHAT INTERFACE LOGIC
+// Helper: Check if text contains any of the keywords
+function hasKeyword(text, keywords) {
+    return keywords.some(keyword => text.includes(keyword));
+}
+
+// Helper: Get Random Array Item
+function getRandomResponse(arr) {
+    return Array.isArray(arr) ? arr[Math.floor(Math.random() * arr.length)] : arr;
+}
+
+// Main Logic: Analyze Text and Get Reply
+function getBotReply(text) {
+    const lowerText = text.toLowerCase();
+
+    // --- 1. Personality & Chit-Chat ---
+    if (hasKeyword(lowerText, ['hi', 'hello', 'hey', 'hola', 'yo', 'sup', 'morning', 'afternoon', 'evening'])) return getRandomResponse(chatData.greetings);
+    if (hasKeyword(lowerText, ['how are you', 'how r u', 'doing today', 'whats up'])) return getRandomResponse(chatData.how_are_you);
+    if (hasKeyword(lowerText, ['joke', 'funny', 'laugh'])) return getRandomResponse(chatData.joke);
+    if (hasKeyword(lowerText, ['cool', 'awesome', 'wow', 'amazing', 'sick', 'great'])) return getRandomResponse(chatData.cool);
+    if (hasKeyword(lowerText, ['bye', 'goodbye', 'see ya', 'cya', 'later'])) return getRandomResponse(chatData.bye);
+    if (hasKeyword(lowerText, ['who made', 'who built', 'creator', 'developer'])) return chatData.who_made_you;
+
+    // --- 2. Socials (Insta, Mail, LinkedIn) ---
+    if (hasKeyword(lowerText, ['insta', 'instagram', 'ig', 'handle', 'id', 'link', 'linkedin', 'mail', 'email', 'contact', 'reach', 'connect', 'hire', 'message', 'ping'])) return chatData.contact;
+
+    // --- 3. Bio & Info ---
+    if (hasKeyword(lowerText, ['about', 'who are you', 'bio', 'intro', 'background', 'name', 'age', 'student', 'laksh', 'yourself'])) return chatData.about;
+
+    // --- 4. Professional ---
+    if (hasKeyword(lowerText, ['experience', 'job', 'intern', 'work', 'company', 'unified', 'moreyeahs', 'hotel'])) return chatData.experience;
+    if (hasKeyword(lowerText, ['educat', 'school', 'college', 'study', 'class', 'grade', 'degree', 'sunbeam', 'cirs', '12th', '10th'])) return chatData.education;
+
+    // --- 5. Skills & Tech ---
+    if (hasKeyword(lowerText, ['skill', 'tech', 'stack', 'code', 'programming', 'language', 'react', 'python', 'django', 'js', 'html', 'css', 'ai', 'ml', 'cyber'])) return chatData.skills;
+    if (hasKeyword(lowerText, ['certif', 'course', 'license', 'iit', 'google', 'deepcytes'])) return chatData.certifications;
+    if (hasKeyword(lowerText, ['workshop', 'seminar', 'bootcamp', 'training'])) return chatData.workshops;
+
+    // --- 6. Achievements & Interests ---
+    if (hasKeyword(lowerText, ['achieve', 'award', 'prize', 'win', 'won', 'medal', 'hackathon', 'rank', 'topper'])) return chatData.achievements;
+    if (hasKeyword(lowerText, ['sport', 'game', 'hobby', 'shoot', 'badminton', 'volley', 'swim', 'yoga', 'football'])) return chatData.sports;
+
+    // --- 7. Projects (Specific) ---
+    if (hasKeyword(lowerText, ['calibridge', 'calendar', 'event'])) return chatData.calibridge;
+    if (hasKeyword(lowerText, ['helios', 'music', 'player', 'song'])) return chatData.helios;
+    if (hasKeyword(lowerText, ['canvas', 'blog', 'article', 'write'])) return chatData.codecanvas;
+    if (hasKeyword(lowerText, ['shop', 'store', 'ecommerce', 'cart', 'mvp', 'buy'])) return chatData.mvp;
+    if (hasKeyword(lowerText, ['artist', 'actor', 'gallery'])) return chatData.artist;
+    if (hasKeyword(lowerText, ['portfolio', 'site', 'web', 'this website'])) return chatData.portfolio;
+
+    // --- 8. Projects (General) ---
+    if (hasKeyword(lowerText, ['project', 'build', 'app', 'application', 'demo', 'repo', 'git'])) return chatData.projects;
+
+    return chatData.default;
+}
+
+// --- CHAT UI INTERACTION ---
 const chatToggle = document.getElementById('chatbot-toggle');
 const chatWindow = document.getElementById('chat-window');
 const closeChat = document.getElementById('close-chat');
@@ -532,124 +595,53 @@ const chatForm = document.getElementById('chat-form');
 const userInput = document.getElementById('user-input');
 const messagesArea = document.getElementById('chat-messages');
 
-// Toggle Window Visibility
+// Toggle Window
 function toggleChat() {
     if (!chatWindow) return;
     const isHidden = chatWindow.classList.contains('opacity-0');
-
     if (isHidden) {
-        // Open
         chatWindow.classList.remove('opacity-0', 'scale-90', 'pointer-events-none', 'translate-y-4');
         chatWindow.classList.add('opacity-100', 'scale-100', 'pointer-events-auto', 'translate-y-0');
     } else {
-        // Close
         chatWindow.classList.add('opacity-0', 'scale-90', 'pointer-events-none', 'translate-y-4');
         chatWindow.classList.remove('opacity-100', 'scale-100', 'pointer-events-auto', 'translate-y-0');
     }
 }
 
-// Helper: Scroll to bottom
-function scrollToBottom() {
-    if (messagesArea) {
-        messagesArea.scrollTop = messagesArea.scrollHeight;
-    }
-}
-
-// Helper: Add Message to Chat UI
-function addMessage(content, isUser = false) {
-    if (!messagesArea) return;
-
-    const div = document.createElement('div');
-    div.className = 'flex items-start gap-3 ' + (isUser ? 'justify-end' : '');
-
-    if (isUser) {
-        // User Message Style
-        div.innerHTML = `
-            <div class="bg-sky-600 text-white rounded-2xl rounded-tr-none p-3 text-sm shadow-md max-w-[80%]">
-                <p>${content}</p>
-            </div>
-        `;
-    } else {
-        // Bot Message Style
-        div.innerHTML = `
-            <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center border border-white/10 shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10H12V2z"></path><path d="M12 2a10 10 0 0 1 10 10"></path><path d="M2 12a10 10 0 0 1 10-10v10Z"></path></svg>
-            </div>
-            <div class="bg-slate-800/50 border border-white/5 rounded-2xl rounded-tl-none p-3 text-sm text-slate-300 shadow-sm max-w-[80%]">
-                <p>${content}</p>
-            </div>
-        `;
-    }
-
-    messagesArea.appendChild(div);
-    scrollToBottom();
-}
-
-// Helper: Get Random Array Item
-function getRandomResponse(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
-}
-
-// Helper: Analyze Text and Get Reply
-function getBotReply(text) {
-    const lowerText = text.toLowerCase();
-
-    // --- Personality & Chit-Chat ---
-    if (lowerText.match(/\b(hi|hello|hey|hola|yo)\b/)) return getRandomResponse(chatData.greetings);
-    if (lowerText.includes('how are you') || lowerText.includes('how are u')) return getRandomResponse(chatData.how_are_you);
-    if (lowerText.includes('joke') || lowerText.includes('funny')) return getRandomResponse(chatData.joke);
-    if (lowerText.includes('cool') || lowerText.includes('awesome') || lowerText.includes('wow')) return chatData.cool;
-    if (lowerText.includes('bye') || lowerText.includes('goodbye') || lowerText.includes('cya')) return chatData.bye;
-    if (lowerText.includes('who made you') || lowerText.includes('who built you') || lowerText.includes('creator')) return chatData.who_made_you;
-
-    // --- Core Topics ---
-    if (lowerText.includes('contact') || lowerText.includes('email') || lowerText.includes('reach')) return chatData.contact;
-    if (lowerText.includes('about') || lowerText.includes('who are you') || lowerText.includes('bio') || lowerText.includes('laksh')) return chatData.about;
-
-    // --- Experience & Education ---
-    if (lowerText.includes('experience') || lowerText.includes('job') || lowerText.includes('intern') || lowerText.includes('work')) return chatData.experience;
-    if (lowerText.includes('school') || lowerText.includes('college') || lowerText.includes('education') || lowerText.includes('study') || lowerText.includes('class')) return chatData.education;
-
-    // --- Skills & Tech ---
-    if (lowerText.includes('skill') || lowerText.includes('tech') || lowerText.includes('stack') || lowerText.includes('language') || lowerText.includes('python') || lowerText.includes('react')) return chatData.skills;
-    if (lowerText.includes('certif') || lowerText.includes('course') || lowerText.includes('license')) return chatData.certifications;
-    if (lowerText.includes('workshop') || lowerText.includes('seminar') || lowerText.includes('training')) return chatData.workshops;
-
-    // --- Achievements & Interests ---
-    if (lowerText.includes('achieve') || lowerText.includes('award') || lowerText.includes('prize') || lowerText.includes('win') || lowerText.includes('hackathon') || lowerText.includes('robot') || lowerText.includes('topper')) return chatData.achievements;
-    if (lowerText.includes('sport') || lowerText.includes('game') || lowerText.includes('play') || lowerText.includes('hobby') || lowerText.includes('yoga') || lowerText.includes('swimming')) return chatData.sports;
-
-    // --- Specific Projects ---
-    if (lowerText.includes('calibridge') || lowerText.includes('calendar')) return chatData.calibridge;
-    if (lowerText.includes('helios') || lowerText.includes('music')) return chatData.helios;
-    if ((lowerText.includes('code') && lowerText.includes('canvas')) || lowerText.includes('blog')) return chatData.codecanvas;
-    if (lowerText.includes('store') || lowerText.includes('shop') || lowerText.includes('mvp') || lowerText.includes('e-commerce')) return chatData.mvp;
-    if (lowerText.includes('artist') || lowerText.includes('actor')) return chatData.artist;
-
-    // --- General Projects ---
-    if (lowerText.includes('project') || lowerText.includes('build') || lowerText.includes('app') || lowerText.includes('site')) return chatData.projects;
-
-    return chatData.default;
-}
-
-// 3. EVENT LISTENERS
 if (chatToggle) chatToggle.addEventListener('click', toggleChat);
 if (closeChat) closeChat.addEventListener('click', toggleChat);
 
+// Add Message to UI
+function addMessage(content, isUser = false) {
+    if (!messagesArea) return;
+    const div = document.createElement('div');
+    div.className = 'flex items-start gap-3 ' + (isUser ? 'justify-end' : '');
+    
+    // User vs Bot Message Styling
+    div.innerHTML = isUser ? 
+        `<div class="bg-sky-600 text-white rounded-2xl rounded-tr-none p-3 text-sm shadow-md max-w-[80%]"><p>${content}</p></div>` :
+        `<div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center border border-white/10 shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10H12V2z"></path><path d="M12 2a10 10 0 0 1 10 10"></path><path d="M2 12a10 10 0 0 1 10-10v10Z"></path></svg>
+         </div>
+         <div class="bg-slate-800/50 border border-white/5 rounded-2xl rounded-tl-none p-3 text-sm text-slate-300 shadow-sm max-w-[80%]"><p>${content}</p></div>`;
+    
+    messagesArea.appendChild(div);
+    messagesArea.scrollTop = messagesArea.scrollHeight;
+}
+
+// Handle Form Submit
 if (chatForm) {
     chatForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const text = userInput.value.trim();
         if (!text) return;
 
-        // 1. Show User Message
         addMessage(text, true);
         userInput.value = '';
 
-        // 2. Simulate Delay & Show Bot Reply
         setTimeout(() => {
             const reply = getBotReply(text);
             addMessage(reply, false);
-        }, 600); // 600ms delay feels more natural
+        }, 600);
     });
 }

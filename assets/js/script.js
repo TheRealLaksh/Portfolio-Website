@@ -456,26 +456,154 @@ function loadPremiumProjects() {
         projectsGrid.insertAdjacentHTML('beforeend', cardHTML);
     });
 }
-// --- CHATBOT LOGIC ---
+
+
+/* =========================================
+   🤖 AI CHATBOT LOGIC & DATABASE
+   ========================================= */
+
+// 1. THE BRAIN (Your Data)
+const chatData = {
+    "greeting": "Hello! I'm Laksh's AI assistant. 🤖<br>I can tell you about my <b>projects</b>, <b>skills</b>, <b>experience</b>, <b>achievements</b>, <b>workshops</b>, or how to <b>contact</b> me!",
+
+    "about": "Laksh Pradhwani is an 18-year-old aspiring <b>AI/ML Engineer & Full-Stack Developer</b> from Varanasi, India. 🇮🇳<br><br>He is currently a Class 12 student (PCM + CS) at <b>Sunbeam School Lahartara</b>. He loves building clean web apps, experimenting with Neural Networks, and competing in hackathons.<br><br>He has interned at Unified Mentor, MoreYeahs, and Hotel Kavana.",
+
+    "education": "🎓 <b>Sunbeam School Lahartara</b> (2024–2026)<br>Class 12 — PCM + Computer Science<br><i>Activities:</i> Robotics, Coding, Shooting<br><br>🏫 <b>Chinmaya International Residential School</b> (2019–2024)<br>Class 10 — House Captain, Sports & Leadership",
+
+    "experience": "💼 <b>Full-Stack Developer @ Unified Mentor</b> (Oct–Dec 2025)<br>Remote | React, Redux, Firebase<br><br>💼 <b>Web Developer @ MoreYeahs</b> (Aug–Sep 2025)<br>Remote | Django, REST APIs, GigX Platform<br><br>💼 <b>IT Intern @ Hotel Kavana</b> (Jun 2025)<br>On-site | IT Infrastructure & Security",
+
+    "projects": "Here are my key projects:<br><br>1. <b>Portfolio Website</b>: 3D Personal Site (You are here!)<br>2. <b>Artist Portfolio</b>: For actors/creatives<br>3. <b>CaliBridge</b>: JS Event Calendar App<br>4. <b>Helios</b>: Animated Music Player<br>5. <b>MVP Webstore</b>: E-commerce Demo<br>6. <b>Code & Canvas</b>: Modern Blog Platform<br><br>View code on <a href='https://github.com/TheRealLaksh' target='_blank' class='text-sky-400 underline'>GitHub</a>.",
+
+    // Specific Project Details (Triggered by name)
+    "calibridge": "<b>CaliBridge</b> is a JS-based event calendar app. It supports creating events, month switching, and LocalStorage sync with a responsive UI.",
+    "helios": "<b>Helios Music Player</b> is a lightweight web player with dynamic track switching and smooth animations.",
+    "codecanvas": "<b>Code & Canvas</b> is a modern blog with dark mode, Firebase real-time comments, and social sharing.",
+
+    "skills": "🚀 <b>Web Dev:</b> HTML, CSS, JS, React (MERN), Firebase, Tailwind<br>🐍 <b>Backend:</b> Python, Django, REST APIs<br>🤖 <b>AI/ML:</b> Neural Networks, Clustering, Feature Engineering, Prompt Engineering<br>🔐 <b>Cybersecurity:</b> Kali Linux, Forensics, Pentesting basics<br>🛠 <b>Tools:</b> Git, Postman, Zapier",
+
+    "certifications": "📜 <b>Data Science & AI</b> — IIT Madras<br>📜 <b>Generative AI Mastermind</b> — Outskill<br>📜 <b>Cyber Investigator</b> — DeepCytes Cyber Labs (UK)<br>📜 <b>Advanced Drone Tech</b> — Bharat Space Education",
+
+    "workshops": "I've attended workshops at:<br>• <b>IIT Madras:</b> Neural Networks & AI Ethics<br>• <b>Plaksha University:</b> ML Types & Feature Extraction<br>• <b>Outskill:</b> Gen AI & Automation<br>• <b>Bharat Space Education:</b> Drone Tech & Air Mobility",
+
+    "achievements": "🏆 <b>Tech:</b><br>• 2nd Place: Robowars (Impetus ’25)<br>• National Finalist: Manual HTML/CSS Dev<br>• VVM Science Exam: District Topper<br><br>🎖 <b>Leadership:</b><br>• House Captain (CIRS)<br>• NCC 'A' Certificate",
+
+    "sports": "I'm active in sports too! 🏅<br>🔫 <b>Shooting:</b> State-Level Air Pistol<br>🏸 <b>Badminton:</b> District-Level<br>🏐 <b>School:</b> Volleyball (1st), Football (2nd), Swimming (2nd)",
+
+    "contact": "Let's connect! 🤝<br>📧 <a href='mailto:laksh.pradhwani@gmail.com' class='text-sky-400'>laksh.pradhwani@gmail.com</a><br>🔗 <a href='https://linkedin.com/in/laksh-pradhwani' target='_blank' class='text-sky-400'>LinkedIn</a><br>📸 <a href='https://www.instagram.com/_.lakshp/' target='_blank' class='text-sky-400'>Instagram</a>",
+
+    "default": "I'm not sure about that specific detail. 😅<br>Try asking about my <b>projects</b>, <b>skills</b>, <b>achievements</b>, <b>sports</b>, or <b>certifications</b>!"
+};
+
+// 2. CHAT INTERFACE LOGIC
 const chatToggle = document.getElementById('chatbot-toggle');
 const chatWindow = document.getElementById('chat-window');
 const closeChat = document.getElementById('close-chat');
+const chatForm = document.getElementById('chat-form');
+const userInput = document.getElementById('user-input');
+const messagesArea = document.getElementById('chat-messages');
 
+// Toggle Window Visibility
 function toggleChat() {
+    if (!chatWindow) return;
     const isHidden = chatWindow.classList.contains('opacity-0');
-    
+
     if (isHidden) {
-        // Open Chat
+        // Open Logic
         chatWindow.classList.remove('opacity-0', 'scale-90', 'pointer-events-none', 'translate-y-4');
         chatWindow.classList.add('opacity-100', 'scale-100', 'pointer-events-auto', 'translate-y-0');
     } else {
-        // Close Chat
+        // Close Logic
         chatWindow.classList.add('opacity-0', 'scale-90', 'pointer-events-none', 'translate-y-4');
         chatWindow.classList.remove('opacity-100', 'scale-100', 'pointer-events-auto', 'translate-y-0');
     }
 }
 
-if (chatToggle && chatWindow && closeChat) {
-    chatToggle.addEventListener('click', toggleChat);
-    closeChat.addEventListener('click', toggleChat);
+// Helper: Scroll to bottom of chat
+function scrollToBottom() {
+    if (messagesArea) {
+        messagesArea.scrollTop = messagesArea.scrollHeight;
+    }
+}
+
+// Helper: Add Message to Chat UI
+function addMessage(content, isUser = false) {
+    if (!messagesArea) return;
+
+    const div = document.createElement('div');
+    div.className = 'flex items-start gap-3 ' + (isUser ? 'justify-end' : '');
+
+    if (isUser) {
+        div.innerHTML = `
+            <div class="bg-sky-600 text-white rounded-2xl rounded-tr-none p-3 text-sm shadow-md max-w-[80%]">
+                <p>${content}</p>
+            </div>
+        `;
+    } else {
+        div.innerHTML = `
+            <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center border border-white/10 shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10H12V2z"></path><path d="M12 2a10 10 0 0 1 10 10"></path><path d="M2 12a10 10 0 0 1 10-10v10Z"></path></svg>
+            </div>
+            <div class="bg-slate-800/50 border border-white/5 rounded-2xl rounded-tl-none p-3 text-sm text-slate-300 shadow-sm max-w-[80%]">
+                <p>${content}</p>
+            </div>
+        `;
+    }
+
+    messagesArea.appendChild(div);
+    scrollToBottom();
+}
+
+// Helper: Analyze Text and Get Reply
+function getBotReply(text) {
+    const lowerText = text.toLowerCase();
+
+    // Basic Keywords
+    if (lowerText.includes('hello') || lowerText.includes('hi') || lowerText.includes('hey')) return chatData.greeting;
+    if (lowerText.includes('contact') || lowerText.includes('email') || lowerText.includes('reach')) return chatData.contact;
+    if (lowerText.includes('about') || lowerText.includes('who are you') || lowerText.includes('bio')) return chatData.about;
+
+    // Experience & Education
+    if (lowerText.includes('experience') || lowerText.includes('job') || lowerText.includes('intern') || lowerText.includes('work')) return chatData.experience;
+    if (lowerText.includes('school') || lowerText.includes('college') || lowerText.includes('education') || lowerText.includes('class')) return chatData.education;
+
+    // Skills & Tech
+    if (lowerText.includes('skill') || lowerText.includes('tech') || lowerText.includes('stack') || lowerText.includes('language')) return chatData.skills;
+    if (lowerText.includes('certif') || lowerText.includes('course') || lowerText.includes('license')) return chatData.certifications;
+    if (lowerText.includes('workshop') || lowerText.includes('seminar') || lowerText.includes('training')) return chatData.workshops;
+
+    // Achievements & Interests
+    if (lowerText.includes('achieve') || lowerText.includes('award') || lowerText.includes('prize') || lowerText.includes('win')) return chatData.achievements;
+    if (lowerText.includes('sport') || lowerText.includes('game') || lowerText.includes('play') || lowerText.includes('hobby')) return chatData.sports;
+
+    // Specific Projects
+    if (lowerText.includes('calibridge') || lowerText.includes('calendar')) return chatData.calibridge;
+    if (lowerText.includes('helios') || lowerText.includes('music player')) return chatData.helios;
+    if ((lowerText.includes('code') && lowerText.includes('canvas')) || lowerText.includes('blog')) return chatData.codecanvas;
+
+    // General Projects
+    if (lowerText.includes('project') || lowerText.includes('build') || lowerText.includes('app')) return chatData.projects;
+
+    return chatData.default;
+}
+
+// 3. EVENT LISTENERS
+if (chatToggle) chatToggle.addEventListener('click', toggleChat);
+if (closeChat) closeChat.addEventListener('click', toggleChat);
+
+if (chatForm) {
+    chatForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const text = userInput.value.trim();
+        if (!text) return;
+
+        // 1. Show User Message
+        addMessage(text, true);
+        userInput.value = '';
+
+        // 2. Simulate Delay & Show Bot Reply
+        setTimeout(() => {
+            const reply = getBotReply(text);
+            addMessage(reply, false);
+        }, 500);
+    });
 }

@@ -260,7 +260,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-
 // ===============================================================
 //  ⭐ GITHUB REPO DATA FUNCTIONS (Outside DOMContentLoaded) ⭐
 // ===============================================================
@@ -328,7 +327,6 @@ async function loadProjectsFromGitHub() {
         const results = await Promise.all(REPOS.map(r => fetchRepoData(r)));
         window.myProjects = results.filter(r => r !== null);
     } catch (e) {
-        // This catch handles critical initial errors (e.g., network down)
         console.error("Critical GitHub fetch failed:", e);
         if (grid) grid.innerHTML = `<p class="text-red-400 col-span-full text-center py-10">⚠️ Failed to connect to GitHub API. Projects cannot be loaded right now.</p>`;
         window.myProjects = [];
@@ -360,32 +358,64 @@ function loadPremiumProjects() {
         blog: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />`
     };
 
+    // Map for specific language colors
+    const langColors = {
+        JavaScript: "text-yellow-300 bg-yellow-500/10 border-yellow-500/20",
+        HTML: "text-orange-300 bg-orange-500/10 border-orange-500/20",
+        CSS: "text-blue-300 bg-blue-500/10 border-blue-500/20",
+        Python: "text-cyan-300 bg-cyan-500/10 border-cyan-500/20",
+        TypeScript: "text-blue-400 bg-blue-600/10 border-blue-600/20",
+        Vue: "text-emerald-300 bg-emerald-500/10 border-emerald-500/20",
+        React: "text-sky-300 bg-sky-500/10 border-sky-500/20",
+        Java: "text-red-300 bg-red-500/10 border-red-500/20",
+        // Default fallback
+        default: "text-zinc-300 bg-zinc-800/80 border-zinc-700/50"
+    };
+
     projectsGrid.innerHTML = "";
 
     window.myProjects.forEach(repo => {
 
         const languagesHtml = repo.languages
-            .slice(0, 3) // Limit to top 3 languages
-            .map(lang => `<span class="text-[10px] font-medium text-zinc-400 bg-zinc-800/80 px-2 py-1 rounded border border-zinc-700/50">${lang}</span>`)
+            .slice(0, 3)
+            .map(lang => {
+                // Determine color class based on map, fallback to default if not found
+                const colorClass = langColors[lang] || langColors.default;
+                return `<span class="text-[10px] font-medium px-2 py-1 rounded border ${colorClass}">${lang}</span>`;
+            })
             .join("");
 
+        // New Live Demo Button Style (Emerald Theme)
         const liveIcon = repo.homepage ? `
-            <a href="${repo.homepage}" target="_blank" title="Live Demo"
-                class="p-2 rounded-lg bg-zinc-900 border border-zinc-700 hover:border-emerald-500/50 hover:text-emerald-400 transition-all">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-5 h-5"
-                    viewBox="0 0 24 24">
-                    <path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3ZM5 5h5V3H5c-1.1 0-2 .9-2 2v5h2V5Zm0 9H3v5c0 1.1.9 2 2 2h5v-2H5v-5Zm14-2h2v5c0 1.1-.9 2-2 2h-5v-2h5v-5Z"/>
-                </svg>
+            <a href="${repo.homepage}" target="_blank" rel="noopener noreferrer"
+                class="group relative flex items-center justify-start w-10 hover:w-28 h-10 bg-slate-800/50 border border-slate-700 rounded-full overflow-hidden transition-all duration-500 ease-out hover:border-emerald-500/50 shadow-lg hover:shadow-emerald-900/20">
+                <div class="absolute inset-0 w-full h-full bg-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="w-10 h-10 flex items-center justify-center shrink-0 z-10 group-hover:text-emerald-400 text-slate-400 transition-colors duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                </div>
+                <span class="opacity-0 group-hover:opacity-100 text-emerald-400 font-medium text-xs whitespace-nowrap transition-all duration-500 delay-100 absolute left-10">
+                    Live Demo
+                </span>
             </a>
         ` : "";
 
+        // New GitHub Button Style (Green Theme)
         const githubIcon = `
-            <a href="${repo.html_url}" target="_blank" title="GitHub Code"
-                class="p-2 rounded-lg bg-zinc-900 border border-zinc-700 hover:border-sky-500/50 hover:text-sky-400 transition-all">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                    class="w-5 h-5" viewBox="0 0 24 24">
-                    <path d="M12 .5C5.73.5.5 5.73.5 12c0 5.09 3.29 9.4 7.86 10.93.58.11.79-.25.79-.56v-2c-3.2.69-3.87-1.39-3.87-1.39-.53-1.35-1.3-1.71-1.3-1.71-1.06-.73.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.79 2.73 1.27 3.4.97.11-.75.41-1.27.75-1.56-2.55-.29-5.23-1.28-5.23-5.72 0-1.27.45-2.31 1.2-3.13-.12-.3-.52-1.52.11-3.17 0 0 .97-.31 3.18 1.2a10.9 10.9 0 0 1 5.79 0c2.21-1.51 3.18-1.2 3.18-1.2.63 1.65.23 2.87.11 3.17a4.57 4.57 0 0 1 1.2 3.13c0 4.45-2.69 5.43-5.25 5.71.42.36.8 1.07.8 2.16v3.2c0 .31.21.68.8.56A10.99 10.99 0 0 0 23.5 12c0-6.27-5.23-11.5-11.5-11.5Z"/>
-                </svg>
+            <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer"
+                class="group relative flex items-center justify-start w-10 hover:w-24 h-10 bg-slate-800/50 border border-slate-700 rounded-full overflow-hidden transition-all duration-500 ease-out hover:border-green-500/50 shadow-lg hover:shadow-green-900/20">
+                <div class="absolute inset-0 w-full h-full bg-green-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="w-10 h-10 flex items-center justify-center shrink-0 z-10 group-hover:text-green-400 text-slate-400 transition-colors duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2.1c-3.2.7-3.9-1.5-3.9-1.5-.5-1.2-1.1-1.6-1.1-1.6-.9-.6.1-.6.1-.6 1 .1 1.6 1 1.6 1 .9 1.6 2.5 1.1 3.1.8.1-.7.4-1.1.7-1.4-2.6-.3-5.4-1.3-5.4-5.9 0-1.3.5-2.4 1.1-3.3-.1-.3-.5-1.5.1-3.1 0 0 .9-.3 3.4 1.2a11.5 11.5 0 0 1 6.2 0c2.5-1.5 3.4-1.2 3.4-1.2.6 1.6.2 2.8.1 3.1.7.9 1.1 2 1.1 3.3 0 4.6-2.8 5.6-5.5 5.9.4.3.8 1 .8 2v3c0 .4.2.7.8.6 4.6-1.5 7.9-5.9 7.9-10.9C23.5 5.65 18.35.5 12 .5z" />
+                    </svg>
+                </div>
+                <span class="opacity-0 group-hover:opacity-100 text-green-400 font-medium text-xs whitespace-nowrap transition-all duration-500 delay-100 absolute left-10">
+                    Code
+                </span>
             </a>
         `;
 
@@ -401,7 +431,10 @@ function loadPremiumProjects() {
                             </svg>
                         </div>
 
-                        <div class="flex gap-3">${liveIcon}${githubIcon}</div>
+                        <div class="flex gap-3 items-center h-10">
+                            ${liveIcon}
+                            ${githubIcon}
+                        </div>
                     </div>
 
                     <h3 class="text-lg font-bold text-white mb-3 tracking-tight group-hover:text-sky-100 transition-colors">

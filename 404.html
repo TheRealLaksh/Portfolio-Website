@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>404 — Not Found · lakshp.live</title>
+  <meta name="description" content="404 page — lakshp.live — dark space theme" />
+  <style>
+    :root{
+      --bg:#05060a; --fg:#cfe8ff; --accent:#7dd3fc; --muted:#eaf6ff;
+    }
+    html,body{height:100%;margin:0}
+    body{
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+      background:var(--bg);
+      color:var(--fg);
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      overflow:hidden;
+    }
+
+    /* full-canvas container */
+    .canvas-wrap{position:fixed;inset:0;display:block}
+
+    /* UI overlay */
+    .ui{
+      position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);
+      text-align:center;z-index:20;pointer-events:auto;padding:20px;max-width:920px;width:92%;
+    }
+
+    .title-404{
+      font-weight:900;font-size:clamp(48px,12vw,120px);line-height:0.86;letter-spacing:-0.03em;
+      margin:0;color:transparent;/* fill via background-clip */
+      background-image:linear-gradient(90deg, rgba(125,211,252,0.95), rgba(120,145,255,0.9));
+      -webkit-background-clip:text;background-clip:text;
+      filter:drop-shadow(0 12px 30px rgba(2,6,23,0.6));
+      position:relative;
+    }
+
+    .glitch{
+      position:relative;display:inline-block;
+    }
+    /* Glitch pseudo layers */
+    .glitch::before, .glitch::after{
+      content:attr(data-text);
+      position:absolute;left:0;top:0;width:100%;
+      mix-blend-mode:screen;opacity:0.85;
+      clip-path:polygon(0 0,100% 0,100% 45%,0 45%);
+    }
+    .glitch::before{transform:translate(6px,-6px);filter:hue-rotate(190deg);opacity:0.7}
+    .glitch::after{transform:translate(-6px,6px);filter:hue-rotate(320deg);opacity:0.6;clip-path:polygon(0 55%,100% 55%,100% 100%,0 100%)}
+
+    .subtitle{color:var(--muted);font-size:clamp(14px,2.2vw,18px);margin-top:12px}
+
+    .cta{
+      margin-top:20px;display:inline-grid;grid-auto-flow:column;gap:12px;align-items:center;justify-content:center
+    }
+    .btn{
+      background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border:1px solid rgba(255,255,255,0.06);color:var(--fg);
+      padding:12px 18px;border-radius:12px;font-weight:600;text-decoration:none;backdrop-filter:blur(6px)
+    }
+    .btn.secondary{background:none;border:1px solid rgba(125,211,252,0.12);color:var(--accent)}
+
+    footer.info{position:fixed;left:16px;bottom:14px;color:var(--muted);font-size:12px;z-index:20}
+
+    /* small ephemera */
+    .credits{margin-top:10px;color:var(--muted);font-size:13px}
+
+    /* subtle vignette + noise */
+    .overlay{
+      pointer-events:none;position:fixed;inset:0;z-index:15;mix-blend-mode:overlay;
+      background:radial-gradient(1200px 600px at 50% 42%, rgba(255,255,255,0.02), transparent 8% ),
+                 radial-gradient(1600px 800px at 10% 90%, rgba(0,0,0,0.65), transparent 20%);
+    }
+    .noise{position:fixed;inset:0;z-index:40;opacity:0.04;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><filter id="n"><feTurbulence baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>');mix-blend-mode:overlay;pointer-events:none}
+
+    /* responsiveness */
+    @media (max-width:600px){
+      .ui{padding:14px}
+      .subtitle{font-size:13px}
+      .credits{display:none}
+    }
+
+  </style>
+</head>
+<body>
+  <div class="canvas-wrap" id="canvasWrap"></div>
+
+  <div class="ui" role="main" aria-labelledby="big404">
+    <h1 id="big404" class="title-404 glitch" data-text="404">404</h1>
+    <div class="subtitle">Looks like this star wasn't charted. The page you requested couldn't be found.</div>
+
+    <div class="cta">
+      <a class="btn" href="https://lakshp.live" aria-label="Go back home">Return Home</a>
+    </div>
+
+    
+  </div>
+
+  <div class="overlay"></div>
+  <div class="noise"></div>
+  <footer class="info">Error code 404 · Not Found</footer>
+
+  <script src="https://unpkg.com/three@0.152.2/build/three.min.js"></script>
+<script>
+// --- PWA SERVICE WORKER REGISTRATION ---
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then(reg => console.log('SW Registered!', reg.scope))
+            .catch(err => console.log('SW Failed:', err));
+    });
+}
+
+// --- ADVANCED THREE.JS BACKGROUND ---
+window.addEventListener('load', function () {
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x000000, 0.0008);
+
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
+    camera.position.z = 100;
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+
+    renderer.domElement.style.position = 'fixed';
+    renderer.domElement.style.top = '0';
+    renderer.domElement.style.left = '0';
+    renderer.domElement.style.width = '100%';
+    renderer.domElement.style.height = '100%';
+    renderer.domElement.style.zIndex = '-1';
+    renderer.domElement.style.transition = 'filter 0.5s ease';
+    document.body.appendChild(renderer.domElement);
+
+    const COLORS = {
+        home: new THREE.Color(0x0ea5e9),
+        about: new THREE.Color(0xffffff),
+        experience: new THREE.Color(0xa855f7),
+        skills: new THREE.Color(0x22c55e),
+        projects: new THREE.Color(0xf43f5e),
+        contact: new THREE.Color(0xeab308)
+    };
+    let targetColor = COLORS.home;
+
+    const starGeometry = new THREE.BufferGeometry();
+    const starCount = 12000;
+    const starPositions = new Float32Array(starCount * 3);
+    for (let i = 0; i < starCount * 3; i++) starPositions[i] = (Math.random() - 0.5) * 2500;
+    starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+    const starMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.6, transparent: true, opacity: 0.6 });
+    const starMesh = new THREE.Points(starGeometry, starMaterial);
+    scene.add(starMesh);
+
+    const connectCount = 200;
+    const connectGeometry = new THREE.BufferGeometry();
+    const connectPositions = new Float32Array(connectCount * 3);
+    const originalPositions = new Float32Array(connectCount * 3);
+    const connectVelocities = [];
+
+    for (let i = 0; i < connectCount; i++) {
+        const x = (Math.random() - 0.5) * 1500;
+        const y = (Math.random() - 0.5) * 1500;
+        const z = (Math.random() - 0.5) * 1500;
+
+        connectPositions[i * 3] = x; connectPositions[i * 3 + 1] = y; connectPositions[i * 3 + 2] = z;
+        originalPositions[i * 3] = x; originalPositions[i * 3 + 1] = y; originalPositions[i * 3 + 2] = z;
+
+        connectVelocities.push({ x: 0, y: 0, z: 0 });
+    }
+    connectGeometry.setAttribute('position', new THREE.BufferAttribute(connectPositions, 3));
+    const connectMaterial = new THREE.PointsMaterial({ color: 0x0ea5e9, size: 2 });
+    const connectMesh = new THREE.Points(connectGeometry, connectMaterial);
+    scene.add(connectMesh);
+
+    const lineMaterial = new THREE.LineBasicMaterial({ color: 0x0ea5e9, transparent: true, opacity: 0.2 });
+    const lineGeometry = new THREE.BufferGeometry();
+    const linesMesh = new THREE.LineSegments(lineGeometry, lineMaterial);
+    scene.add(linesMesh);
+
+    let mouse = new THREE.Vector2(9999, 9999);
+    let warpSpeed = 0;
+    let baseSpeed = 0.0005;
+
+    document.addEventListener('mousemove', (event) => {
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    });
+
+    window.addEventListener('scroll', () => {
+        const sections = ['home', 'about', 'experience', 'skills', 'projects', 'contact'];
+        let current = 'home';
+        sections.forEach(id => {
+            const el = document.getElementById(id);
+            if (el && window.scrollY >= (el.offsetTop - window.innerHeight / 3)) current = id;
+        });
+        if (COLORS[current]) targetColor = COLORS[current];
+    });
+
+    const clock = new THREE.Clock();
+    const tempVec = new THREE.Vector3();
+
+    function animate() {
+        requestAnimationFrame(animate);
+
+        connectMaterial.color.lerp(targetColor, 0.05);
+        lineMaterial.color.lerp(targetColor, 0.05);
+
+        const speed = baseSpeed + (warpSpeed * 0.01);
+
+        if (warpSpeed > 0) {
+            starMesh.rotation.z += 0.02;
+            camera.position.z -= speed * 50;
+            if (camera.position.z < -1000) camera.position.z = 100;
+        } else {
+            starMesh.rotation.y += speed;
+            connectMesh.rotation.y += speed;
+            linesMesh.rotation.y += speed;
+            camera.position.z += (100 - camera.position.z) * 0.05;
+        }
+
+        const positions = connectMesh.geometry.attributes.position.array;
+        const linePositions = [];
+
+        for (let i = 0; i < connectCount; i++) {
+            const px = positions[i * 3];
+            const py = positions[i * 3 + 1];
+            const pz = positions[i * 3 + 2];
+
+            const ox = originalPositions[i * 3];
+            const oy = originalPositions[i * 3 + 1];
+            const oz = originalPositions[i * 3 + 2];
+
+            tempVec.set(px, py, pz);
+            tempVec.applyMatrix4(connectMesh.matrixWorld);
+            tempVec.project(camera);
+
+            const dx = tempVec.x - mouse.x;
+            const dy = tempVec.y - mouse.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < 0.2) {
+                const force = (0.2 - dist) * 200;
+                positions[i * 3] -= dx * force;
+                positions[i * 3 + 1] -= dy * force;
+            } else {
+                positions[i * 3] += (ox - px) * 0.05;
+                positions[i * 3 + 1] += (oy - py) * 0.05;
+                positions[i * 3 + 2] += (oz - pz) * 0.05;
+            }
+        }
+
+        connectMesh.geometry.attributes.position.needsUpdate = true;
+
+        linesMesh.geometry.dispose();
+        linesMesh.geometry = new THREE.BufferGeometry();
+        linesMesh.geometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
+
+        renderer.render(scene, camera);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+});
+</script>
+  <script>
+    // Basic Three.js scene: animated starfield + planet + parallax mouse
+    const container = document.getElementById('canvasWrap');
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, innerWidth/innerHeight, 0.1, 2000);
+    camera.position.set(0,0,60);
+
+    const renderer = new THREE.WebGLRenderer({antialias:true,alpha:true});
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(innerWidth, innerHeight);
+    container.appendChild(renderer.domElement);
+
+    // Resize
+    window.addEventListener('resize', () => {
+      camera.aspect = innerWidth/innerHeight; camera.updateProjectionMatrix();
+      renderer.setSize(innerWidth, innerHeight);
+    });
+
+    // STARFIELD as Points
+    const starCount = 20000; // large but okay on modern devices; we'll scale down for mobile
+    function makeStarfield(count){
+      const geometry = new THREE.BufferGeometry();
+      const positions = new Float32Array(count*3);
+      const colors = new Float32Array(count*3);
+      for(let i=0;i<count;i++){
+        const idx = i*3;
+        const r = 400 * Math.random() + 60;
+        // spherical distribution
+        const theta = Math.random()*Math.PI*2;
+        const phi = Math.acos(2*Math.random()-1);
+        positions[idx]   = Math.sin(phi)*Math.cos(theta)*r;
+        positions[idx+1] = Math.sin(phi)*Math.sin(theta)*r;
+        positions[idx+2] = Math.cos(phi)*r;
+        const c = 0.6 + Math.random()*0.4;
+        colors[idx]=colors[idx+1]=colors[idx+2]=c;
+      }
+      geometry.setAttribute('position', new THREE.BufferAttribute(positions,3));
+      geometry.setAttribute('color', new THREE.BufferAttribute(colors,3));
+
+      const mat = new THREE.PointsMaterial({size:0.4, vertexColors:true, depthWrite:false, transparent:true, opacity:0.95});
+      const points = new THREE.Points(geometry, mat);
+      return points;
+    }
+
+    // adjust for device
+    const reduced = /Mobi|Android/i.test(navigator.userAgent);
+    const stars = makeStarfield(reduced ? 8000 : starCount);
+    scene.add(stars);
+
+    // soft lights
+    const keyLight = new THREE.DirectionalLight(0xe8f9ff, 1.0);
+    keyLight.position.set(-40, 20, 60);
+    scene.add(keyLight);
+    const fill = new THREE.AmbientLight(0x2a3b44, 0.35);
+    scene.add(fill);
+
+    // subtle camera parallax using mouse and small rotation of planet
+    const mouse = {x:0,y:0};
+    window.addEventListener('mousemove', (e)=>{
+      mouse.x = (e.clientX / innerWidth) * 2 - 1;
+      mouse.y = (e.clientY / innerHeight) * 2 - 1;
+    });
+
+    // click-and-drag to pour velocity into scene
+    let drag = false; let last = null; let velocity = {x:0,y:0};
+    renderer.domElement.addEventListener('pointerdown', (e)=>{drag=true; last={x:e.clientX,y:e.clientY}; renderer.domElement.setPointerCapture(e.pointerId)});
+    renderer.domElement.addEventListener('pointerup', (e)=>{drag=false; last=null});
+    renderer.domElement.addEventListener('pointermove', (e)=>{
+      if(drag && last){ velocity.x += (e.clientX-last.x)*0.002; velocity.y += (e.clientY-last.y)*0.002; last={x:e.clientX,y:e.clientY} }
+    });
+
+    // subtle star twinkle animation via scaling a random subset
+    const starPositions = stars.geometry.attributes.position;
+    const starCountActual = starPositions.count;
+
+    // animate
+    const clock = new THREE.Clock();
+    function animate(){
+      const t = clock.getElapsedTime();
+      // rotate overall starfield slowly
+      stars.rotation.y = t*0.004 + velocity.x*0.1;
+      stars.rotation.x = Math.sin(t*0.05)*0.001 + velocity.y*0.05;
+
+      // twinkle by moving positions slightly (cheap noise)
+      const pos = stars.geometry.attributes.position.array;
+      for(let i=0;i<starCountActual;i+=Math.max(1,Math.floor(starCountActual/800))){
+        const k = i*3;
+        pos[k+2] += Math.sin(t*0.7 + i)*0.0009; // small Z wobble
+      }
+      stars.geometry.attributes.position.needsUpdate = true;
+
+      // planet slow rotation and bob
+      planet.rotation.y += 0.0015 + velocity.x*0.002;
+      planet.rotation.x = Math.sin(t*0.25)*0.03;
+      planetGroup.position.x += (mouse.x*8 - planetGroup.position.x) * 0.02;
+      planetGroup.position.y += (-mouse.y*6 - planetGroup.position.y) * 0.02;
+
+      // damp velocity
+      velocity.x *= 0.95; velocity.y *= 0.95;
+
+      renderer.render(scene, camera);
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    // small accessibility for explore btn: push camera into scene briefly
+    document.getElementById('exploreBtn').addEventListener('click', (e)=>{
+      e.preventDefault();
+      // simple camera zoom animation
+      const startZ = camera.position.z; const targetZ = Math.max(20, startZ*0.45);
+      let dur=800; let start=performance.now();
+      function step(now){
+        const p = Math.min(1,(now-start)/dur);
+        const ease = 1 - Math.pow(1-p,3);
+        camera.position.z = startZ*(1-ease) + targetZ*ease;
+        if(p<1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+      // after a beat, send back to homepage
+      setTimeout(()=>{ window.location.href = 'https://lakshp.live' }, 1100);
+    });
+
+    // performance fallback: if WebGL is not available, show a dark static background and keep UI usable
+    if(!renderer.capabilities.isWebGL2 && !renderer.capabilities.isWebGL1){
+      container.innerHTML = '';
+      container.style.background = 'radial-gradient(circle at 30% 20%, #071426 3%, #03040a 45%, #000 100%)';
+    }
+
+    // Small hint: pause animations when tab not visible
+    document.addEventListener('visibilitychange', ()=>{
+      if(document.hidden){ renderer.setAnimationLoop(null) } else { renderer.setAnimationLoop(()=>renderer.render(scene,camera)) }
+    });
+  </script>
+</body>
+</html>

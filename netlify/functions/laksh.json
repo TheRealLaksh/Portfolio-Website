@@ -1,0 +1,113 @@
+{
+  "name": "Laksh Pradhwani",
+  "preferred_name": "Laksh",
+  "age": 18,
+  "location": "Varanasi, Uttar Pradesh, India",
+  "role": "Full-Stack Developer & Aspiring AI/ML Engineer",
+  "email": "laksh.pradhwani@gmail.com",
+  "about": "Laksh Pradhwani is an 18-year-old Full-Stack Developer & Aspiring AI/ML Engineer. Class 12 student at Sunbeam School Lahartara (PCM + CS). Interested in hackathons, robotics, and clean UI.",
+  "education": [
+    {
+      "school": "Sunbeam School Lahartara",
+      "years": "2024–2026",
+      "details": "Class 12 — PCM + Computer Science"
+    },
+    {
+      "school": "Chinmaya International Residential School",
+      "years": "2019–2024",
+      "details": "Class 10 — House Captain, Leadership Programs, Sports"
+    }
+  ],
+  "experience": [
+    {
+      "role": "Full-Stack Developer",
+      "company": "Unified Mentor",
+      "time": "Oct–Dec 2025",
+      "details": "React, Redux, Firebase. Built dynamic UIs and managed state."
+    },
+    {
+      "role": "Web Developer",
+      "company": "MoreYeahs",
+      "time": "Aug–Sep 2025",
+      "details": "Built GigX platform core features, Auth pages, and CRUD dashboards using Django & REST APIs."
+    },
+    {
+      "role": "IT Intern",
+      "company": "Hotel Kavana",
+      "time": "Jun 2025",
+      "details": "Managed hotel software, automation workflows, and IT security."
+    }
+  ],
+  "skills": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Tailwind CSS",
+    "MERN (basics)",
+    "Python",
+    "Django",
+    "Firebase",
+    "Neural Networks",
+    "Feature Engineering",
+    "Clustering",
+    "Prompt Engineering",
+    "Basic Cybersecurity"
+  ],
+  "projects": [
+    {
+      "name": "Portfolio Website",
+      "github": "https://github.com/TheRealLaksh/Portfolio-Website",
+      "live": "https://lakshp.live",
+      "summary": "A fully animated personal portfolio with clean UI, micro-interactions, responsive design, and smooth transitions."
+    },
+    {
+      "name": "Artist Portfolio — Artistry",
+      "github": "https://github.com/TheRealLaksh/Artist-Portfolio",
+      "live": "https://artist-portfolio.lakshp.live/",
+      "summary": "A clean and responsive artist portfolio built using HTML, CSS, and JavaScript. Balanced gallery and smooth animations."
+    },
+    {
+      "name": "CaliBridge — Event Calendar App",
+      "github": "https://github.com/TheRealLaksh/Callender-Events",
+      "live": "https://events.lakshp.live/",
+      "summary": "JavaScript-based event calendar with event creation, month switching, LocalStorage sync, and responsive UI."
+    },
+    {
+      "name": "Helios Music Player",
+      "github": "https://github.com/TheRealLaksh/Music-Player",
+      "live": "https://music.lakshp.live/",
+      "summary": "Lightweight web music player with responsive design and animated controls."
+    },
+    {
+      "name": "MVP Webstore — Shopping Demo",
+      "github": "https://github.com/TheRealLaksh/Shopping-demo",
+      "live": "https://mvp-webstore.lakshp.live/",
+      "summary": "Front-end MVP e-commerce demo with product listings and a basic cart."
+    },
+    {
+      "name": "Code & Canvas — Modern Blog",
+      "github": "https://github.com/TheRealLaksh/code-and-canvas-blog",
+      "live": "https://blog.lakshp.live/",
+      "summary": "Modern blog with dark mode, Firebase real-time comments, search, and social sharing."
+    }
+  ],
+  "achievements": [
+    "2nd Place: Robowars (Impetus ’25)",
+    "National Finalist: Manual HTML/CSS Dev",
+    "VVM Science Exam: School & District Topper",
+    "Multiple Hackathon recognitions"
+  ],
+  "sports": [
+    "Shooting (State-Level Air Pistol)",
+    "Badminton (District-Level)",
+    "Volleyball (School 1st)",
+    "Swimming (Relay 2nd)",
+    "Yoga (108 Surya Namaskars)"
+  ],
+  "contact": {
+    "email": "laksh.pradhwani@gmail.com",
+    "linkedin": "https://linkedin.com/in/laksh-pradhwani",
+    "instagram": "https://www.instagram.com/_.lakshp/",
+    "github": "https://github.com/TheRealLaksh/"
+  }
+}

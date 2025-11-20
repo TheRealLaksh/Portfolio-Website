@@ -1,0 +1,6 @@
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+[[functions.files]]
+  path = "netlify/functions/laksh.json"

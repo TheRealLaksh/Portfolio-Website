@@ -1,3 +1,5 @@
+// netlify/functions/ai.js
+
 const path = require("path");
 const fs = require("fs");
 
@@ -13,7 +15,9 @@ exports.handler = async (event, context) => {
     }
 
     try {
-        const filePath = path.resolve(__dirname, "./laksh.json");
+        // CORRECT PATH - JSON is inside same folder
+        const filePath = path.join(__dirname, "laksh.json");
+
         const profileData = JSON.parse(fs.readFileSync(filePath, "utf8"));
 
         const systemPrompt = `
@@ -43,7 +47,9 @@ ${JSON.stringify(profileData)}
 
         return {
             statusCode: 200,
-            body: JSON.stringify({ reply: data[0]?.generated_text || "No reply" })
+            body: JSON.stringify({
+                reply: data[0]?.generated_text || "No reply"
+            })
         };
 
     } catch (err) {

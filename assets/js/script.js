@@ -457,6 +457,33 @@ function loadPremiumProjects() {
     });
 }
 
+function showTyping() {
+    const div = document.createElement('div');
+    div.id = 'typing-indicator';
+    div.className = 'flex items-center gap-3';
+    div.innerHTML = `
+        <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center border border-white/10">🤖</div>
+        <div class="bg-slate-800/50 border border-white/5 rounded-2xl p-4 flex">
+            <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
+        </div>
+    `;
+    document.getElementById('chat-messages').appendChild(div);
+    scrollToBottom();
+}
+
+function removeTyping() {
+    const el = document.getElementById('typing-indicator');
+    if (el) el.remove();
+}
+
+// Usage in your form listener:
+addMessage(text, true); // User message
+showTyping(); // Show dots
+setTimeout(() => {
+    removeTyping(); // Remove dots
+    addMessage(reply, false); // Show actual reply
+}, 1500);
+
 /* =========================================
    🤖 AI CHATBOT LOGIC (THE BRAIN)
    ========================================= */
@@ -547,69 +574,69 @@ function getBotReply(text) {
     const lowerText = text.toLowerCase();
 
     // --- 1. Personality & Chit-Chat ---
-    if (hasKeyword(lowerText, ['hi', 'hello', 'hey', 'hola', 'yo', 'sup', 'morning', 'afternoon', 'evening'])) 
+    if (hasKeyword(lowerText, ['hi', 'hello', 'hey', 'hola', 'yo', 'sup', 'morning', 'afternoon', 'evening']))
         return getRandomResponse(chatData.greetings);
-    
-    if (hasKeyword(lowerText, ['how are you', 'how are u', 'how r u', 'doing today', 'whats up'])) 
+
+    if (hasKeyword(lowerText, ['how are you', 'how are u', 'how r u', 'doing today', 'whats up']))
         return getRandomResponse(chatData.how_are_you);
-    
-    if (hasKeyword(lowerText, ['joke', 'funny', 'laugh', 'entertain'])) 
+
+    if (hasKeyword(lowerText, ['joke', 'funny', 'laugh', 'entertain']))
         return getRandomResponse(chatData.joke);
-    
-    if (hasKeyword(lowerText, ['cool', 'awesome', 'wow', 'amazing', 'sick', 'great', 'nice'])) 
+
+    if (hasKeyword(lowerText, ['cool', 'awesome', 'wow', 'amazing', 'sick', 'great', 'nice']))
         return getRandomResponse(chatData.cool);
-    
-    if (hasKeyword(lowerText, ['bye', 'goodbye', 'see ya', 'cya', 'later'])) 
+
+    if (hasKeyword(lowerText, ['bye', 'goodbye', 'see ya', 'cya', 'later']))
         return getRandomResponse(chatData.bye);
-    
-    if (hasKeyword(lowerText, ['who made', 'who built', 'creator', 'developer', 'author'])) 
+
+    if (hasKeyword(lowerText, ['who made', 'who built', 'creator', 'developer', 'author']))
         return chatData.who_made_you;
 
     // --- 2. Specific Personal Info ---
     if (hasKeyword(lowerText, ['location', 'where are you', 'live', 'city', 'from', 'based']))
         return chatData.location;
-    
+
     if (hasKeyword(lowerText, ['age', 'how old', 'birth']))
         return chatData.age;
 
     // --- 3. Contact & Socials ---
-    if (hasKeyword(lowerText, ['contact', 'email', 'mail', 'gmail', 'reach', 'connect', 'hire', 'message', 'ping'])) 
+    if (hasKeyword(lowerText, ['contact', 'email', 'mail', 'gmail', 'reach', 'connect', 'hire', 'message', 'ping']))
         return chatData.contact;
-    
-    if (hasKeyword(lowerText, ['insta', 'instagram', 'ig', 'handle', 'id', 'social'])) 
+
+    if (hasKeyword(lowerText, ['insta', 'instagram', 'ig', 'handle', 'id', 'social']))
         return chatData.contact; // Reusing contact as it has the links
 
-    if (hasKeyword(lowerText, ['link', 'linkedin', 'github', 'git'])) 
+    if (hasKeyword(lowerText, ['link', 'linkedin', 'github', 'git']))
         return chatData.contact;
 
     // --- 4. Bio & Professional ---
-    if (hasKeyword(lowerText, ['about', 'who are you', 'bio', 'intro', 'background', 'profile', 'name', 'student', 'laksh', 'yourself'])) 
+    if (hasKeyword(lowerText, ['about', 'who are you', 'bio', 'intro', 'background', 'profile', 'name', 'student', 'laksh', 'yourself']))
         return chatData.about;
 
-    if (hasKeyword(lowerText, ['experience', 'job', 'intern', 'work', 'company', 'unified', 'moreyeahs', 'hotel', 'kavana', 'profession', 'employment'])) 
+    if (hasKeyword(lowerText, ['experience', 'job', 'intern', 'work', 'company', 'unified', 'moreyeahs', 'hotel', 'kavana', 'profession', 'employment']))
         return chatData.experience;
-    
-    if (hasKeyword(lowerText, ['resume', 'cv', 'curriculum'])) 
+
+    if (hasKeyword(lowerText, ['resume', 'cv', 'curriculum']))
         return "You can view or download my Resume from the **Resume** section below! 📄";
 
-    if (hasKeyword(lowerText, ['educat', 'school', 'college', 'university', 'study', 'class', 'grade', 'degree', 'sunbeam', 'cirs', '12th', '10th', 'board'])) 
+    if (hasKeyword(lowerText, ['educat', 'school', 'college', 'university', 'study', 'class', 'grade', 'degree', 'sunbeam', 'cirs', '12th', '10th', 'board']))
         return chatData.education;
 
     // --- 5. Skills & Tech ---
-    if (hasKeyword(lowerText, ['skill', 'tech', 'stack', 'code', 'programming', 'language', 'react', 'python', 'django', 'js', 'html', 'css', 'tailwind', 'firebase', 'ai', 'ml', 'cyber', 'linux'])) 
+    if (hasKeyword(lowerText, ['skill', 'tech', 'stack', 'code', 'programming', 'language', 'react', 'python', 'django', 'js', 'html', 'css', 'tailwind', 'firebase', 'ai', 'ml', 'cyber', 'linux']))
         return chatData.skills;
-    
-    if (hasKeyword(lowerText, ['certif', 'course', 'license', 'iit', 'google', 'deepcytes'])) 
+
+    if (hasKeyword(lowerText, ['certif', 'course', 'license', 'iit', 'google', 'deepcytes']))
         return chatData.certifications;
-    
-    if (hasKeyword(lowerText, ['workshop', 'seminar', 'bootcamp', 'training'])) 
+
+    if (hasKeyword(lowerText, ['workshop', 'seminar', 'bootcamp', 'training']))
         return chatData.workshops;
 
     // --- 6. Achievements & Interests ---
-    if (hasKeyword(lowerText, ['achieve', 'award', 'prize', 'win', 'won', 'medal', 'hackathon', 'rank', 'topper', 'robowar', 'robot'])) 
+    if (hasKeyword(lowerText, ['achieve', 'award', 'prize', 'win', 'won', 'medal', 'hackathon', 'rank', 'topper', 'robowar', 'robot']))
         return chatData.achievements;
-    
-    if (hasKeyword(lowerText, ['sport', 'game', 'hobby', 'shoot', 'badminton', 'volley', 'swim', 'yoga', 'football', 'surya', 'namaskar'])) 
+
+    if (hasKeyword(lowerText, ['sport', 'game', 'hobby', 'shoot', 'badminton', 'volley', 'swim', 'yoga', 'football', 'surya', 'namaskar']))
         return chatData.sports;
 
     // --- 7. Specific Projects ---
@@ -618,9 +645,9 @@ function getBotReply(text) {
     if (hasKeyword(lowerText, ['canvas', 'blog', 'article', 'write'])) return chatData.codecanvas;
     if (hasKeyword(lowerText, ['shop', 'store', 'ecommerce', 'cart', 'mvp', 'buy'])) return chatData.mvp;
     if (hasKeyword(lowerText, ['artist', 'actor', 'gallery', 'portfolio'])) return chatData.artist; // Matches "portfolio" here too
-    
+
     // --- 8. General Projects ---
-    if (hasKeyword(lowerText, ['project', 'build', 'app', 'application', 'demo', 'repo', 'site', 'web', 'website'])) 
+    if (hasKeyword(lowerText, ['project', 'build', 'app', 'application', 'demo', 'repo', 'site', 'web', 'website']))
         return chatData.projects;
 
     return chatData.default;
@@ -655,15 +682,15 @@ function addMessage(content, isUser = false) {
     if (!messagesArea) return;
     const div = document.createElement('div');
     div.className = 'flex items-start gap-3 ' + (isUser ? 'justify-end' : '');
-    
+
     // User vs Bot Message Styling
-    div.innerHTML = isUser ? 
+    div.innerHTML = isUser ?
         `<div class="bg-sky-600 text-white rounded-2xl rounded-tr-none p-3 text-sm shadow-md max-w-[80%]"><p>${content}</p></div>` :
         `<div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center border border-white/10 shrink-0">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10H12V2z"></path><path d="M12 2a10 10 0 0 1 10 10"></path><path d="M2 12a10 10 0 0 1 10-10v10Z"></path></svg>
          </div>
          <div class="bg-slate-800/50 border border-white/5 rounded-2xl rounded-tl-none p-3 text-sm text-slate-300 shadow-sm max-w-[80%]"><p>${content}</p></div>`;
-    
+
     messagesArea.appendChild(div);
     messagesArea.scrollTop = messagesArea.scrollHeight;
 }

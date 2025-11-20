@@ -555,14 +555,14 @@ function editDistance(s1, s2) {
 // Format Bot Reply (Markdown -> HTML)
 function formatMessage(text) {
     return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-               .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" class="text-sky-400 underline">$1</a>');
+        .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" class="text-sky-400 underline">$1</a>');
 }
 
 // Sound effect (kept)
 const playPopSound = () => {
     const audio = new Audio("data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU"); // Short beep placeholder
     audio.volume = 0.2;
-    audio.play().catch(() => {});
+    audio.play().catch(() => { });
 };
 
 /* -------------------------------------------------------
@@ -570,17 +570,17 @@ const playPopSound = () => {
    -------------------------------------------------------
 */
 const baseBank = {
-    greetings: ["hello","hi","hey","greetings","yo","hiya"],
-    about: ["laksh","about","bio","who","introduction","profile"],
-    skills: ["skills","skillset","tech","stack","technologies","abilities","expertise"],
-    projects: ["projects","project","portfolio","work","apps","application","repo","github"],
-    experience: ["experience","internship","intern","work","job","roles"],
-    education: ["education","school","college","study","qualification"],
-    achievements: ["achievements","awards","wins","hackathon","prize","recognition"],
-    sports: ["sports","badminton","shooting","volleyball","swimming","yoga","athlete"],
-    contact: ["contact","email","mail","linkedin","instagram","social"],
-    jokes: ["joke","funny","meme","laugh"],
-    bye: ["bye","goodbye","see ya","later","farewell"]
+    greetings: ["hello", "hi", "hey", "greetings", "yo", "hiya"],
+    about: ["laksh", "about", "bio", "who", "introduction", "profile"],
+    skills: ["skills", "skillset", "tech", "stack", "technologies", "abilities", "expertise"],
+    projects: ["projects", "project", "portfolio", "work", "apps", "application", "repo", "github"],
+    experience: ["experience", "internship", "intern", "work", "job", "roles"],
+    education: ["education", "school", "college", "study", "qualification"],
+    achievements: ["achievements", "awards", "wins", "hackathon", "prize", "recognition"],
+    sports: ["sports", "badminton", "shooting", "volleyball", "swimming", "yoga", "athlete"],
+    contact: ["contact", "email", "mail", "linkedin", "instagram", "social"],
+    jokes: ["joke", "funny", "meme", "laugh"],
+    bye: ["bye", "goodbye", "see ya", "later", "farewell"]
 };
 
 // small templates to multiply variants
@@ -681,7 +681,7 @@ function toggleChat() {
         chatWindow.classList.remove('opacity-0', 'scale-90', 'pointer-events-none', 'translate-y-4');
         chatWindow.classList.add('opacity-100', 'scale-100', 'pointer-events-auto', 'translate-y-0');
         // If we don't know the user name, prompt and set state so next message is stored as name
-        if(!chatState.userName && messagesArea.children.length <= 1) {
+        if (!chatState.userName && messagesArea.children.length <= 1) {
             chatState.step = 'awaiting_name';
             setTimeout(() => botResponse("Hi! What's your name?"), 400);
         }
@@ -720,7 +720,7 @@ function addMessage(html, isUser) {
     if (!messagesArea) return;
     const div = document.createElement('div');
     div.className = 'flex items-start gap-3 ' + (isUser ? 'justify-end' : '');
-    div.innerHTML = isUser ? 
+    div.innerHTML = isUser ?
         `<div class="bg-sky-600 text-white rounded-2xl rounded-tr-none p-3 text-sm shadow-md max-w-[85%]"><p>${html}</p></div>` :
         `<div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center border border-white/10 shrink-0">
              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg>
@@ -804,14 +804,77 @@ function getBotReply(text) {
         return "🎵 Laksh isn't listening to anything on Spotify currently.";
     }
     if (lower.includes('time') || lower.includes('awake')) {
-        const time = new Date().toLocaleString("en-US", {timeZone: "Asia/Kolkata", hour: 'numeric', minute: 'numeric', hour12: true});
+        const time = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata", hour: 'numeric', minute: 'numeric', hour12: true });
         return `🕒 It's **${time}** in Varanasi.`;
     }
     if (lower.includes('latest project')) {
-        if(window.myProjects && window.myProjects.length > 0) {
+        if (window.myProjects && window.myProjects.length > 0) {
             const p = window.myProjects[0];
             return `🔥 Latest drop: **${p.name}** - ${p.description}. [Check it out](${p.html_url})`;
         }
+    }
+    // --- PROJECT LINK RESPONSES ---
+    const projectLinks = [
+        {
+            keys: ["portfolio", "main site", "website", "portfolio website"],
+            name: "Portfolio Website",
+            github: "https://github.com/TheRealLaksh/Portfolio-Website",
+            live: "https://lakshp.live"
+        },
+        {
+            keys: ["artist", "art", "artistry"],
+            name: "Artist Portfolio",
+            github: "https://github.com/TheRealLaksh/Artist-Portfolio",
+            live: "https://artist-portfolio.lakshp.live/"
+        },
+        {
+            keys: ["calibridge", "calendar", "event", "event app", "event calendar", "callender", "events"],
+            name: "CaliBridge — Event Calendar App",
+            github: "https://github.com/TheRealLaksh/Callender-Events",
+            live: "https://events.lakshp.live/"
+        },
+        {
+            keys: ["helios", "music", "music player", "audio", "player"],
+            name: "Helios Music Player",
+            github: "https://github.com/TheRealLaksh/Music-Player",
+            live: "https://music.lakshp.live/"
+        },
+        {
+            keys: ["mvp", "shop", "store", "ecommerce", "shopping"],
+            name: "MVP Webstore",
+            github: "https://github.com/TheRealLaksh/Shopping-demo",
+            live: "https://mvp-webstore.lakshp.live/"
+        },
+        {
+            keys: ["code", "canvas", "blog", "code & canvas"],
+            name: "Code & Canvas — Modern Blog",
+            github: "https://github.com/TheRealLaksh/code-and-canvas-blog",
+            live: "https://blog.lakshp.live/"
+        }
+    ];
+
+    // If user asks for a project link, detect automatically
+    if (
+        lower.includes("link") ||
+        lower.includes("url") ||
+        lower.includes("github") ||
+        lower.includes("repo") ||
+        lower.includes("live")
+    ) {
+        for (const project of projectLinks) {
+            for (const key of project.keys) {
+                if (lower.includes(key) || similarity(lower, key) > 0.72) {
+                    return `
+<b>${project.name}</b><br>
+🌐 Live: <a href="${project.live}" target="_blank" class="text-sky-400 underline">${project.live}</a><br>
+💻 GitHub: <a href="${project.github}" target="_blank" class="text-sky-400 underline">${project.github}</a>
+                `;
+                }
+            }
+        }
+
+        // If asked for a link but no project detected
+        return "Tell me the project name (Portfolio, Artist, CaliBridge, Helios, MVP Store, Code & Canvas).";
     }
 
     // Fuzzy topic array (kept) - still used as fallback
@@ -885,10 +948,10 @@ function getRandomResponse(arr) {
 }
 function escapeHtml(unsafe) {
     return unsafe
-         .replace(/&/g, "&amp;")
-         .replace(/</g, "&lt;")
-         .replace(/>/g, "&gt;")
-         .replace(/"/g, "&quot;")
-         .replace(/'/g, "&#039;");
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 }
 

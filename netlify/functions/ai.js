@@ -1,6 +1,8 @@
-import fetch from "node-fetch";
-import fs from "fs";
+// netlify/functions/ai.js
+
+import { fileURLToPath } from "url";
 import path from "path";
+import fs from "fs";
 
 export async function handler(event, context) {
     if (event.httpMethod !== "POST") {
@@ -13,20 +15,21 @@ export async function handler(event, context) {
     }
 
     try {
-        // ✔️ Netlify always places your function in: /var/task/
-        // ✔️ So we locate laksh.json RELATIVE to the function file
-        const filePath = path.join(process.cwd(), "laksh.json");
-
-        const profileData = JSON.parse(fs.readFileSync(filePath, "utf8"));
+        // ---- Load laksh.json ----
+        const __dirname = path.dirname(fileURLToPath(import.meta.url));
+        const filePath = path.resolve(__dirname, "laksh.json");
+        const profileData = JSON.parse(fs.readFileSync(filePath, "utf-8"));
 
         const systemPrompt = `
-You are AI Laksh — a funny + professional assistant of Laksh Pradhwani.
-Use ONLY the following profile data to answer questions:
+You are AI Laksh — a super smart, funny + professional assistant of Laksh Pradhwani.
+Answer ONLY using this data:
+
 ${JSON.stringify(profileData)}
         `;
 
         const HF_TOKEN = process.env.HF_API_TOKEN;
 
+        // ---- NATIVELY AVAILABLE fetch (NO node-fetch) ----
         const response = await fetch(
             "https://api-inference.huggingface.co/models/mistralai/Mixtral-8x7B-Instruct-v0.1",
             {
@@ -36,23 +39,24 @@ ${JSON.stringify(profileData)}
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    inputs: `${systemPrompt}\n\nUser: ${message}\nAI:`,
-                    parameters: { max_new_tokens: 250 }
+                    inputs: `${systemPrompt}\nUser: ${message}\nAI:`,
+                    parameters: { max_new_tokens: 200 }
                 })
             }
         );
 
         const data = await response.json();
 
-        const reply =
-            Array.isArray(data) && data[0]?.generated_text
-                ? data[0].generated_text
-                : JSON.stringify(data);
+        let reply = "Sorry, I couldn't generate a reply.";
+        if (Array.isArray(data) && data[0]?.generated_text) {
+            reply = data[0].generated_text.replace(/.*AI:/s, "").trim();
+        }
 
         return {
             statusCode: 200,
             body: JSON.stringify({ reply })
         };
+
     } catch (err) {
         return {
             statusCode: 500,

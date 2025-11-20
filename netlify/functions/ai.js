@@ -17,7 +17,7 @@ export async function handler(event, context) {
     try {
         // ---- Load laksh.json ----
         const __dirname = path.dirname(fileURLToPath(import.meta.url));
-        const filePath = path.resolve(__dirname, "laksh.json");
+        const filePath = path.join(process.cwd(), "assets", "data", "laksh.json");
         const profileData = JSON.parse(fs.readFileSync(filePath, "utf-8"));
 
         const systemPrompt = `

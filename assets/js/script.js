@@ -721,7 +721,7 @@ function botResponse(text) {
     showTyping();
     setTimeout(() => {
         removeTyping();
-        addMessage(formatMessage(text), false);
+        addMessage(formatMessage(addPersonality(text)), false);
         playPopSound();
     }, 700);
 }
@@ -744,6 +744,20 @@ function addMessage(html, isUser) {
    ------------------------------------------- */
 function getBotReply(text) {
     const lower = (text || "").toLowerCase();
+    if (lower.includes("love you"))
+        return "Aww, virtual hugs only! 🤖❤️ But thanks, that made my algorithm blush!";
+
+    if (lower.includes("funny") || lower.includes("make me laugh"))
+        return getRandomResponse(chatData.joke);
+
+    if (lower.includes("who are you"))
+        return "I'm AI Laksh — coded by the real Laksh Pradhwani. I'm like him but with better typing speed. 😉";
+
+    if (lower.includes("wtf") || lower.includes("lol") || lower.includes("lmao"))
+        return "😂 That reaction was priceless. Hit me with another one.";
+
+    if (lower.includes("bored"))
+        return "Bored? Want a joke? Or I can flex Laksh’s achievements again 😎.";
 
     // Navigator (kept)
     const navMatch = lower.match(/(?:go to|navigate|show|take me to|view|open|scroll to) (home|about|experience|skills|projects|contact|resume)/i);
@@ -955,6 +969,44 @@ if (chatForm) {
 function getRandomResponse(arr) {
     return Array.isArray(arr) ? arr[Math.floor(Math.random() * arr.length)] : arr;
 }
+function addPersonality(text) {
+    const vibes = [
+        "😎",
+        "😉",
+        "😂",
+        "🤖✨",
+        "🚀",
+        "🔥",
+        "😄",
+        "🧠",
+    ];
+
+    const starters = [
+        "Alright, here's the deal — ",
+        "Let me break it down for you — ",
+        "Great question! ",
+        "Okay, so check this out: ",
+        "Fun fact incoming — ",
+        "",
+        "",
+    ];
+
+    const enders = [
+        " Pretty cool, right?",
+        " Wild, isn’t it?",
+        " Let me know if you want more!",
+        "",
+        "",
+        "",
+    ];
+
+    const vibe = vibes[Math.floor(Math.random() * vibes.length)];
+    const start = starters[Math.floor(Math.random() * starters.length)];
+    const end = enders[Math.floor(Math.random() * enders.length)];
+
+    return `${vibe} ${start}${text}${end}`;
+}
+
 function escapeHtml(unsafe) {
     return unsafe
         .replace(/&/g, "&amp;")
@@ -964,3 +1016,27 @@ function escapeHtml(unsafe) {
         .replace(/'/g, "&#039;");
 }
 
+
+
+const chatWindowResize = document.getElementById("chat-window");
+const resizeHandle = document.getElementById("resize-handle");
+
+let resizing = false;
+
+resizeHandle.addEventListener("mousedown", () => {
+    resizing = true;
+});
+
+window.addEventListener("mousemove", (e) => {
+    if (!resizing) return;
+
+    chatWindowResize.style.width =
+        e.clientX - chatWindowResize.getBoundingClientRect().left + "px";
+
+    chatWindowResize.style.height =
+        e.clientY - chatWindowResize.getBoundingClientRect().top + "px";
+});
+
+window.addEventListener("mouseup", () => {
+    resizing = false;
+});

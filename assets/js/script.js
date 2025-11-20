@@ -457,32 +457,7 @@ function loadPremiumProjects() {
     });
 }
 
-function showTyping() {
-    const div = document.createElement('div');
-    div.id = 'typing-indicator';
-    div.className = 'flex items-center gap-3';
-    div.innerHTML = `
-        <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center border border-white/10">🤖</div>
-        <div class="bg-slate-800/50 border border-white/5 rounded-2xl p-4 flex">
-            <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
-        </div>
-    `;
-    document.getElementById('chat-messages').appendChild(div);
-    scrollToBottom();
-}
 
-function removeTyping() {
-    const el = document.getElementById('typing-indicator');
-    if (el) el.remove();
-}
-
-// Usage in your form listener:
-addMessage(text, true); // User message
-showTyping(); // Show dots
-setTimeout(() => {
-    removeTyping(); // Remove dots
-    addMessage(reply, false); // Show actual reply
-}, 1500);
 /* =========================================
    🤖 ULTIMATE AI CHATBOT (Features: NLP, Context, Actions, Easter Eggs)
    ========================================= */
@@ -597,7 +572,6 @@ function toggleChat() {
 if (chatToggle) chatToggle.addEventListener('click', toggleChat);
 if (closeChat) closeChat.addEventListener('click', toggleChat);
 
-// Typing Indicator
 function showTyping() {
     const div = document.createElement('div');
     div.id = 'typing-indicator';

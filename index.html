@@ -1396,6 +1396,50 @@
         </button>
     </div>
 
+    <div id="chat-window" 
+    class="fixed bottom-28 right-8 w-80 sm:w-96 h-[500px] bg-slate-900/90 backdrop-blur-xl border border-slate-700 rounded-2xl shadow-2xl transform scale-90 opacity-0 pointer-events-none translate-y-4 transition-all duration-300 z-50 flex flex-col overflow-hidden origin-bottom-right">
+    
+    <div class="p-4 border-b border-white/10 flex items-center justify-between bg-gradient-to-r from-slate-900 to-slate-800">
+        <div class="flex items-center gap-3">
+            <div class="relative">
+                <div class="w-10 h-10 rounded-full overflow-hidden border border-sky-500/30">
+                    <img src="assets/images/laksh.pradhwani.webp" alt="AI Laksh" class="w-full h-full object-cover">
+                </div>
+                <div class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-slate-900 animate-pulse"></div>
+            </div>
+            <div>
+                <h3 class="font-bold text-white text-sm">AI Laksh</h3>
+                <p class="text-xs text-slate-400">Online & Ready</p>
+            </div>
+        </div>
+        <button id="close-chat" class="text-slate-400 hover:text-white transition-colors hover:bg-white/10 p-1 rounded-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+    </div>
+
+    <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-4 scroll-smooth scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent">
+        <div class="flex items-start gap-3">
+            <div class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center border border-white/10 shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10H12V2z"></path><path d="M12 2a10 10 0 0 1 10 10"></path><path d="M2 12a10 10 0 0 1 10-10v10Z"></path></svg>
+            </div>
+            <div class="bg-slate-800/50 border border-white/5 rounded-2xl rounded-tl-none p-3 text-sm text-slate-300 shadow-sm">
+                <p>Hello! I'm Laksh's digital twin. Ask me about my projects, skills, or experience! 🚀</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="p-4 border-t border-white/10 bg-slate-900/50">
+        <form id="chat-form" class="flex gap-2">
+            <input type="text" id="user-input" placeholder="Type your question..." autocomplete="off"
+                class="w-full bg-slate-950/50 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-all placeholder:text-slate-600">
+            <button type="submit" 
+                class="bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-500 hover:to-blue-500 text-white p-2.5 rounded-xl transition-all shadow-lg shadow-sky-900/20 active:scale-95">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+        </form>
+    </div>
+</div>
+
     <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="assets/js/script.js"></script>

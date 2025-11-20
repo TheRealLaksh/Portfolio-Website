@@ -456,3 +456,26 @@ function loadPremiumProjects() {
         projectsGrid.insertAdjacentHTML('beforeend', cardHTML);
     });
 }
+// --- CHATBOT LOGIC ---
+const chatToggle = document.getElementById('chatbot-toggle');
+const chatWindow = document.getElementById('chat-window');
+const closeChat = document.getElementById('close-chat');
+
+function toggleChat() {
+    const isHidden = chatWindow.classList.contains('opacity-0');
+    
+    if (isHidden) {
+        // Open Chat
+        chatWindow.classList.remove('opacity-0', 'scale-90', 'pointer-events-none', 'translate-y-4');
+        chatWindow.classList.add('opacity-100', 'scale-100', 'pointer-events-auto', 'translate-y-0');
+    } else {
+        // Close Chat
+        chatWindow.classList.add('opacity-0', 'scale-90', 'pointer-events-none', 'translate-y-4');
+        chatWindow.classList.remove('opacity-100', 'scale-100', 'pointer-events-auto', 'translate-y-0');
+    }
+}
+
+if (chatToggle && chatWindow && closeChat) {
+    chatToggle.addEventListener('click', toggleChat);
+    closeChat.addEventListener('click', toggleChat);
+}

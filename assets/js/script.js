@@ -934,6 +934,23 @@ function getBotReply(text) {
     return chatData.default;
 }
 
+async function askCloudAI(msg) {
+    try {
+        const r = await fetch("/.netlify/functions/ai", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: msg })
+        });
+
+        const j = await r.json();
+        return j.reply;
+    } catch (err) {
+        console.warn("Cloud AI failed:", err);
+        return null;
+    }
+}
+
+
 /* -------------------------
    6. EVENT LISTENERS
    ------------------------- */
@@ -941,15 +958,21 @@ if (chatToggle) chatToggle.addEventListener('click', toggleChat);
 if (closeChat) closeChat.addEventListener('click', toggleChat);
 
 if (chatForm) {
-    chatForm.addEventListener('submit', (e) => {
+    chatForm.addEventListener("submit", async (e) => {
         e.preventDefault();
+
         const text = userInput.value.trim();
         if (!text) return;
+
         addMessage(formatMessage(escapeHtml(text)), true);
-        userInput.value = '';
-        const reply = getBotReply(text);
-        botResponse(reply);
+        userInput.value = "";
+
+        const cloud = await askCloudAI(text);
+
+        if (cloud) botResponse(cloud);
+        else botResponse(getBotReply(text));
     });
+
 
     // Konami Code (kept)
     let konami = [];

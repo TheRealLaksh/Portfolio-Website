@@ -275,11 +275,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const REPOS = [
     "TheRealLaksh/Portfolio-Website",
-    "TheRealLaksh/Artist-Portfolio",
-    "TheRealLaksh/Callender-Events",
+    "TheRealLaksh/stranger-things",
     "TheRealLaksh/Music-Player",
+    "TheRealLaksh/Callender-Events",
+    "TheRealLaksh/artist-portfolio",
     "TheRealLaksh/Shopping-demo",
-    "TheRealLaksh/code-and-canvas-blog"
 ];
 
 const GITHUB_TOKEN = null; // optional

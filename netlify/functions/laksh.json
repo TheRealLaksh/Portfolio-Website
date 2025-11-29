@@ -55,40 +55,44 @@
   ],
   "projects": [
     {
-      "name": "Portfolio Website",
-      "github": "https://github.com/TheRealLaksh/Portfolio-Website",
-      "live": "https://lakshp.live",
-      "summary": "A fully animated personal portfolio with clean UI, micro-interactions, responsive design, and smooth transitions."
-    },
-    {
-      "name": "Artist Portfolio — Artistry",
-      "github": "https://github.com/TheRealLaksh/Artist-Portfolio",
-      "live": "https://artist-portfolio.lakshp.live/",
-      "summary": "A clean and responsive artist portfolio built using HTML, CSS, and JavaScript. Balanced gallery and smooth animations."
-    },
-    {
-      "name": "CaliBridge — Event Calendar App",
-      "github": "https://github.com/TheRealLaksh/Callender-Events",
-      "live": "https://events.lakshp.live/",
-      "summary": "JavaScript-based event calendar with event creation, month switching, LocalStorage sync, and responsive UI."
-    },
-    {
-      "name": "Helios Music Player",
-      "github": "https://github.com/TheRealLaksh/Music-Player",
-      "live": "https://music.lakshp.live/",
-      "summary": "Lightweight web music player with responsive design and animated controls."
-    },
-    {
-      "name": "MVP Webstore — Shopping Demo",
-      "github": "https://github.com/TheRealLaksh/Shopping-demo",
-      "live": "https://mvp-webstore.lakshp.live/",
-      "summary": "Front-end MVP e-commerce demo with product listings and a basic cart."
-    },
-    {
-      "name": "Code & Canvas — Modern Blog",
-      "github": "https://github.com/TheRealLaksh/code-and-canvas-blog",
-      "live": "https://blog.lakshp.live/",
-      "summary": "Modern blog with dark mode, Firebase real-time comments, search, and social sharing."
+      "projects": [
+        {
+          "name": "Portfolio Website",
+          "github": "https://github.com/TheRealLaksh/Portfolio-Website",
+          "live": "https://lakshp.live",
+          "summary": "A fully animated personal portfolio with clean UI, micro-interactions, responsive design, and smooth transitions."
+        },
+        {
+          "name": "Stranger Things 3D",
+          "github": "https://github.com/TheRealLaksh/stranger-things",
+          "live": "https://stranger-things.lakshp.live",
+          "summary": "An immersive 3D web experience inspired by Stranger Things, featuring upside-down effects and interactive elements."
+        },
+        {
+          "name": "Helios Music Player",
+          "github": "https://github.com/TheRealLaksh/Music-Player",
+          "live": "https://music.lakshp.live/",
+          "summary": "Lightweight web music player with responsive design and animated controls."
+        },
+        {
+          "name": "CaliBridge — Event Calendar App",
+          "github": "https://github.com/TheRealLaksh/Callender-Events",
+          "live": "https://events.lakshp.live/",
+          "summary": "JavaScript-based event calendar with event creation, month switching, LocalStorage sync, and responsive UI."
+        },
+        {
+          "name": "Artist Portfolio — Artistry",
+          "github": "https://github.com/TheRealLaksh/Artist-Portfolio",
+          "live": "https://artist-portfolio.lakshp.live/",
+          "summary": "A clean and responsive artist portfolio built using HTML, CSS, and JavaScript. Balanced gallery and smooth animations."
+        },
+        {
+          "name": "MVP Webstore — Shopping Demo",
+          "github": "https://github.com/TheRealLaksh/Shopping-demo",
+          "live": "https://mvp-webstore.lakshp.live/",
+          "summary": "Front-end MVP e-commerce demo with product listings and a basic cart."
+        }
+      ]
     }
   ],
   "achievements": [

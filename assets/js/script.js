@@ -934,16 +934,29 @@ function getBotReply(text) {
     return chatData.default;
 }
 
+// Add this variable at the top of script.js to store context
+let chatHistory = []; 
+
 async function askCloudAI(msg) {
     try {
-        const r = await fetch("/.netlify/functions/ai", {
+        const response = await fetch("/.netlify/functions/ai", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message: msg })
+            body: JSON.stringify({ 
+                message: msg,
+                history: chatHistory // Send history to backend
+            })
         });
 
-        const j = await r.json();
-        return j.reply;
+        const data = await response.json();
+
+        // Update history with the new turn
+        if (data.reply) {
+            chatHistory.push({ role: "user", parts: [{ text: msg }] });
+            chatHistory.push({ role: "model", parts: [{ text: data.reply }] });
+        }
+
+        return data.reply;
     } catch (err) {
         console.warn("Cloud AI failed:", err);
         return null;

@@ -2,6 +2,7 @@
   "name": "laksh-ai-functions",
   "type": "module",
   "dependencies": {
+    "@google/genai": "^1.30.0",
     "node-fetch": "^3.3.2"
   }
 }

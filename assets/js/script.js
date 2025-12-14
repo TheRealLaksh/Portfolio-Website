@@ -278,7 +278,7 @@ const REPOS = [
     "TheRealLaksh/stranger-things",
     "TheRealLaksh/Music-Player",
     "TheRealLaksh/Callender-Events",
-    "TheRealLaksh/artist-portfolio",
+    "TheRealLaksh/Profiley-Resume-Builder",
     "TheRealLaksh/Shopping-demo",
 ];
 
